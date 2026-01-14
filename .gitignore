@@ -1,0 +1,15 @@
+# Claude Code
+CLAUDE.md
+**/CLAUDE.md
+.claude/
+
+# macOS
+.DS_Store
+*.swp
+
+# Node (if using build tools)
+node_modules/
+.svelte-kit/
+
+# Local development
+*.log
