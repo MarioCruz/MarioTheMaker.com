@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Restoring a 1984 Tomy Omnibot (Part 2) - Mario The Maker</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="../index.html" class="logo"><img src="../images/MarioTheMaker.jpg" alt="Mario The Maker Logo" class="logo-img"></a>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../about.html">About</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <a href="../index.html" class="back-link">&larr; Back to all posts</a>
+
+    <article>
+      <header class="post-header">
+        <h1>Restoring a 1984 Tomy Omnibot (Part 2)</h1>
+        <p class="post-meta">January 19, 2026</p>
+      </header>
+
+      <div class="post-content">
+        <figure>
+          <img src="../images/tomy-controller.png" alt="Tomy Omnibot Web Controller Interface">
+        </figure>
+
+        <p>In <a href="tomy-omnibot-restoration.html">Part 1</a>, I documented the teardown and initial restoration of my 1984 Tomy Omnibot. That meant cleaning up battery acid damage, getting the drive motors working, and that exciting first drive test. Now it's time to take things further: <strong>Bluetooth control and giving this 40-year-old robot a modern voice.</strong></p>
+
+        <h2>Inspiration: The Bluetooth Cassette Hack</h2>
+
+        <p>While researching Omnibot restorations, I stumbled upon a brilliant YouTube series by <a href="https://www.youtube.com/watch?v=q2_7oxHHZ1U&list=PLxmt8zABB71q9mBGFcQ04k3DVVC7AFYMQ" target="_blank">a maker who used a Bluetooth cassette adapter</a> to control their Omnibot. The concept is genius. The Omnibot's original remote control works by sending audio tones through the air, which the robot interprets as movement commands. Each direction has a specific frequency:</p>
+
+        <ul>
+          <li><strong>Forward:</strong> 1614 Hz</li>
+          <li><strong>Right:</strong> 1811 Hz</li>
+          <li><strong>Backward:</strong> 2013 Hz</li>
+          <li><strong>Left:</strong> 2208 Hz</li>
+        </ul>
+
+        <p>Instead of transmitting these tones wirelessly like the original remote, what if we could play them directly through the cassette player? A Bluetooth cassette adapter inserted into the Omnibot's tape deck could receive audio from a phone or laptop and send those control tones straight to the robot's brain.</p>
+
+        <p>I ordered a Bluetooth cassette adapter and started experimenting.</p>
+
+        <h2>Building a Web-Based Controller</h2>
+
+        <p>Once I had the Bluetooth cassette working, I needed a way to generate the control tones. Rather than building a native app, I decided to create a web-based controller using the <strong>Web Audio API</strong>. This approach has several advantages:</p>
+
+        <ul>
+          <li>Works on any device with a browser like a laptop, phone, or tablet</li>
+          <li>No installation required</li>
+          <li>Easy to iterate and add features</li>
+          <li>Can send audio through Bluetooth to the robot</li>
+        </ul>
+
+        <p>I built an HTML page with a D-pad interface that generates sine wave tones at the exact frequencies the Omnibot expects. Hold down the forward button, and it plays a 1614 Hz tone. Release, and it stops. The result is a fully functional wireless controller running in a browser.</p>
+
+        <h2>The Controller Interface</h2>
+
+        <p>The web controller I built includes several features:</p>
+
+        <ul>
+          <li><strong>D-Pad Controls:</strong> Touch or click to move forward, backward, left, and right</li>
+          <li><strong>Keyboard Support:</strong> Use WASD or arrow keys for control</li>
+          <li><strong>Timed Movements:</strong> Preset buttons for precise movements like "Forward 1 step" or "Turn Left 90°"</li>
+          <li><strong>Sequence Builder:</strong> Drag and drop movement blocks to create custom routines</li>
+          <li><strong>Pre-built Sequences:</strong> Drive in a square, zigzag, figure-8, and more</li>
+          <li><strong>Calibration:</strong> Adjust turn duration until the robot rotates exactly 90°</li>
+        </ul>
+
+        <p>The interface uses a dark theme with neon accents, fitting for controlling a robot from the 80s. The buttons provide visual feedback when pressed, and a status display shows the current command being sent.</p>
+
+        <h2>Adding Robot Speech</h2>
+
+        <p>Here's where it gets really fun. The Omnibot has a built-in speaker that was originally used for playing back recorded cassette messages. Since we're now sending audio through the cassette player via Bluetooth, we can send <strong>any audio</strong>, including synthesized speech.</p>
+
+        <p>I integrated the browser's <strong>Speech Synthesis API</strong> into the controller. The web page can generate text-to-speech audio and route it through the laptop's Bluetooth to the robot's speaker. The Omnibot literally speaks!</p>
+
+        <p>The controller includes:</p>
+
+        <ul>
+          <li>A text input field for custom messages</li>
+          <li>Quick phrase buttons: "Hello", "Yes", "No", "Thank you"</li>
+          <li>Fun preset phrases like "Hi, my name is Tomy Omnibot" and "I was made by Mario the Maker"</li>
+          <li>On macOS, it even uses robotic-sounding voices like "Zarvox" when available</li>
+        </ul>
+
+        <h2>Tomy Delivers a Soda</h2>
+
+        <p>Time to put everything together. The Omnibot's original purpose was to be a butler robot, complete with a serving tray for delivering drinks. Using the web controller, I programmed a sequence of movements and had Tomy deliver a soda.</p>
+
+        <figure>
+          <video controls width="100%">
+            <source src="../images/TomyAmyWantACoke.mov" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <figcaption>The Omnibot delivers a soda using Bluetooth control and synthesized speech</figcaption>
+        </figure>
+
+        <p>In the video, you can see the robot responding to movement commands sent from the web interface while speaking through its built-in speaker. It's incredibly satisfying to see a 40-year-old robot working again, but now with modern control capabilities.</p>
+
+        <h2>The Code</h2>
+
+        <p>I've open-sourced the controller code on GitHub: <a href="https://github.com/MarioCruz/Tomy-Omnibot-Control-" target="_blank">github.com/MarioCruz/Tomy-Omnibot-Control-</a></p>
+
+        <p>The entire controller is a single HTML file with embedded CSS and JavaScript. No frameworks, no build process, no dependencies. Just open it in a browser, pair your Bluetooth cassette adapter, and start controlling your Omnibot.</p>
+
+        <h2>Looking Ahead: AI Vision Control</h2>
+
+        <p>Now the question becomes: <strong>Can we make this smarter?</strong></p>
+
+        <p>The current setup requires manual control through the web interface. But what if the Omnibot could see and respond to its environment? What if kids could press simple buttons to give commands like "bring me that" or "follow me"?</p>
+
+        <p>My plan for Part 3 is to add:</p>
+
+        <ul>
+          <li><strong>Raspberry Pi integration:</strong> A small computer mounted inside the robot</li>
+          <li><strong>Pi AI Camera:</strong> Computer vision to detect objects and people</li>
+          <li><strong>LLM integration:</strong> Using a language model to interpret commands and decide actions</li>
+          <li><strong>Simple button interface:</strong> Big, kid-friendly buttons for demos</li>
+        </ul>
+
+        <p>The goal is to have this ready for <strong>Maker Faire Miami 2026</strong>, where kids can interact with the Omnibot using simple voice commands or button presses. The robot will use vision AI to understand its surroundings and an LLM to decide how to respond.</p>
+
+        <p>Imagine asking a 40-year-old robot to bring you something, and it actually figures out how to do it. That's the dream.</p>
+
+        <h2>What's Next</h2>
+
+        <p>The restoration continues! Here's the current status:</p>
+
+        <ul>
+          <li><strong>Bluetooth control:</strong> Working via cassette adapter</li>
+          <li><strong>Web controller:</strong> Complete with movement, sequences, and speech</li>
+          <li><strong>Speech synthesis:</strong> Robot can talk through its original speaker</li>
+          <li><strong>Wheels:</strong> Still waiting on 3D printed replacements</li>
+          <li><strong>Alarm clock display:</strong> Still hunting for that replacement part</li>
+          <li><strong>AI vision:</strong> Coming in Part 3</li>
+        </ul>
+
+        <p>There's something magical about taking vintage technology and giving it new capabilities while preserving its original charm. The Omnibot looks and sounds like it did in 1984, but now it's controlled by a web browser and speaks with synthesized voice. The cassette player that once played recorded messages now receives Bluetooth audio from anywhere in the world.</p>
+
+        <p>The future and the past, working together.</p>
+
+        <p>Stay tuned for Part 3, where we add eyes and a brain to this 80s icon.</p>
+      </div>
+    </article>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Mario The Maker. Built with passion in Miami.</p>
+    <p><a href="https://miami.makerfaire.com/" target="_blank">Maker Faire Miami</a></p>
+  </footer>
+</body>
+</html>
