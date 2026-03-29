@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Restoring a 1984 Tomy Omnibot (Part 3) - Mario The Maker</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="../index.html" class="logo"><img src="../images/MarioTheMaker.jpg" alt="Mario The Maker Logo" class="logo-img"></a>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../about.html">About</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <a href="../index.html" class="back-link">&larr; Back to all posts</a>
+
+    <article>
+      <header class="post-header">
+        <h1>Restoring a 1984 Tomy Omnibot (Part 3)</h1>
+        <p class="post-meta">January 26, 2026</p>
+      </header>
+
+      <div class="post-content">
+        <figure>
+          <img src="../images/tomy-ai-dashboard.png" alt="Tomy Omnibot AI Dashboard showing camera feed and controls">
+        </figure>
+
+        <p>In <a href="tomy-omnibot-restoration.html">Part 1</a>, I restored the hardware. In <a href="tomy-omnibot-restoration-part-2.html">Part 2</a>, I added Bluetooth control and gave it a voice. Now it's time for the real magic: <strong>giving this 40-year-old robot eyes and a brain.</strong></p>
+
+        <p>The goal was simple but ambitious. Could I make the Omnibot autonomous? Could it see its environment, understand what's around it, and decide what to do on its own? The answer is yes, and the results are ready for <strong>Maker Faire Miami 2026</strong>.</p>
+
+        <h2>The Vision: Retro Meets Modern AI</h2>
+
+        <p>The Tomy Omnibot was a marvel of 1980s consumer robotics. It could be programmed via cassette tapes to deliver drinks and perform simple tasks. Four decades later, I've given it a brain transplant: a Raspberry Pi 5 with an AI-accelerated camera and cloud LLM integration.</p>
+
+        <p>The result is a robot that can see, think, and act autonomously while maintaining its vintage charm.</p>
+
+        <h2>The AI Stack</h2>
+
+        <p>The system has three layers working together:</p>
+
+        <ul>
+          <li><strong>Perception Layer:</strong> The IMX500 AI Camera runs hardware-accelerated YOLOv8 object detection at 30 FPS</li>
+          <li><strong>Reasoning Layer:</strong> A cloud-based Groq LLM (Llama 3.1 8B) decides what to do with what it sees</li>
+          <li><strong>Action Layer:</strong> Audio tones control movement, text-to-speech provides a voice, and an animated eye display shows emotion</li>
+        </ul>
+
+        <h2>Layer 1: The Eyes (IMX500 AI Camera)</h2>
+
+        <figure>
+          <img src="../images/raspberry-pi-ai-camera.jpg" alt="Raspberry Pi 5 with AI Camera module">
+          <figcaption>The Raspberry Pi 5 with the IMX500 AI Camera module</figcaption>
+        </figure>
+
+        <p>The magic starts with the <strong>Raspberry Pi AI Camera</strong>. This isn't a regular camera that sends frames to the CPU for processing. The IMX500 sensor has a built-in neural network accelerator. The AI inference happens on the camera chip itself.</p>
+
+        <p>When the system starts, YOLOv8 neural network weights are uploaded directly to the camera. Every frame is processed by on-chip AI, not the Pi's CPU. Detection results arrive as metadata alongside the image data.</p>
+
+        <p>The performance is impressive:</p>
+
+        <ul>
+          <li>Inference time: ~17ms per frame</li>
+          <li>Frame rate: 30 FPS continuous</li>
+          <li>Object classes: 80 (COCO dataset)</li>
+          <li>Can detect people, animals, vehicles, household items, and more</li>
+        </ul>
+
+        <h2>Layer 2: The Brain (Cloud LLM)</h2>
+
+        <p>Raw detections aren't useful on their own. The robot needs to understand what to do with what it sees. This is where the Large Language Model comes in.</p>
+
+        <p>The LLM acts as a "mission controller" receiving:</p>
+
+        <ul>
+          <li>The current task (like "Find and approach people")</li>
+          <li>What objects are visible and where they are in the frame</li>
+          <li>Recent actions taken</li>
+        </ul>
+
+        <p>And it outputs movement commands (forward, backward, left, right), speech commands, and pattern commands (dance, circle, search). I'm using Groq's cloud API with Llama 3.1 8B because it returns responses in about 100ms. Running inference locally on the Pi takes 2-5 seconds, which is too slow for real-time autonomy.</p>
+
+        <h2>Layer 3: The Body (Action System)</h2>
+
+        <p>The beautiful part is that we're still using the Omnibot's original control system. Audio tones through the Bluetooth cassette adapter make it move:</p>
+
+        <ul>
+          <li>Forward: 1614 Hz</li>
+          <li>Backward: 2013 Hz</li>
+          <li>Left: 2208 Hz (3 seconds for 90°)</li>
+          <li>Right: 1811 Hz (3 seconds for 90°)</li>
+        </ul>
+
+        <p>I also added a 1.8" TFT display showing an animated "eye" that reacts to what the robot sees. When it detects a person, the eye looks happy. When it's turning, the eye looks in that direction. After 30 seconds of idle, it gets sleepy. This gives the robot personality and makes interactions feel more natural.</p>
+
+        <h2>The Web Dashboard</h2>
+
+        <p>Everything is controlled through a web dashboard built with Flask and WebSockets. The interface shows:</p>
+
+        <ul>
+          <li><strong>Live camera feed</strong> with object detection overlays</li>
+          <li><strong>Statistics</strong> showing iterations, FPS, detections, and commands sent</li>
+          <li><strong>Detection history</strong> logging what the camera sees over time</li>
+          <li><strong>Generated commands</strong> showing what the LLM decides to do</li>
+          <li><strong>Activity log</strong> of executed actions</li>
+          <li><strong>Manual controls</strong> for overriding autonomous behavior</li>
+          <li><strong>Speech controls</strong> for making the robot talk</li>
+        </ul>
+
+        <p>You can set different tasks like "Explore and interact with objects" or "Find and greet people" and watch the robot figure out what to do.</p>
+
+        <h2>How It Works in Practice</h2>
+
+        <p>When running autonomously, the system operates in a continuous loop every 500ms:</p>
+
+        <ol>
+          <li><strong>Capture:</strong> Camera captures frame and runs YOLOv8 on-chip</li>
+          <li><strong>Reason:</strong> LLM receives detections and current mission, outputs commands</li>
+          <li><strong>Act:</strong> Robot executes commands via audio tones, eye display shows reaction</li>
+          <li><strong>Repeat:</strong> About 2 decisions per second with the full AI pipeline</li>
+        </ol>
+
+        <p>For example, if the task is "Find and approach people":</p>
+
+        <ul>
+          <li>Camera detects a person on the right side of the frame</li>
+          <li>LLM reasons: "Person is on the right. Turn right to center them."</li>
+          <li>Robot turns right</li>
+          <li>Next frame: person is now centered</li>
+          <li>LLM reasons: "Person is centered. Move forward to approach."</li>
+          <li>Robot moves forward and says "Hello!"</li>
+        </ul>
+
+        <h2>Why This Architecture Works</h2>
+
+        <p>A few design decisions made this practical:</p>
+
+        <p><strong>Hardware acceleration where it matters.</strong> The IMX500's on-chip inference means the Pi's CPU is free for other tasks. Vision doesn't bottleneck the system.</p>
+
+        <p><strong>Cloud LLM for complex reasoning.</strong> Running a 7B parameter model locally takes 2-5 seconds per inference. Groq's cloud API returns in ~100ms. This makes real-time autonomous operation practical.</p>
+
+        <p><strong>Simple, robust action layer.</strong> Audio tones are deterministic and reliable. No motors to calibrate, no encoders to read. If the frequency is right, the robot moves.</p>
+
+        <p><strong>Graceful degradation.</strong> No internet? Falls back to local Ollama. Display not connected? System runs without it. Camera fails? Manual control still works via web dashboard.</p>
+
+        <h2>Ready for Maker Faire</h2>
+
+        <p>The system is now ready for demos at <strong>Maker Faire Miami 2026</strong>. Kids can interact with the Omnibot using simple button presses or by just walking up to it. The robot will see them, turn to face them, and say hello. They can give it tasks like "find my water bottle" and watch it search the room.</p>
+
+        <p>What makes this special is the contrast. A robot from 1984 with an 80s aesthetic, running 2026 AI technology. Hardware-accelerated neural networks. Cloud LLMs making decisions. All hidden behind that nostalgic plastic shell.</p>
+
+        <h2>The Code</h2>
+
+        <p>The entire AI system is open source on GitHub: <a href="https://github.com/MarioCruz/omnibotAi" target="_blank">github.com/MarioCruz/omnibotAi</a></p>
+
+        <p>The repo includes the Flask web dashboard, the YOLOv8 camera integration, Groq LLM client, the tone-based movement controller, and the animated eye display system. If you have a Raspberry Pi 5 with an AI Camera and an Omnibot (or any robot that responds to audio tones), you can try this yourself.</p>
+
+        <h2>What's Next: Physical Integration (Part 4)</h2>
+
+        <p>The AI brain is working. The vision system sees. The LLM reasons. But right now all of this lives on my workbench, connected to the Omnibot with a tangle of wires. The next challenge is making this portable and self-contained. I need to get the Raspberry Pi, camera, display, and power system physically mounted on or inside the robot in a way that looks good and actually works at a busy maker faire.</p>
+
+        <p>This is going to take some serious design work, and I have until April to figure it out.</p>
+
+        <h3>The Mounting Challenge</h3>
+
+        <p>The Omnibot wasn't designed to carry a Raspberry Pi. Its internal cavity is mostly taken up by the original electronics, the cassette mechanism, and the battery compartment. I could gut it and replace everything with modern hardware, but that feels wrong. Part of the charm of this project is that the original 1984 electronics still work. The robot moves using its original motor drivers. The cassette player still accepts tapes. I want to add the AI system without destroying what makes this robot special.</p>
+
+        <p>That means the Pi and camera probably need to live externally. I'm thinking about designing some kind of "AI buddy" enclosure that attaches to the robot. Maybe it sits on the serving tray, or mounts to the back, or rides along as a companion unit. Whatever the solution, it needs to hold the Pi 5, the AI camera (positioned to see forward), the eye display, and a power source. And it needs to look like it belongs with a 1980s robot, not like I duct-taped a computer to a toy.</p>
+
+        <h3>Collaborating with PLACITECH</h3>
+
+        <p>For the 3D modeling and enclosure design, I'm teaming up with <a href="https://placitech.com/" target="_blank">PLACITECH</a>, a local Miami maker and creative studio. Usually I'd work with Tom and Daisy over at <a href="https://moonlighterfablab.org/" target="_blank">Moonlighter FabLab</a> for projects like this, but I wanted to branch out and collaborate with other local creators and makers in the community. The aesthetic challenge here is unique: I need something that bridges four decades of design language.</p>
+
+        <p>The vision is an AI buddy that looks like it came from 2030 but was somehow best friends with a robot from 1984. Sleek enough to feel futuristic, but with design cues that complement the Omnibot's chunky buttons and rounded plastic shell. PLACITECH will be helping with everything from the initial concept sketches to the functional design, figuring out how to integrate the camera, display, and power system into something that actually looks intentional rather than improvised.</p>
+
+        <p>Working with other makers is one of the best parts of projects like this. Everyone brings different skills and perspectives. I know the electronics and the software. PLACITECH knows form and fabrication. Together we can build something neither of us would have made alone.</p>
+
+        <h3>Power Problems</h3>
+
+        <p>Power is always the hardest part of mobile robotics projects. The Raspberry Pi 5 is hungry. It wants 5V at up to 5A, especially when the AI camera is running inference and the display is active. The Omnibot itself runs on D batteries (six of them), which is a completely different voltage. I can't just tap into the robot's power system without some serious voltage regulation.</p>
+
+        <p>My current thinking is a dedicated USB power bank for the Pi. A good 20,000mAh bank with USB-C Power Delivery should run the system for several hours. The challenge is finding one that fits the enclosure design and doesn't look out of place. I might end up 3D printing a custom battery compartment that matches the Omnibot's aesthetic. Or I could go with a proper LiPo battery pack and a buck converter, which would be more elegant but adds complexity and safety considerations.</p>
+
+        <p>There's also the question of charging. At Maker Faire, I'll be demoing this robot for hours. I need a way to swap or charge batteries without disassembling everything. Quick-release connectors, maybe. Or a charging dock the robot can return to. Still working through the options.</p>
+
+        <h3>Aesthetics Matter</h3>
+
+        <p>This might sound superficial, but aesthetics are actually critical for this project. The whole point is the contrast between 1984 hardware and 2026 AI. If the modern tech looks modern, that contrast is lost. The Raspberry Pi needs to be hidden or disguised. The camera needs to look like it belongs. The eye display should feel like a feature the original designers might have included if the technology existed.</p>
+
+        <p>I'm looking at 3D printing enclosures in colors that match the Omnibot's cream and gray plastic. Maybe adding some fake vents or panel lines that echo the robot's original styling. The eye display already helps with this since it gives the robot an expressive face that fits the friendly butler aesthetic. But the camera is tricky. It's clearly a modern component. I might need to create some kind of housing that makes it look like a sensor from the 80s.</p>
+
+        <h3>Calibration and Testing</h3>
+
+        <p>Once the hardware is mounted, the real work begins: making the robot actually navigate reliably. Right now, the movement system is open-loop. I send a tone for a certain duration, and the robot moves that direction. But there's no feedback. I don't actually know how far it moved or whether it turned exactly 90 degrees. Carpet vs. hardwood changes everything. Battery level affects motor speed. Temperature affects the motors. Two identical commands can produce different results.</p>
+
+        <p>This means extensive calibration testing. I need to figure out exactly how long to play each tone for different movement increments. A "step forward" needs to be consistent. A "turn left" needs to actually be 90 degrees, or the robot will drift off course over time. I'll probably end up with lookup tables for different surfaces and conditions, and maybe some adaptive logic that adjusts based on what the camera sees.</p>
+
+        <p>The turn calibration is especially important. If the robot thinks it turned 90 degrees but actually turned 85, that error compounds. After four turns it should be back where it started, but instead it's facing a completely different direction. I need to test this obsessively until it's reliable.</p>
+
+        <h3>Getting Lost and Recovery</h3>
+
+        <p>Robots get lost. It's going to happen, especially at a crowded maker faire where kids might pick it up and move it, or it might drive into a corner, or someone might block its camera. The system needs graceful recovery strategies.</p>
+
+        <p>Some ideas I'm working through:</p>
+
+        <ul>
+          <li><strong>Search patterns:</strong> If the robot doesn't see anything relevant for a while, it should start a systematic search. Turn in place, scan the room, look for recognizable objects or people.</li>
+          <li><strong>Stuck detection:</strong> If the camera view doesn't change after a movement command, the robot might be stuck against an obstacle. Back up and try a different direction.</li>
+          <li><strong>Return to home:</strong> Define a "home base" with a distinctive visual marker. If the robot gets confused, it can search for the marker and return to a known position.</li>
+          <li><strong>Manual override:</strong> Big obvious buttons that let a human take control. Sometimes the best recovery is just having someone drive it back to center stage.</li>
+          <li><strong>Timeout behaviors:</strong> If nothing interesting happens for 30 seconds, do something engaging. Dance, say something funny, look around. This keeps the robot entertaining even when it's confused.</li>
+        </ul>
+
+        <p>The LLM actually helps here. I can include recovery instructions in the system prompt. "If you haven't seen anything interesting in 5 iterations, try searching in a new direction." The model can reason about being lost and decide what to do, rather than needing hard-coded state machines.</p>
+
+        <h3>The April Deadline</h3>
+
+        <p>Maker Faire Miami is in April. That gives me roughly two months to solve mounting, power, aesthetics, calibration, and recovery. It's ambitious, but that's how maker projects work. You set a deadline, you commit to showing up, and then you figure it out. The deadline forces decisions. Good enough beats perfect when you're staring down a demo date.</p>
+
+        <p>I'll be documenting the physical integration process in Part 4 of this series. Expect 3D printing, probably some failures, definitely some late nights, and hopefully a robot that can autonomously wander around a maker faire delighting kids and adults alike.</p>
+
+        <p>Beyond the physical build, Part 4 will also explore expanding the AI capabilities: better object tracking, voice command input so you can talk to the robot directly, memory so it remembers people it's met, and possibly swapping in newer models as they become available. The software side of this project is never really "done" — every new model release opens up possibilities that weren't practical before. Stay tuned.</p>
+
+        <h2>The Journey So Far</h2>
+
+        <p>This project started with a corroded robot from 1984 and has evolved into something I never expected:</p>
+
+        <ul>
+          <li><a href="tomy-omnibot-restoration.html">Part 1:</a> Teardown, battery acid cleanup, first drive test</li>
+          <li><a href="tomy-omnibot-restoration-part-2.html">Part 2:</a> Bluetooth control, web controller, synthesized speech</li>
+          <li><strong>Part 3:</strong> AI vision, cloud LLM reasoning, autonomous behavior</li>
+          <li><strong>Part 4 (coming soon):</strong> Physical integration, power systems, calibration, and Maker Faire prep</li>
+        </ul>
+
+        <p>The future of robotics isn't always about building new hardware. Sometimes it's about breathing new life into the classics. The Omnibot was a promise of a robotic future. Now, 40 years later, that promise is finally being fulfilled.</p>
+
+        <p>See you at Maker Faire Miami!</p>
+      </div>
+    </article>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Mario The Maker. Built with passion in Miami.</p>
+    <p><a href="https://miami.makerfaire.com/" target="_blank">Maker Faire Miami</a></p>
+  </footer>
+</body>
+</html>
