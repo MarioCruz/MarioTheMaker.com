@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Poetry Phone — Part 2: Wrangling the DFPlayer Mini - Mario The Maker</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="../index.html" class="logo"><img src="../images/MarioTheMaker.jpg" alt="Mario The Maker Logo" class="logo-img"></a>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../about.html">About</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <a href="../index.html" class="back-link">&larr; Back to all posts</a>
+
+    <article>
+      <header class="post-header">
+        <h1>Poetry Phone — Part 2: Wrangling the DFPlayer Mini</h1>
+        <p class="post-meta">March 2026</p>
+      </header>
+
+      <div class="post-content">
+        <figure>
+          <img src="../images/poetry-phone-pico-inside.jpeg" alt="Raspberry Pi Pico mounted inside the phone with DFPlayer wiring">
+          <figcaption>Pico and DFPlayer wired up inside the phone.</figcaption>
+        </figure>
+
+        <p>With the <a href="poetry-phone-part-1.html">keypad working reliably</a>, the next challenge was audio. The whole point of this phone is that you hear things: a dial tone, touch tones, ringing, and then a poem. I needed something that could play MP3s through the phone's earpiece without taxing the Pico's limited resources.</p>
+
+        <h2>Why the DFPlayer Mini</h2>
+
+        <p>I chose the <a href="https://wiki.dfrobot.com/DFPlayer_Mini_SKU_DFR0299" target="_blank">DFPlayer Mini</a> for a few reasons:</p>
+
+        <ul>
+          <li><strong>Four wires.</strong> VCC, GND, TX, RX. That's the entire connection to the Pico.</li>
+          <li><strong>Built-in amp.</strong> It drives an 8-ohm speaker directly, which is exactly what a phone earpiece is.</li>
+          <li><strong>Built-in SD card slot.</strong> No separate breakout board needed.</li>
+          <li><strong>Zero CPU load.</strong> The DFPlayer handles all the MP3 decoding. The Pico stays free for keypad scanning and hook switch detection.</li>
+        </ul>
+
+        <p>The alternative was an I2S DAC with a separate SD reader, external amp, and streaming WAV files from the Pico. That's 7+ wires, no MP3 support, and constant CPU load. For $3, the DFPlayer does everything.</p>
+
+        <h2>The Wiring</h2>
+
+        <p>The DFPlayer talks to the Pico over UART at 9600 baud. The wiring is straightforward, with one critical detail:</p>
+
+        <pre><code>Pico                              DFPlayer Mini
+====                              =============
+GP20 (UART1 TX) ---[1K &Omega;]------> RX
+GP21 (UART1 RX) <--------------- TX
+VBUS (5V) ----------------------> VCC
+GND -----------------------------> GND
+                                  SPK1 ----> Phone earpiece (+)
+                                  SPK2 ----> Phone earpiece (-)</code></pre>
+
+        <p>That 1K resistor on the TX line is important. The Pico runs at 3.3V logic but the DFPlayer expects 5V. The resistor protects both sides. Don't skip it.</p>
+
+        <h2>The 5V Lesson</h2>
+
+        <p>My first test: nothing. No LED on the DFPlayer, no UART response, complete silence. I had it wired to the Pico's 3V3 pin.</p>
+
+        <p>The DFPlayer needs 5V. Period. On the Pico, that's the <strong>VBUS pin</strong>, the raw USB voltage. Not the 3V3 regulated output. Once I moved the power wire to VBUS, the DFPlayer's LED lit up and everything came alive.</p>
+
+        <p>If you're powering the DFPlayer externally (from a separate supply), that works too, but make sure you connect the grounds together. The Pico and DFPlayer must share a common ground or UART communication won't work.</p>
+
+        <h2>Finding the DFPlayer with UART Probe</h2>
+
+        <p>Even with the right power, I wasn't confident my TX/RX wires were on the right pins. So I wrote <code>uart_probe.py</code>, a script that tries multiple valid UART1 pin combinations and sends a raw status query to see if anything responds:</p>
+
+        <pre><code>def try_uart(uart_id, tx_pin, rx_pin, label):
+    uart = UART(uart_id, baudrate=9600, tx=Pin(tx_pin), rx=Pin(rx_pin))
+    utime.sleep_ms(200)
+    uart.read()  # flush stale data
+
+    # Send "get status" command (DFPlayer protocol)
+    cmd = bytearray([0x7E, 0xFF, 0x06, 0x42, 0x00,
+                     0x00, 0x00, 0xFE, 0xB9, 0xEF])
+    uart.write(cmd)
+    utime.sleep_ms(500)
+
+    resp = uart.read()
+    if resp:
+        print("RESPONSE: {}".format(resp.hex()))
+        return True
+    return False</code></pre>
+
+        <p>On the first successful run after fixing the power issue:</p>
+
+        <pre><code>[1/3] GP20 TX -> DFPlayer RX, GP21 RX <- DFPlayer TX (UART1)
+  Testing normal (UART1, TX=GP20, RX=GP21)...
+    RESPONSE: 7eff06420002000000ef
+    >> FOUND on GP20/GP21 (correct!)</code></pre>
+
+        <p>First audio test: dial tone through the phone earpiece. The built-in amp drove the earpiece perfectly at volume 20 (out of 30).</p>
+
+        <h2>The is_playing() Disaster</h2>
+
+        <p>Everything seemed great until I deployed the full Poetry Phone state machine. You'd dial a number, hear ringing, the poem would start playing... and then nothing. The phone never returned to the dial tone when the poem finished.</p>
+
+        <p>The original code used <code>df.is_playing()</code> to detect when playback ended. According to the DFPlayer datasheet, this function returns the file number while playing, 0 when stopped, and -1 on error. Simple enough.</p>
+
+        <p>I added a monitoring script to log <code>is_playing()</code> every 500ms during a 30-second playback:</p>
+
+        <pre><code>Time(s)  is_playing()
+-------  ------------
+  0.5    -1
+  1.0    -1
+  1.5    -1
+  ...
+ 29.5    -1
+ 30.0    -1</code></pre>
+
+        <p><strong>Every single read returned -1.</strong> Not during playback, not after it stopped. Always -1. The UART query for playback status simply doesn't work on this particular DFPlayer clone.</p>
+
+        <p>This is a known issue with cheaper DFPlayer modules. The chip inside isn't always a genuine YX5200. Clones use different chipsets that implement most of the protocol but skip certain query commands. Unfortunately, <code>is_playing()</code> is one of them.</p>
+
+        <h3>First Fix Attempt: Check for 0</h3>
+
+        <p>Changed the check from <code>playing &gt; 0</code> to <code>playing == 0</code>, thinking maybe the error was in my comparison. No help. 0 never appeared either.</p>
+
+        <h3>Second Fix Attempt: Treat -1 as "stopped"</h3>
+
+        <p>Changed it to <code>playing &lt;= 0</code>. Now poems never played at all. The function returned -1 immediately after calling <code>play()</code>, before the DFPlayer even started decoding.</p>
+
+        <h3>Third Fix Attempt: Grace Period</h3>
+
+        <p>Added a 2-second delay before checking:</p>
+
+        <pre><code>if utime.ticks_diff(utime.ticks_ms(), play_start) > 2000:
+    if df.is_playing() <= 0:
+        # Playback must be done</code></pre>
+
+        <p>Poems played for exactly 2 seconds, then got cut off. The -1 never changes.</p>
+
+        <p>At this point I gave up on <code>is_playing()</code> entirely.</p>
+
+        <h2>The BUSY Pin Solution</h2>
+
+        <p>The DFPlayer has a hardware pin called <strong>BUSY</strong> that does exactly what <code>is_playing()</code> was supposed to do, and it actually works. It's a simple digital signal: <strong>LOW while audio is playing, HIGH when idle.</strong></p>
+
+        <p>No UART queries, no parsing responses, no clone compatibility issues. Just read a pin.</p>
+
+        <p>I connected it to GP17 on the Pico:</p>
+
+        <pre><code>DFPlayer BUSY ----> Pico GP17 (input, pull-up)</code></pre>
+
+        <p>Then wrote a quick test to verify:</p>
+
+        <pre><code>busy = Pin(17, Pin.IN, Pin.PULL_UP)
+
+df.play(1, 1)  # play dial tone
+
+for i in range(30):
+    utime.sleep_ms(500)
+    val = busy.value()
+    status = "IDLE" if val == 1 else "PLAYING"
+    print("{:5.1f}    {}     {}".format((i+1)*0.5, val, status))</code></pre>
+
+        <pre><code>Time(s)  BUSY  Status
+-------  ----  ------
+  0.5    0     PLAYING
+  1.0    0     PLAYING
+  ...
+ 14.0    0     PLAYING
+ 14.5    1     IDLE      &larr; track finished
+ 15.0    1     IDLE</code></pre>
+
+        <p>Clean transitions, every time. One gotcha: the BUSY pin briefly reads HIGH right after you call <code>play()</code>, before the DFPlayer starts decoding. A 2-second grace period handles this. Don't check the pin until the audio has had time to start.</p>
+
+        <p>The final STATE_PLAYING logic:</p>
+
+        <pre><code># Check BUSY pin: HIGH = idle (playback finished)
+# Skip first 2s to let DFPlayer start
+if utime.ticks_diff(utime.ticks_ms(), play_start) > 2000:
+    if busy_pin.value() == 1:
+        print("[playback finished]")
+        play_sfx(SFX_HANGUP)    # click sound
+        utime.sleep_ms(500)
+        stop_audio()
+        start_dialtone()        # back to dial tone
+        state = STATE_OFF_HOOK</code></pre>
+
+        <h2>The Hook Switch</h2>
+
+        <p>The last piece of hardware was the hook switch, the mechanism that detects whether the handset is on the cradle or lifted. This particular phone has a normally-open switch, meaning:</p>
+
+        <ul>
+          <li><strong>Handset down (on-hook):</strong> switch open, pin reads HIGH (pulled up)</li>
+          <li><strong>Handset lifted (off-hook):</strong> switch closes to ground, pin reads LOW</li>
+        </ul>
+
+        <p>I wired it to GP22 with the Pico's internal pull-up:</p>
+
+        <pre><code>GP22 ----+---- Hook Switch ---- GND
+         |
+    (internal pull-up)</code></pre>
+
+        <p>A simple hardware test confirmed the behavior. Rock solid transitions, no bounce issues like the keypad. The hook switch is a much heavier mechanism than the thin membrane keypad contacts.</p>
+
+        <p>The phone checks for hangup in every state. Pick up the handset, you get a dial tone. Put it down at any point, mid-dial, mid-ring, mid-poem, and everything stops and resets.</p>
+
+        <h2>The Invisible Bug: UART1 Steals Your Keypad Pins</h2>
+
+        <p>This was the hardest bug in the entire project. After wiring up the DFPlayer, the keypad started failing intermittently. Sometimes all keys worked. Sometimes row 0 (1-2-3) or column 1 (2-5-8-0) would go dead. Restarting the script sometimes fixed it. Rebooting the Pico sometimes didn't.</p>
+
+        <p>I spent hours checking wires, adding pull-ups, swapping GPIO pins. Nothing made sense. The keypad had been rock solid before I added the DFPlayer.</p>
+
+        <p>The problem wasn't the wiring. It was one line of code:</p>
+
+        <pre><code>self.uart = machine.UART(1, 9600)</code></pre>
+
+        <p>On the RP2040, <strong><code>UART(1, 9600)</code> without explicit <code>tx</code>/<code>rx</code> parameters silently claims GP4 and GP5</strong>, the default UART1 pins. Even if you immediately call <code>.init()</code> with different pins (GP20/GP21), the damage is done. GP4 and GP5 have been briefly reconfigured as UART pins, and they don't always cleanly return to GPIO mode.</p>
+
+        <p>GP4 is keypad row 0 (keys 1, 2, 3). GP5 is keypad column 1 (keys 2, 5, 8, 0). The DFPlayer init was silently breaking half the keypad on every boot.</p>
+
+        <h3>The Fix</h3>
+
+        <p>Pass the pins directly in the constructor so UART1 never touches GP4/GP5:</p>
+
+        <pre><code># Before (broken): claims GP4/GP5 briefly
+self.uart = machine.UART(1, 9600)
+self.uart.init(9600, bits=8, parity=None, stop=1, tx=20, rx=21)
+
+# After (fixed): never touches GP4/GP5
+self.uart = machine.UART(1, 9600, bits=8, parity=None, stop=1, tx=20, rx=21)</code></pre>
+
+        <p>One line. Hours of debugging. The lesson: <strong>on RP2040, always pass explicit <code>tx</code> and <code>rx</code> pins when creating a UART.</strong> The default pins are not just defaults. They get physically configured even before you call <code>.init()</code>.</p>
+
+        <h2>Putting It All Together</h2>
+
+        <p>The complete system uses a five-state machine:</p>
+
+        <pre><code>IDLE &rarr; OFF_HOOK &rarr; DIALING &rarr; CONNECTING &rarr; PLAYING
+                                              &darr;
+                                         OFF_HOOK (poem done)</code></pre>
+
+        <p>Every state checks for hangup. The keypad scanning code from Part 1 carries through unchanged. It already handles the noisy bottom row.</p>
+
+        <p>Special codes (dialing 0 for operator, 411 for directory assistance, 305 for an O, Miami greeting) route through the same PLAYING state as poems, so they get the same BUSY pin end-of-track detection.</p>
+
+        <p>The DFPlayer handles three folders on the SD card:</p>
+
+        <pre><code>/01/  &rarr; Sound effects (dial tone, ringback, DTMF tones, etc.)
+/02/  &rarr; Poems mapped to phone numbers
+/03/  &rarr; Random poems for unknown numbers</code></pre>
+
+        <p>Dial a number that's in the phonebook? You get that specific poem. Dial anything else? A random poem from folder 03. Every call connects to something.</p>
+
+        <h2>What I Learned</h2>
+
+        <ol>
+          <li><strong>The BUSY pin is the only reliable way to detect playback state</strong> on DFPlayer clones. Don't trust <code>is_playing()</code>. It may work on genuine YX5200 chips, but clones return garbage.</li>
+          <li><strong>The DFPlayer needs 5V.</strong> Not 3.3V, not "it might work at 3.3V." Use VBUS on the Pico or an external 5V supply with common ground.</li>
+          <li><strong>Build diagnostic tools early.</strong> The UART probe and BUSY pin test scripts saved hours of guesswork. When something doesn't work, isolate the problem with a minimal test before changing the main code.</li>
+          <li><strong>Hardware signals beat software queries.</strong> A physical pin that goes LOW when playing is simpler, faster, and more reliable than sending a UART command and parsing the response. When hardware gives you a shortcut, take it.</li>
+        </ol>
+
+        <p>The phone is fully functional now. Pick up, hear the dial tone, punch in a number, hear it ring, listen to a poem, hang up. Everything a real phone call should feel like, minus the cell tower.</p>
+
+        <p>The phone works. Now it needs to survive kids at an outdoor festival. <a href="poetry-phone-part-3.html">Part 3</a>.</p>
+
+        <h2>The Journey</h2>
+
+        <ul>
+          <li><a href="poetry-phone-part-1.html">Part 1:</a> Cracking the keypad matrix</li>
+          <li><strong>Part 2:</strong> Wiring the DFPlayer Mini</li>
+          <li><a href="poetry-phone-part-3.html">Part 3:</a> Kid-proofing and Easter eggs</li>
+          <li><a href="poetry-phone-part-4.html">Part 4:</a> Making it a banana</li>
+        </ul>
+
+        <hr>
+
+        <p><em>Built for <a href="https://www.omiami.org/" target="_blank">O, Miami</a>. Code on <a href="https://github.com/MarioCruz/OMiamiPhone" target="_blank">GitHub</a>.</em></p>
+      </div>
+    </article>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Mario The Maker. Built with passion in Miami.</p>
+    <p><a href="https://miami.makerfaire.com/" target="_blank">Maker Faire Miami</a></p>
+  </footer>
+</body>
+</html>

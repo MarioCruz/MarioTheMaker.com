@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Poetry Phone — Part 1: Cracking the Keypad Matrix - Mario The Maker</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="../index.html" class="logo"><img src="../images/MarioTheMaker.jpg" alt="Mario The Maker Logo" class="logo-img"></a>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../about.html">About</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <a href="../index.html" class="back-link">&larr; Back to all posts</a>
+
+    <article>
+      <header class="post-header">
+        <h1>Poetry Phone — Part 1: Cracking the Keypad Matrix</h1>
+        <p class="post-meta">March 2026</p>
+      </header>
+
+      <div class="post-content">
+        <figure>
+          <img src="../images/poetry-phone-teardown.jpeg" alt="Phone teardown showing original internals and handset">
+          <figcaption>The donor phone, fully disassembled.</figcaption>
+        </figure>
+
+        <p>It started with a request from the amazing team at <a href="https://www.omiami.org/" target="_blank">O, Miami</a> — they wanted to create a custom phone shaped like a banana that would play poems about bananas, along with other special poems selected based on the number you dialed. The phone would live at <strong>Peel</strong>, a banana-based soft serve shop in Miami Shores and the Design District that rescues "ugly" bananas that stores won't sell. A banana phone playing poetry in a banana soft serve shop. I was in.</p>
+
+        <p>Pick up the handset, hear a dial tone, punch in a number, listen to a poem. No screens, no apps.</p>
+
+        <p>I found <a href="https://learn.adafruit.com/phone-a-song" target="_blank">John Park's project</a> where he built a phone that played songs with an Adafruit Feather, and that got me started on the electronics side. I went with a <strong>Raspberry Pi Pico</strong> running MicroPython, a <strong>DFPlayer Mini</strong> for audio, and a salvaged phone handset. But first I needed to figure out the keypad.</p>
+
+        <h2>The Phone Keypad Problem</h2>
+
+        <p>John Park's project used a standard 3x4 membrane keypad with a well-documented pinout. My phone's keypad? Not so much. It was a salvaged unit from a real telephone, and the wiring was completely different from what I expected.</p>
+
+        <p>A typical phone keypad is a 3x4 matrix, 3 columns and 4 rows, giving you 12 keys with just 7 wires. The columns are outputs and the rows are inputs. To scan it, you pull one column LOW at a time, then read the rows to see which key is pressed:</p>
+
+        <pre><code>        Col 0   Col 1   Col 2
+Row 0:    1       2       3
+Row 1:    4       5       6
+Row 2:    7       8       9
+Row 3:    *       0       #</code></pre>
+
+        <p>Simple enough in theory. But which wire is which?</p>
+
+        <h2>Brute-Force Pin Discovery</h2>
+
+        <figure>
+          <img src="../images/poetry-phone-pico-keypad.jpeg" alt="Raspberry Pi Pico wired to the phone keypad via ribbon cable">
+          <figcaption>Pico wired to the keypad ribbon cable.</figcaption>
+        </figure>
+
+        <p>With no datasheet and no markings, I wrote a script called <code>keypad_probe.py</code> that brute-forced every possible pin pair on the Pico. The idea: try every combination of two GPIO pins. Set one as output (LOW) and the other as input (pull-up), then wait for a keypress. When a key connects a row to a column, the input pin gets pulled LOW.</p>
+
+        <pre><code># The brute-force approach: try every pin pair
+for pin_a in range(28):
+    for pin_b in range(28):
+        if pin_a == pin_b:
+            continue
+        # Set pin_a as output LOW, pin_b as input with pull-up
+        # Press a key, see if pin_b goes LOW
+        # If it does, we found a connection!</code></pre>
+
+        <p>I pressed each key one at a time and logged which pin pairs responded. After working through all 12 keys, a pattern emerged:</p>
+
+        <table>
+          <thead>
+            <tr><th>Key</th><th>Pin A (Column)</th><th>Pin B (Row)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>GP0</td><td>GP6</td></tr>
+            <tr><td>2</td><td>GP1</td><td>GP6</td></tr>
+            <tr><td>3</td><td>GP2</td><td>GP6</td></tr>
+            <tr><td>4</td><td>GP0</td><td>GP5</td></tr>
+            <tr><td>5</td><td>GP1</td><td>GP5</td></tr>
+            <tr><td>6</td><td>GP2</td><td>GP5</td></tr>
+            <tr><td>7</td><td>GP0</td><td>GP4</td></tr>
+            <tr><td>8</td><td>GP1</td><td>GP4</td></tr>
+            <tr><td>9</td><td>GP2</td><td>GP4</td></tr>
+            <tr><td>*</td><td>GP0</td><td>GP3</td></tr>
+            <tr><td>0</td><td>GP1</td><td>GP3</td></tr>
+            <tr><td>#</td><td>GP2</td><td>GP3</td></tr>
+          </tbody>
+        </table>
+
+        <p>Three columns on GP0, GP1, GP2. Four rows on GP6, GP5, GP4, GP3. The column pins were straightforward, but the row ordering was reversed compared to what I expected. GP6 is the top row (1-2-3) and GP3 is the bottom row (*-0-#).</p>
+
+        <h2>The Bottom Row Problem</h2>
+
+        <p>With the matrix mapped out, I wired it up and wrote a basic scanning loop. Keys 1 through 9 worked great on the first try. Then I pressed 0.</p>
+
+        <pre><code>0
+00
+000</code></pre>
+
+        <p>Three zeroes from a single press. The bottom row (GP3: *, 0, #) was incredibly noisy. Every press registered multiple times, and ghost presses would fire randomly.</p>
+
+        <p>My first debounce approach, waiting for a single clean read, wasn't even close to enough. The bottom row needed something much more aggressive.</p>
+
+        <h2>Getting Debounce Right</h2>
+
+        <p>After a lot of experimentation, I landed on a two-stage debounce:</p>
+
+        <p><strong>Stage 1: Key detection.</strong> Require 5 consecutive identical reads before accepting a keypress. This filters out the brief noise spikes that cause false triggers.</p>
+
+        <pre><code>def get_key():
+    count = 0
+    last = None
+    while True:
+        hit = raw_scan()
+        if hit is not None and hit == last:
+            count += 1
+            if count >= 5:
+                return KEYMAP[hit[0]][hit[1]]
+        else:
+            count = 1 if hit is not None else 0
+            last = hit
+        sleep_ms(10)</code></pre>
+
+        <p><strong>Stage 2: Key release.</strong> Wait for 5 clean reads (no key detected) plus a 30ms cooldown before accepting the next key. This prevents the bouncy release from registering as a second press.</p>
+
+        <pre><code>def wait_release():
+    clean = 0
+    while clean < 5:
+        hit = raw_scan()
+        if hit is None:
+            clean += 1
+        else:
+            clean = 0
+        sleep_ms(5)
+    sleep_ms(30)</code></pre>
+
+        <p>The numbers took some tuning. Too aggressive and the keypad feels sluggish. You're dialing a phone number and people expect keys to respond instantly. Too loose and the bottom row double-fires. The current values feel natural: fast enough for quick dialing, stable enough that every press registers exactly once.</p>
+
+        <h2>The Final Wiring</h2>
+
+        <p>Here's how the keypad connects to the Pico:</p>
+
+        <pre><code>Pico GPIO    Keypad Function
+---------    ---------------
+GP6          Column 0 (1, 4, 7, *)    &larr; Output
+GP5          Column 1 (2, 5, 8, 0)    &larr; Output
+GP7          Column 2 (3, 6, 9, #)    &larr; Output
+GP4          Row 0 (1, 2, 3)          &larr; Input (pull-up)
+GP2          Row 1 (4, 5, 6)          &larr; Input (pull-up)
+GP1          Row 2 (7, 8, 9)          &larr; Input (pull-up)
+GP0          Row 3 (*, 0, #)          &larr; Input (pull-up)</code></pre>
+
+        <p>The scanning works by pulling each column LOW one at a time, then reading the four row pins. If a key is pressed on that column, the corresponding row will read LOW (pulled down through the key switch). The Pico's internal pull-up resistors keep the row pins HIGH when no key is pressed. No external components needed.</p>
+
+        <h2>What I Learned</h2>
+
+        <ol>
+          <li><strong>Don't assume standard pinouts.</strong> Salvaged phone keypads can be wired any way the manufacturer felt like. Brute-force discovery is your friend.</li>
+          <li><strong>Debounce is not optional.</strong> Especially on real mechanical switches. The bottom row of this keypad generates significantly more noise than the other rows, possibly due to longer trace lengths or wear on the contacts.</li>
+          <li><strong>Test with the actual hardware.</strong> The keypad worked perfectly in simulation. The real one had bounce characteristics that no simulator would have predicted.</li>
+        </ol>
+
+        <p>Keypad done. Next up was getting the DFPlayer Mini to play poems through the earpiece, which turned out to be its own adventure. <a href="poetry-phone-part-2.html">Part 2</a>.</p>
+
+        <h2>The Journey</h2>
+
+        <ul>
+          <li><strong>Part 1:</strong> Cracking the keypad matrix</li>
+          <li><a href="poetry-phone-part-2.html">Part 2:</a> Wiring the DFPlayer Mini</li>
+          <li><a href="poetry-phone-part-3.html">Part 3:</a> Kid-proofing and Easter eggs</li>
+          <li><a href="poetry-phone-part-4.html">Part 4:</a> Making it a banana</li>
+        </ul>
+
+        <hr>
+
+        <p><em>Built for <a href="https://www.omiami.org/" target="_blank">O, Miami</a>. Code on <a href="https://github.com/MarioCruz/OMiamiPhone" target="_blank">GitHub</a>.</em></p>
+      </div>
+    </article>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Mario The Maker. Built with passion in Miami.</p>
+    <p><a href="https://miami.makerfaire.com/" target="_blank">Maker Faire Miami</a></p>
+  </footer>
+</body>
+</html>
