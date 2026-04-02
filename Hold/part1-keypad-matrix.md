@@ -1,6 +1,6 @@
 # Poetry Phone — Part 1: Cracking the Keypad Matrix
 
-It all began with a blog post by [John Park](https://learn.adafruit.com/touch-tone-phone-dial-a-song/overview) about a phone that played songs using an Adafruit Feather. From there, I received an exciting request from the amazing team at [O, Miami](https://www.omiami.org/) — they wanted to create a custom phone shaped like a banana that would play poems about bananas, along with other special poems selected based on the number you dialed.
+It all began with a blog post by [John Park](https://learn.adafruit.com/touch-tone-phone-dial-a-song/assemble-the-dial-a-song) about a phone that played songs using an Adafruit Feather. From there, I received an exciting request from the amazing team at [O, Miami](https://www.omiami.org/) — they wanted to create a custom phone shaped like a banana that would play poems about bananas, along with other special poems selected based on the number you dialed.
 
 The concept was simple: pick up the handset, hear a dial tone, punch in a number, and listen to a poem. A real phone experience — no screens, no apps, just a conversation between you and a poet.
 
