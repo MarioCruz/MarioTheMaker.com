@@ -3,8 +3,93 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="In Part 1, I restored the hardware. In Part 2, I added Bluetooth control and gave it a voice. Now it&#x27;s time for the real magic: giving this 40-year-old robot...">
+  <meta property="og:title" content="Restoring a 1984 Tomy Omnibot (Part 3) - Mario The Maker">
+  <meta property="og:description" content="In Part 1, I restored the hardware. In Part 2, I added Bluetooth control and gave it a voice. Now it&#x27;s time for the real magic: giving this 40-year-old robot...">
+  <meta property="og:image" content="https://mariothemaker.com/images/tomy-ai-dashboard.png">
+  <meta property="og:url" content="https://mariothemaker.com/posts/tomy-omnibot-restoration-part-3.html">
+  <meta property="og:type" content="article">
+  <meta property="article:author" content="Mario Cruz">
+  <meta property="article:published_time" content="2026-03-28">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://mariothemaker.com/posts/tomy-omnibot-restoration-part-3.html">
   <title>Restoring a 1984 Tomy Omnibot (Part 3) - Mario The Maker</title>
   <link rel="stylesheet" href="../css/style.css">
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Restoring a 1984 Tomy Omnibot (Part 3)",
+  "description": "In Part 1, I restored the hardware. In Part 2, I added Bluetooth control and gave it a voice. Now it's time for the real magic: giving this 40-year-old robot...",
+  "image": "https://mariothemaker.com/images/tomy-ai-dashboard.png",
+  "datePublished": "2026-03-28",
+  "dateModified": "2026-03-28",
+  "url": "https://mariothemaker.com/posts/tomy-omnibot-restoration-part-3.html",
+  "author": {
+    "@type": "Person",
+    "name": "Mario Cruz",
+    "url": "https://mariothemaker.com/"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Mario The Maker",
+    "url": "https://mariothemaker.com/"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://mariothemaker.com/posts/tomy-omnibot-restoration-part-3.html"
+  },
+  "keywords": "Tomy Omnibot, IMX500 AI Camera, YOLO object detection, Raspberry Pi 5, AI robot, Groq LLM, autonomous robot, vintage robotics AI, Maker Faire Miami, Mario The Maker",
+  "about": [
+    {
+      "@type": "Thing",
+      "name": "Tomy Omnibot",
+      "sameAs": "https://en.wikipedia.org/wiki/Omnibot"
+    },
+    {
+      "@type": "Thing",
+      "name": "You Only Look Once (YOLO)",
+      "sameAs": "https://en.wikipedia.org/wiki/You_Only_Look_Once"
+    },
+    {
+      "@type": "Thing",
+      "name": "Raspberry Pi",
+      "sameAs": "https://en.wikipedia.org/wiki/Raspberry_Pi"
+    },
+    {
+      "@type": "Thing",
+      "name": "Object detection",
+      "sameAs": "https://en.wikipedia.org/wiki/Object_detection"
+    },
+    {
+      "@type": "Thing",
+      "name": "Artificial intelligence",
+      "sameAs": "https://en.wikipedia.org/wiki/Artificial_intelligence"
+    },
+    {
+      "@type": "Thing",
+      "name": "Robotics",
+      "sameAs": "https://en.wikipedia.org/wiki/Robotics"
+    }
+  ],
+  "mentions": [
+    {
+      "@type": "SoftwareSourceCode",
+      "name": "omnibotAi",
+      "codeRepository": "https://github.com/MarioCruz/omnibotAi"
+    },
+    {
+      "@type": "Organization",
+      "name": "Moonlighter FabLab",
+      "url": "https://moonlighterfablab.org/"
+    }
+  ],
+  "isPartOf": {
+    "@type": "BlogPosting",
+    "url": "https://mariothemaker.com/posts/tomy-omnibot-restoration.html"
+  }
+}
+  </script>
 </head>
 <body>
   <header>
@@ -33,11 +118,11 @@
 
         <p>In <a href="tomy-omnibot-restoration.html">Part 1</a>, I restored the hardware. In <a href="tomy-omnibot-restoration-part-2.html">Part 2</a>, I added Bluetooth control and gave it a voice. Now it's time for the real magic: <strong>giving this 40-year-old robot eyes and a brain.</strong></p>
 
-        <p>The goal was simple but ambitious. Could I make the Omnibot autonomous? Could it see its environment, understand what's around it, and decide what to do on its own? The answer is yes, and the results are ready for <strong>Maker Faire Miami 2026</strong>.</p>
+        <p>The goal was simple but ambitious. Could I make the Omnibot autonomous? Could it see its environment, understand what's around it, and decide what to do on its own? The answer is yes, and the results are ready for <strong><a href="https://miami.makerfaire.com/" target="_blank">Maker Faire Miami</a> 2026</strong>.</p>
 
         <h2>The Vision: Retro Meets Modern AI</h2>
 
-        <p>The Tomy Omnibot was a marvel of 1980s consumer robotics. It could be programmed via cassette tapes to deliver drinks and perform simple tasks. Four decades later, I've given it a brain transplant: a Raspberry Pi 5 with an AI-accelerated camera and cloud LLM integration.</p>
+        <p>The Tomy Omnibot was a marvel of 1980s consumer robotics. It could be programmed via cassette tapes to deliver drinks and perform simple tasks. Four decades later, I've given it a brain transplant: a <a href="https://www.raspberrypi.com/products/raspberry-pi-5/" target="_blank">Raspberry Pi 5</a> with an AI-accelerated camera and cloud LLM integration.</p>
 
         <p>The result is a robot that can see, think, and act autonomously while maintaining its vintage charm.</p>
 
@@ -46,12 +131,12 @@
         <p>The system has three layers working together:</p>
 
         <ul>
-          <li><strong>Perception Layer:</strong> The IMX500 AI Camera runs hardware-accelerated YOLOv8 object detection at 30 FPS</li>
-          <li><strong>Reasoning Layer:</strong> A cloud-based Groq LLM (Llama 3.1 8B) decides what to do with what it sees</li>
+          <li><strong>Perception Layer:</strong> The <a href="https://www.raspberrypi.com/products/ai-camera/" target="_blank">IMX500 AI Camera</a> runs hardware-accelerated <a href="https://docs.ultralytics.com/models/yolov8/" target="_blank">YOLOv8</a> object detection at 30 FPS</li>
+          <li><strong>Reasoning Layer:</strong> A cloud-based <a href="https://groq.com/" target="_blank">Groq</a> LLM (Llama 3.1 8B) decides what to do with what it sees</li>
           <li><strong>Action Layer:</strong> Audio tones control movement, text-to-speech provides a voice, and an animated eye display shows emotion</li>
         </ul>
 
-        <h2>Layer 1: The Eyes (IMX500 AI Camera)</h2>
+        <h2>Layer 1: The Eyes (<a href="https://www.raspberrypi.com/products/ai-camera/" target="_blank">IMX500 AI Camera</a>)</h2>
 
         <figure>
           <img src="../images/raspberry-pi-ai-camera.jpg" alt="Raspberry Pi 5 with AI Camera module">

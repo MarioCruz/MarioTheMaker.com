@@ -3,8 +3,79 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="It started with a request from the amazing team at O, Miami — they wanted to create a custom phone shaped like a banana that would play poems about bananas,...">
+  <meta property="og:title" content="Poetry Phone — Part 1: Cracking the Keypad Matrix - Mario The Maker">
+  <meta property="og:description" content="It started with a request from the amazing team at O, Miami — they wanted to create a custom phone shaped like a banana that would play poems about bananas,...">
+  <meta property="og:image" content="https://mariothemaker.com/images/poetry-phone-teardown.jpeg">
+  <meta property="og:url" content="https://mariothemaker.com/posts/poetry-phone-part-1.html">
+  <meta property="og:type" content="article">
+  <meta property="article:author" content="Mario Cruz">
+  <meta property="article:published_time" content="2026-04-02">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://mariothemaker.com/posts/poetry-phone-part-1.html">
   <title>Poetry Phone — Part 1: Cracking the Keypad Matrix - Mario The Maker</title>
   <link rel="stylesheet" href="../css/style.css">
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Poetry Phone \u2014 Part 1: Cracking the Keypad Matrix",
+  "description": "It started with a request from the amazing team at O, Miami \u2014 they wanted to create a custom phone shaped like a banana that would play poems about bananas,...",
+  "image": "https://mariothemaker.com/images/poetry-phone-teardown.jpeg",
+  "datePublished": "2026-04-02",
+  "dateModified": "2026-04-02",
+  "url": "https://mariothemaker.com/posts/poetry-phone-part-1.html",
+  "author": {
+    "@type": "Person",
+    "name": "Mario Cruz",
+    "url": "https://mariothemaker.com/"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Mario The Maker",
+    "url": "https://mariothemaker.com/"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://mariothemaker.com/posts/poetry-phone-part-1.html"
+  },
+  "keywords": "Poetry Phone, O Miami Poetry Festival, keypad matrix, Raspberry Pi Pico, GPIO debouncing, banana phone, salvaged electronics, interactive art installation, Mario The Maker, Peel Miami",
+  "about": [
+    {
+      "@type": "Thing",
+      "name": "Raspberry Pi Pico",
+      "sameAs": "https://en.wikipedia.org/wiki/RP2040"
+    },
+    {
+      "@type": "Thing",
+      "name": "Keypad",
+      "sameAs": "https://en.wikipedia.org/wiki/Keypad"
+    },
+    {
+      "@type": "Thing",
+      "name": "Interactive art",
+      "sameAs": "https://en.wikipedia.org/wiki/Interactive_art"
+    },
+    {
+      "@type": "Thing",
+      "name": "Maker culture",
+      "sameAs": "https://en.wikipedia.org/wiki/Maker_culture"
+    }
+  ],
+  "mentions": [
+    {
+      "@type": "Event",
+      "name": "O, Miami Poetry Festival",
+      "url": "https://www.omiami.org/"
+    },
+    {
+      "@type": "Organization",
+      "name": "Moonlighter FabLab",
+      "url": "https://moonlighterfablab.org/"
+    }
+  ]
+}
+  </script>
 </head>
 <body>
   <header>
@@ -36,7 +107,7 @@
 
         <p>Pick up the handset, hear a dial tone, punch in a number, listen to a poem. No screens, no apps.</p>
 
-        <p>I found <a href="https://learn.adafruit.com/touch-tone-phone-dial-a-song/assemble-the-dial-a-song" target="_blank">John Park's project</a> where he built a phone that played songs with an Adafruit Feather, and that got me started on the electronics side. I went with a <strong>Raspberry Pi Pico</strong> running MicroPython, a <strong>DFPlayer Mini</strong> for audio, and a salvaged phone handset. But first I needed to figure out the keypad.</p>
+        <p>I found <a href="https://learn.adafruit.com/touch-tone-phone-dial-a-song/assemble-the-dial-a-song" target="_blank">John Park's project</a> where he built a phone that played songs with an Adafruit Feather, and that got me started on the electronics side. I went with a <strong><a href="https://www.raspberrypi.com/products/raspberry-pi-pico/" target="_blank">Raspberry Pi Pico</a></strong> running MicroPython, a <strong>DFPlayer Mini</strong> for audio, and a salvaged phone handset. But first I needed to figure out the keypad.</p>
 
         <h2>The Phone Keypad Problem</h2>
 

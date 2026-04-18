@@ -3,8 +3,78 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="With the keypad working reliably, the next challenge was audio. The whole point of this phone is that you hear things: a dial tone, touch tones, ringing, and...">
+  <meta property="og:title" content="Poetry Phone — Part 2: Wrangling the DFPlayer Mini - Mario The Maker">
+  <meta property="og:description" content="With the keypad working reliably, the next challenge was audio. The whole point of this phone is that you hear things: a dial tone, touch tones, ringing, and...">
+  <meta property="og:image" content="https://mariothemaker.com/images/poetry-phone-dfplayer-close.jpeg">
+  <meta property="og:url" content="https://mariothemaker.com/posts/poetry-phone-part-2.html">
+  <meta property="og:type" content="article">
+  <meta property="article:author" content="Mario Cruz">
+  <meta property="article:published_time" content="2026-04-02">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://mariothemaker.com/posts/poetry-phone-part-2.html">
   <title>Poetry Phone — Part 2: Wrangling the DFPlayer Mini - Mario The Maker</title>
   <link rel="stylesheet" href="../css/style.css">
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Poetry Phone \u2014 Part 2: Wrangling the DFPlayer Mini",
+  "description": "With the keypad working reliably, the next challenge was audio. The whole point of this phone is that you hear things: a dial tone, touch tones, ringing, and...",
+  "image": "https://mariothemaker.com/images/poetry-phone-dfplayer-close.jpeg",
+  "datePublished": "2026-04-02",
+  "dateModified": "2026-04-02",
+  "url": "https://mariothemaker.com/posts/poetry-phone-part-2.html",
+  "author": {
+    "@type": "Person",
+    "name": "Mario Cruz",
+    "url": "https://mariothemaker.com/"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Mario The Maker",
+    "url": "https://mariothemaker.com/"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://mariothemaker.com/posts/poetry-phone-part-2.html"
+  },
+  "keywords": "DFPlayer Mini, Raspberry Pi Pico, MP3 module, UART audio, Poetry Phone, O Miami Poetry Festival, audio module wiring, interactive installation, banana phone, Mario The Maker",
+  "about": [
+    {
+      "@type": "Thing",
+      "name": "Raspberry Pi Pico",
+      "sameAs": "https://en.wikipedia.org/wiki/RP2040"
+    },
+    {
+      "@type": "Thing",
+      "name": "MP3",
+      "sameAs": "https://en.wikipedia.org/wiki/MP3"
+    },
+    {
+      "@type": "Thing",
+      "name": "UART",
+      "sameAs": "https://en.wikipedia.org/wiki/Universal_asynchronous_receiver-transmitter"
+    },
+    {
+      "@type": "Thing",
+      "name": "Maker culture",
+      "sameAs": "https://en.wikipedia.org/wiki/Maker_culture"
+    }
+  ],
+  "mentions": [
+    {
+      "@type": "Event",
+      "name": "O, Miami Poetry Festival",
+      "url": "https://www.omiami.org/"
+    }
+  ],
+  "isPartOf": {
+    "@type": "BlogPosting",
+    "url": "https://mariothemaker.com/posts/poetry-phone-part-1.html"
+  }
+}
+  </script>
 </head>
 <body>
   <header>
@@ -22,7 +92,7 @@
 
     <article>
       <header class="post-header">
-        <h1>Poetry Phone — Part 2: Wrangling the DFPlayer Mini</h1>
+        <h1>Poetry Phone — Part 2: Wrangling the <a href="https://wiki.dfrobot.com/DFPlayer_Mini_SKU_DFR0299" target="_blank">DFPlayer Mini</a></h1>
         <p class="post-meta">March 2026</p>
       </header>
 
@@ -32,7 +102,7 @@
           <figcaption>DFPlayer Mini inside the phone.</figcaption>
         </figure>
 
-        <p>With the <a href="poetry-phone-part-1.html">keypad working reliably</a>, the next challenge was audio. The whole point of this phone is that you hear things: a dial tone, touch tones, ringing, and then a poem. I needed something that could play MP3s through the phone's earpiece without taxing the Pico's limited resources.</p>
+        <p>With the <a href="poetry-phone-part-1.html">keypad working reliably</a>, the next challenge was audio. The whole point of this phone is that you hear things: a dial tone, touch tones, ringing, and then a poem. I needed something that could play MP3s through the phone's earpiece without taxing the <a href="https://www.raspberrypi.com/products/raspberry-pi-pico/" target="_blank">Pico</a>'s limited resources.</p>
 
         <h2>Why the DFPlayer Mini</h2>
 
@@ -243,7 +313,7 @@ self.uart = machine.UART(1, 9600, bits=8, parity=None, stop=1, tx=20, rx=21)</co
 
         <p>Every state checks for hangup. The keypad scanning code from Part 1 carries through unchanged. It already handles the noisy bottom row.</p>
 
-        <p>Special codes (dialing 0 for operator, 411 for directory assistance, 305 for an O, Miami greeting) route through the same PLAYING state as poems, so they get the same BUSY pin end-of-track detection.</p>
+        <p>Special codes (dialing 0 for operator, 411 for directory assistance, 305 for an <a href="https://www.omiami.org/" target="_blank">O, Miami</a> greeting) route through the same PLAYING state as poems, so they get the same BUSY pin end-of-track detection.</p>
 
         <p>The DFPlayer handles three folders on the SD card:</p>
 

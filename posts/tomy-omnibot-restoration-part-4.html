@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="The robot sees. The robot moves. The robot finds you. Part 4 of the 1984 Tomy Omnibot restoration: meet Ring-O, the Pi-powered companion that gives Omnibot eyes, a brain, and a soul. Heading to Maker Faire Miami 2026.">
+  <meta property="og:title" content="Restoring a 1984 Tomy Omnibot (Part 4): It's Alive - Mario The Maker">
+  <meta property="og:description" content="The robot sees. The robot moves. The robot finds you. Meet Ring-O, the tiny AI companion that finally delivers on Omnibot's 1984 promise.">
+  <meta property="og:image" content="https://mariothemaker.com/images/omnibot-ringo-hero.jpg">
+  <meta property="og:url" content="https://mariothemaker.com/posts/tomy-omnibot-restoration-part-4.html">
+  <meta property="og:type" content="article">
+  <meta property="article:author" content="Mario Cruz">
+  <meta property="article:published_time" content="2026-04-17">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://mariothemaker.com/posts/tomy-omnibot-restoration-part-4.html">
+  <title>Restoring a 1984 Tomy Omnibot (Part 4): It's Alive - Mario The Maker</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Restoring a 1984 Tomy Omnibot (Part 4): It's Alive",
+    "description": "The robot sees. The robot moves. The robot finds you. Meet Ring-O, the tiny AI companion that finally delivers on Omnibot's 1984 promise.",
+    "image": "https://mariothemaker.com/images/omnibot-ringo-hero.jpg",
+    "datePublished": "2026-04-17",
+    "dateModified": "2026-04-18",
+    "url": "https://mariothemaker.com/posts/tomy-omnibot-restoration-part-4.html",
+    "author": {"@type": "Person", "name": "Mario Cruz", "url": "https://mariothemaker.com/"},
+    "publisher": {"@type": "Person", "name": "Mario The Maker", "url": "https://mariothemaker.com/"},
+    "mainEntityOfPage": {"@type": "WebPage", "@id": "https://mariothemaker.com/posts/tomy-omnibot-restoration-part-4.html"},
+    "keywords": "Tomy Omnibot, Ring-O, YOLO11, IMX500 AI Camera, Raspberry Pi 5, vintage robot restoration, autonomous robot, object detection, Maker Faire Miami, Mario The Maker, robotics project, Python robot, AI camera, Groq LLM",
+    "about": [
+      {"@type": "Thing", "name": "Tomy Omnibot", "sameAs": "https://en.wikipedia.org/wiki/Omnibot"},
+      {"@type": "Thing", "name": "YOLO (object detection)", "sameAs": "https://en.wikipedia.org/wiki/You_Only_Look_Once"},
+      {"@type": "Thing", "name": "Raspberry Pi", "sameAs": "https://en.wikipedia.org/wiki/Raspberry_Pi"},
+      {"@type": "Thing", "name": "Object detection", "sameAs": "https://en.wikipedia.org/wiki/Object_detection"},
+      {"@type": "Thing", "name": "Robotics", "sameAs": "https://en.wikipedia.org/wiki/Robotics"},
+      {"@type": "Thing", "name": "Maker Faire", "sameAs": "https://en.wikipedia.org/wiki/Maker_Faire"}
+    ],
+    "mentions": [
+      {"@type": "SoftwareSourceCode", "name": "omnibotAi", "codeRepository": "https://github.com/MarioCruz/omnibotAi"},
+      {"@type": "Organization", "name": "Moonlighter FabLab", "url": "https://moonlighterfablab.org/"},
+      {"@type": "Event", "name": "Maker Faire Miami 2026"}
+    ],
+    "isPartOf": {
+      "@type": "BlogPosting",
+      "headline": "Restoring a 1984 Tomy Omnibot series",
+      "url": "https://mariothemaker.com/posts/tomy-omnibot-restoration.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="../index.html" class="logo"><img src="../images/MarioTheMaker.jpg" alt="Mario The Maker Logo" class="logo-img"></a>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../about.html">About</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <a href="../index.html" class="back-link">&larr; Back to all posts</a>
+
+    <article>
+      <header class="post-header">
+        <h1>Restoring a 1984 Tomy Omnibot (Part 4): It's Alive</h1>
+        <p class="post-meta">April 2026</p>
+      </header>
+
+      <div class="post-content">
+        <figure>
+          <img src="../images/omnibot-ringo-hero.jpg" alt="Tomy Omnibot with Ring-O companion robot mounted on top, OLED eye glowing">
+          <figcaption>Omnibot meets Ring-O. The tiny Pi-powered companion that finally gives the 1984 robot a brain. <em>Photo by PLACITECH.</em></figcaption>
+        </figure>
+
+        <p><em>The robot sees. The robot moves. The robot finds you.</em></p>
+
+        <p>In <a href="tomy-omnibot-restoration.html">Part 1</a>, I restored the hardware. In <a href="tomy-omnibot-restoration-part-2.html">Part 2</a>, I added Bluetooth control and gave it a voice. In <a href="tomy-omnibot-restoration-part-3.html">Part 3</a>, I wired up the AI camera and built the software stack. Now in Part 4, it all comes together. The Omnibot is actually doing the thing. It sees objects, makes decisions, and rolls toward you on its own.</p>
+
+        <p>But first, I had to get the robot back.</p>
+
+        <h2>Getting the Bot Back from PLACITECH</h2>
+
+        <p>When I left off in Part 3, the AI software was written but the physical build wasn't done. I handed the Omnibot off to PLACITECH for the hard part: mounting the power system, designing enclosures, and building Ring-O.</p>
+
+        <p>Meet <strong>Ring-O</strong>, a tiny companion robot whose job is to give Omnibot computer vision. He's basically a <a href="https://www.raspberrypi.com/products/raspberry-pi-5/" target="_blank">Raspberry Pi 5</a> with an <a href="https://www.raspberrypi.com/products/ai-camera/" target="_blank">IMX500 AI camera</a> and an OLED eye display, packed into a custom enclosure that sits on top of Omnibot. The name comes from looking like a Ring camera. He runs all the AI (object detection, navigation, the dashboard) and tells Omnibot where to go via Bluetooth audio tones.</p>
+
+        <figure>
+          <img src="../images/ring-o-cad-drawing.png" alt="CAD rendering of Ring-O, a small robot enclosure with an OLED eye, arms, camera lens, and battery base">
+          <figcaption>Ring-O CAD design. Companion robot with OLED eye, tiny arms, and battery base.</figcaption>
+        </figure>
+
+        <p>PLACITECH handled the full physical build and integration of the system, designing and assembling the companion module for Omnibot that houses the Raspberry Pi, camera, OLED display, and cooling. He also built a custom portable power system from scratch, including a 2S2P lithium-ion battery pack with a BMS and a buck converter to reliably power everything during live demos. From wiring and soldering to 3D design, printing, and final assembly, he brought all the pieces together into a clean, fully self-contained system mounted onto Omnibot.</p>
+
+        <figure>
+          <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;max-width:100%;">
+            <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" src="https://www.youtube.com/embed/EGQXpSLXEzI" title="PLACITECH builds Ring-O for Omnibot" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
+          <figcaption>PLACITECH's build video. Watch Ring-O come together from scratch.</figcaption>
+        </figure>
+
+        <p>The robot came back looking great. But the software? That was half-baked. The AI stack from Part 3 had bugs. A lot of them. Detection was running but bounding boxes were invisible, the LLM navigation didn't work, commands were flooding the robot, and the coordinate math was wrong. It looked impressive in the blog post but it needed serious debugging to actually <em>work</em>.</p>
+
+        <p>That's what this post is really about: the messy, honest process of taking a demo that almost works and turning it into a robot that actually finds people. Or cats, dogs, chairs, bottles, laptops, even pizza. Any of the 80 objects YOLO knows. Then drives right up to them.</p>
+
+        <figure>
+          <video controls muted width="100%" preload="metadata" playsinline>
+            <source src="../images/omnibot-dashboard.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <figcaption>I told Ring-O to find my laptop. Green bounding boxes show what the camera sees. The navigation log on the right shows exactly what the robot is deciding, step by step.</figcaption>
+        </figure>
+
+        <h2>Debugging the AI (It Was Broken in Ways I Didn't Expect)</h2>
+
+        <p>When I fired up the dashboard for the first time with Ring-O mounted on Omnibot, the detection panel showed "person (82%), laptop (73%), chair (50%)." The AI camera was seeing everything. But there were zero green boxes on the video feed. The robot could identify objects but had no idea where they were on screen.</p>
+
+        <p>This kicked off a deep debugging session that uncovered bug after bug in the detection pipeline.</p>
+
+        <h2>The Great LLM Experiment (And Why It Failed)</h2>
+
+        <p>Once the bounding boxes were working and the robot could actually see where things were, I moved on to navigation. In Part 3, I'd built the system around <a href="https://groq.com/" target="_blank">Groq</a>'s cloud LLM. The idea was that the camera sees a person on the left side of the frame, tells the LLM, and the LLM responds with "turn left."</p>
+
+        <p>It didn't work. At all.</p>
+
+        <p>I tested two models on Groq. Llama 3.1 8B (the fast one) and Llama 3.3 70B (the smart one). Both had the same problem: no matter where the person was in the frame, dead center, far left, far right, the LLM always responded with <code>{"commands": ["right"]}</code>. Every. Single. Time.</p>
+
+        <p>The robot just spun in circles.</p>
+
+        <table>
+          <thead>
+            <tr><th>What I Tested</th><th>Latency</th><th>Result</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Llama 3.1 8B (Groq)</td><td>~15 seconds</td><td>Always says "right"</td></tr>
+            <tr><td>Llama 3.3 70B (Groq)</td><td>~15 seconds</td><td>Always says "right"</td></tr>
+            <tr><td>Rule-based math</td><td>~0 milliseconds</td><td>Actually correct</td></tr>
+          </tbody>
+        </table>
+
+        <p>The 15-second latency was the other killer. Every decision took 15 seconds, which meant the dashboard froze, the robot was blind between commands, and by the time it decided to turn right (incorrectly), the person had already moved.</p>
+
+        <p>I had the navigation logs to prove it:</p>
+
+        <pre><code>CMD mode=llm commands=['step("right")'] response={"commands": ["right"]}</code></pre>
+
+        <p>Person at center (x:331 out of 640). LLM says right. Person at left (x:4). LLM says right. Person filling 80% of the frame. LLM says right.</p>
+
+        <h3>What Actually Works: Math</h3>
+
+        <p>The fix was embarrassingly simple. Instead of asking an LLM to interpret position data, I just... did the math:</p>
+
+        <ul>
+          <li>If the person's center pixel is left of frame center, turn left</li>
+          <li>If centered, go forward</li>
+          <li>If right, turn right</li>
+          <li>If the person fills more than 60% of the frame, stop, you're close enough</li>
+        </ul>
+
+        <p>Zero latency. Correct every time. The rule-based navigation engine (<code>navigation.py</code>) replaced hundreds of lines of LLM prompt engineering with about 50 lines of position arithmetic.</p>
+
+        <p>The lesson: LLMs are incredible at language, reasoning, and creative tasks. They are not good at "the number 331 is greater than 224 and less than 416, therefore output forward." That's what math is for.</p>
+
+        <p>I kept the LLM code in the repo for a future "describe what you see" voice feature, where latency is acceptable and you actually need language understanding. But for real-time robot navigation? Rules win.</p>
+
+        <h2>The Bounding Box Saga</h2>
+
+        <p>Getting accurate bounding boxes on the video stream was its own multi-day adventure. The IMX500 AI camera runs <a href="https://docs.ultralytics.com/models/yolo11/" target="_blank">YOLO11</a> on its dedicated neural chip at 30fps. The detection itself worked great from day one. The problem was mapping the model's coordinate system to the actual video frame.</p>
+
+        <p>Here's what I discovered the hard way:</p>
+
+        <p><strong>The intrinsics lie.</strong> The model metadata says <code>bbox_normalization: True</code> (meaning "divide coordinates by 640 to normalize them"). But the YOLO11 post-processed model already outputs normalized [0,1] coordinates. Dividing by 640 again produces values like 0.001. Every bounding box had zero width and zero height. Detections showed up in the panel but no green boxes on the video.</p>
+
+        <p><strong>The coordinate converter doesn't work.</strong> Picamera2's <code>convert_inference_coords()</code> function is supposed to handle the model-to-screen mapping. It returned coordinates like <code>x:2562, y:148800, width:0, height:0</code> for a person standing right in front of the camera. I confirmed this by injecting JavaScript into the live dashboard to capture the actual bbox values being sent over WebSocket.</p>
+
+        <p><strong>The axis swap was wrong.</strong> The model outputs <code>[x1, y1, x2, y2]</code> but the code was swapping to <code>[y1, x1, y2, x2]</code> based on the intrinsics metadata. This transposed every bounding box. The keyboard box ended up on the person's head.</p>
+
+        <p><strong>The aspect ratio matters.</strong> The model input is 640x640 (square) but the camera output is 640x480. The ISP letterboxes the image with 80 pixels of padding top and bottom. Without compensating for that padding, all y-coordinates were shifted down.</p>
+
+        <p>The fix: auto-detect whether boxes need normalization (check if values are &gt; 2.0), skip the axis swap, and compensate for letterbox padding. About 10 lines of math replacing a library function that didn't work.</p>
+
+        <h2>The Dashboard</h2>
+
+        <p>The web dashboard runs on the Pi and is accessible from any device on the network. It's built with Flask and Socket.IO for real-time updates.</p>
+
+        <p>The main dashboard (<code>/</code>) shows:</p>
+        <ul>
+          <li><strong>Live camera feed</strong> with green bounding boxes around detected objects</li>
+          <li><strong>Navigation log</strong> with real-time decisions: "person CENTERED, forward", "person LEFT, turn left", "person fills 64%, STOP"</li>
+          <li><strong>Detection history</strong>, a rolling log of everything the camera sees</li>
+          <li><strong>Set Task / End Task</strong> to start and stop navigation without killing the whole system</li>
+          <li><strong>Describe button</strong> that asks the LLM to describe the scene and speaks it through the robot</li>
+          <li><strong>Manual controls</strong> with directional buttons, dance patterns, and speech</li>
+        </ul>
+
+        <p>The kids dashboard (<code>/kids</code>) has a neon synthwave aesthetic with:</p>
+        <ul>
+          <li>Big mission buttons: Find Human, Find Ball, Explore, Dance</li>
+          <li>"What Do You See?" button that makes the robot describe what it sees out loud</li>
+          <li>"End Mission" button to stop navigation without powering down</li>
+          <li>Big directional controls for manual driving</li>
+          <li>A "Robot Brain" panel showing what the robot is thinking in real-time</li>
+          <li>LED status indicators for power, status, and Bluetooth</li>
+        </ul>
+
+        <p>The kids version was designed so my son and other kids at Maker Faire can operate the robot without knowing anything about AI or Python. Press "Find Human" and the robot goes looking. Press "What See?" and it tells you what it found. Press "Dance" and it dances. Press the big red STOP button when things go wrong.</p>
+
+        <h2>"What Do You See?"</h2>
+
+        <p>So the LLM failed at navigation, but it turns out it's great at one thing: describing what the robot sees. When you press the Describe button, it sends the current detections to Groq's Llama 3.3 70B with a prompt like "What do you see: person (85%), keyboard (56%), laptop (43%)" and gets back something like "I see a person and a keyboard."</p>
+
+        <p>The robot then speaks that description out loud through its speaker. The response is kept to under 10 words and sanitized for the text-to-speech engine. Latency doesn't matter here since you're asking a question and waiting for an answer, not trying to drive in real-time.</p>
+
+        <p>This is the kind of thing LLMs are actually good at. Turning a list of detection labels into a natural sentence. Not "the number 331 is greater than 224, therefore turn left."</p>
+
+        <h2>Upgrading to YOLO11</h2>
+
+        <p>The project started with YOLOv8, and at one point I tried upgrading to YOLO11 nano which was already installed on the Pi (<code>imx500_network_yolo11n_pp.rpk</code>). When the bounding boxes were still broken after the switch, I thought maybe YOLO11 was too heavy and pulling too much CPU. So I went back to YOLOv8 to rule that out. Turns out the model wasn't the problem at all. It was the coordinate math the whole time. Once I fixed the actual bugs, I switched back to YOLO11 and it ran fine. Same 80 COCO classes, same 640x640 input, slightly better accuracy, and inference still runs on-chip so the Pi CPU barely notices. The upgrade was a one-line change in <code>object_detector.py</code>.</p>
+
+        <p>The IMX500 model ecosystem is actually impressive. The camera chip has 16MB of flash that can cache multiple models. You can swap between object detection, pose estimation, and image classification without re-uploading firmware. For this project I'm sticking with detection, but the pose estimation model could be interesting for gesture-controlled driving.</p>
+
+        <h2>What a Run Looks Like</h2>
+
+        <p>Here's an actual navigation sequence from the logs, with the robot finding and approaching a person:</p>
+
+        <pre><code>10:24:11  person(78%) x:223  CENTERED  forward
+10:24:13  person(73%) x:226  CENTERED  forward
+10:24:15  person(73%) x:167  CENTERED  forward
+10:24:17  person(73%) x:186  CENTERED  forward
+10:24:19  person(68%) x:197  CENTERED  forward
+10:24:21  person(68%) x:190  CENTERED  forward
+10:24:24  person(62%) x:226  RIGHT     turn right
+10:24:26  person(68%) x:0    LEFT      turn left
+10:24:28  person(73%) x:216  CENTERED  forward
+10:24:39  person(78%) x:148  CENTERED  forward
+10:24:41  person(68%) x:131  fills 62% STOP
+10:24:49  person(73%) x:146  fills 67% STOP</code></pre>
+
+        <p>Six seconds of forward approach. A course correction when it drifted right. Re-centered and continued forward. Stopped when the person filled 62% of the frame. The whole sequence took about 30 seconds from "Find Human" to face-to-face.</p>
+
+        <figure>
+          <video controls muted width="100%" preload="metadata" playsinline>
+            <source src="../images/omnibot-in-action.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <figcaption>Omnibot in action, sped up 2x. Finding a person and rolling over to say hi.</figcaption>
+        </figure>
+
+        <h2>Ring-O's Eye</h2>
+
+        <figure>
+          <img src="../images/ring-o-eye-expressions.gif" alt="Animated eye cycling through happy, surprised, sleepy, and blinking expressions on Ring-O's OLED display">
+          <figcaption>Ring-O's OLED eye cycles through expressions. Happy, surprised, tracking, blinking, sleepy.</figcaption>
+        </figure>
+
+        <p>Ring-O has his own personality thanks to the SSD1351 OLED eye display, a 128x128 pixel color screen showing an animated eye that:</p>
+        <ul>
+          <li>Looks happy (dilated pupil) when it sees a person</li>
+          <li>Looks surprised when it spots a cat or dog</li>
+          <li>Tracks the direction of movement (looks left when turning left)</li>
+          <li>Blinks randomly every 3-7 seconds</li>
+          <li>Goes sleepy after 30 seconds of inactivity</li>
+        </ul>
+
+        <p>Ring-O's eye doesn't affect navigation at all. It's pure personality. But when a kid walks up and Ring-O's eye lights up and gets bigger because it's "happy" to see them? That's the magic that turns a wheeled box with a camera into a character. Omnibot has the body. Ring-O has the soul.</p>
+
+        <h2>Making It Faire-Ready</h2>
+
+        <p>Debugging the AI made it work. Making it <em>keep</em> working for a public event took another pass. If a robot at Maker Faire freezes after 20 minutes while a kid is watching, you don't get a second shot at that demo. So I rebuilt the deployment layer:</p>
+
+        <ul>
+          <li><strong>Auto-recovery.</strong> The dashboard runs as a systemd service with <code>Restart=on-failure</code>. If anything crashes, it's back in five seconds. If the camera thread stalls for 60 seconds (seen a couple times on long runs), the process exits on purpose so systemd can restart it clean. Better than a silently-stuck robot.</li>
+          <li><strong>Health endpoint.</strong> <code>GET /healthz</code> returns a JSON snapshot of camera age, FPS, Bluetooth state, eye liveness, and last-detection time. Returns HTTP 503 when anything's degraded, so a monitor or even the dashboard itself can flag trouble.</li>
+          <li><strong>Pre-launch smoke test.</strong> A quick script imports every module, grabs one camera frame, plays a muted tone, and exits non-zero if anything failed. Runs before the dashboard launches so a broken deploy fails fast instead of flapping.</li>
+          <li><strong>Bluetooth caching.</strong> The BT status query used to run <code>bluetoothctl</code> synchronously in the Flask request; if the BT stack hung, the dashboard hung. Now a background thread polls every 5 seconds and <code>/api/bluetooth</code> just reads the cache.</li>
+          <li><strong>"Busy, try again" feedback.</strong> Kids at the faire will mash buttons. The robot serializes commands (can't dance and speak at the same time), so the UI now shows a clear "Busy, try again" when a click lands mid-command instead of silently dropping it.</li>
+        </ul>
+
+        <p>None of this is glamorous, but it's the difference between "it works on my desk" and "it works for eight hours with strangers pressing buttons."</p>
+
+        <h2>The Full Stack (All Inside Ring-O)</h2>
+
+        <p>For the technically curious, here's the whole pipeline. Data flows top to bottom. Pixels come in from the camera, object detections get mapped to screen coordinates, the navigation engine picks a direction, the executor turns it into sound, and the Bluetooth speaker plays tones that the 1984 motor board interprets as commands. Meanwhile the eye reacts and the dashboard streams it all to the browser.</p>
+
+        <table>
+          <thead>
+            <tr><th>Layer</th><th>Component</th><th>Job</th></tr>
+          </thead>
+          <tbody>
+            <tr><td rowspan="3"><strong>Eyes</strong></td><td><a href="https://www.raspberrypi.com/products/ai-camera/" target="_blank">IMX500 AI Camera</a></td><td>Runs YOLO11 on-chip at 30fps. Zero load on the Pi's CPU.</td></tr>
+            <tr><td><code>picamera2</code></td><td>Grabs each frame with its detection metadata (640x480).</td></tr>
+            <tr><td><code>object_detector.py</code></td><td>Parses YOLO11 output. Handles the coordinate math the library got wrong (normalization, axis swap, letterbox padding).</td></tr>
+            <tr><td><strong>Brain</strong></td><td><code>navigation.py</code></td><td>Rule-based engine. Picks forward, left, right, or stop from the bounding box position and size. Replaced the LLM.</td></tr>
+            <tr><td rowspan="2"><strong>Body</strong></td><td><code>robot_executor.py</code></td><td>Turns intent into frequencies. Forward is 1614 Hz. Left is 2208 Hz.</td></tr>
+            <tr><td><code>audio_commander.py</code></td><td><code>sox</code> synthesizes sine waves, pipes them to <code>pw-play</code>, and PipeWire routes the audio to the Bluetooth speaker inside Omnibot.</td></tr>
+            <tr><td><strong>Face</strong></td><td><code>eye_display.py</code></td><td>Drives the SSD1351 OLED. Happy, surprised, sleepy, tracking, blinking.</td></tr>
+            <tr><td><strong>UI</strong></td><td><code>dashboard.py</code></td><td>Flask plus Socket.IO plus an MJPEG stream. Both the pro dashboard and the kids mission dashboard live here.</td></tr>
+          </tbody>
+        </table>
+
+        <p>All of it open source at <a href="https://github.com/MarioCruz/omnibotAi" target="_blank">github.com/MarioCruz/omnibotAi</a> if you want to poke at it.</p>
+
+        <p>Audio tones travel via Bluetooth to the Omnibot's cassette input, which the original 1984 hardware interprets as movement commands. Forward is 1614 Hz. Left is 2208 Hz. Speaker on/off tones (1422 Hz / 4650 Hz) toggle the robot's internal relay between "interpret this as a motor command" and "pass this audio to the speaker". Every spoken phrase is sandwiched between two control tones. It's gloriously hacky.</p>
+
+        <h2>Come See It Live</h2>
+
+        <figure>
+          <img src="../images/omnibot-at-makerspace.jpg" alt="Omnibot on a workbench at Moonlighter FabLab with two makers working on it">
+          <figcaption>Omnibot on the bench with Mario The Maker and PLACITECH. Almost ready for <a href="https://miami.makerfaire.com/" target="_blank">Maker Faire Miami</a> 2026.</figcaption>
+        </figure>
+
+        <p><strong>The Omnibot will be at Maker Faire Miami 2026.</strong></p>
+
+        <p>Come say hi. Let it find you. Challenge it to navigate around chairs. Ask a kid to drive it with the arcade dashboard. I'll have the code running live with the dashboard visible on a monitor so you can see exactly what the robot sees and thinks in real-time.</p>
+
+        <p>The full source code is open on GitHub: <a href="https://github.com/MarioCruz/omnibotAi" target="_blank">github.com/MarioCruz/omnibotAi</a></p>
+
+        <p>Follow the project as it evolves on <a href="https://www.instagram.com/mariothemaker/" target="_blank">Instagram @mariothemaker</a>.</p>
+
+        <h2>What's Next</h2>
+
+        <p>This isn't the end. The robot works, but there's more to explore:</p>
+
+        <ul>
+          <li><strong>Custom model training.</strong> The IMX500 supports training custom YOLO models. Imagine training it on specific objects: "find Mario's keys" instead of just "find a person." Sony's Brain Builder tool makes this possible with as few as 50 images.</li>
+          <li><strong>Two-way conversation.</strong> Scene description already works (see the "What Do You See?" section above). Next up is letting visitors ask follow-up questions out loud, with a microphone feeding a speech-to-text model and the robot answering through the speaker.</li>
+          <li><strong>Multi-room navigation.</strong> Right now the robot stops when it reaches the target. A state machine that handles "target lost, search pattern, reacquire" would make it much more capable.</li>
+          <li><strong>Visitor memory.</strong> Recognizing returning visitors at Maker Faire and greeting them by interaction count: "Welcome back! You're visitor number 47."</li>
+        </ul>
+
+        <p>The 1984 Tomy Omnibot was a promise of a robotic future that the technology of its time couldn't deliver. Forty years later, a $70 AI camera, a $100 single-board computer, and a tiny companion named Ring-O finally make good on that promise. The future just needed a buddy to help out.</p>
+
+        <p>See you at Maker Faire.</p>
+
+        <hr>
+
+        <p><em>The Omnibot restoration series:</em></p>
+        <ul>
+          <li><em><a href="tomy-omnibot-restoration.html">Part 1: Hardware restoration</a></em></li>
+          <li><em><a href="tomy-omnibot-restoration-part-2.html">Part 2: Bluetooth control and voice</a></em></li>
+          <li><em><a href="tomy-omnibot-restoration-part-3.html">Part 3: AI camera and software stack</a></em></li>
+          <li><em>Part 4: It's alive (this post)</em></li>
+        </ul>
+
+        <p><em>All code: <a href="https://github.com/MarioCruz/omnibotAi" target="_blank">github.com/MarioCruz/omnibotAi</a></em></p>
+      </div>
+    </article>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Mario The Maker. Built with passion in Miami.</p>
+  </footer>
+</body>
+</html>
