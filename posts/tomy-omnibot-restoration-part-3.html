@@ -21,7 +21,22 @@
   "@type": "BlogPosting",
   "headline": "Restoring a 1984 Tomy Omnibot (Part 3)",
   "description": "In Part 1, I restored the hardware. In Part 2, I added Bluetooth control and gave it a voice. Now it's time for the real magic: giving this 40-year-old robot...",
-  "image": "https://mariothemaker.com/images/tomy-ai-dashboard.png",
+  "image": [
+    "https://mariothemaker.com/images/tomy-ai-dashboard.png",
+    {
+      "@type": "ImageObject",
+      "contentUrl": "https://mariothemaker.com/images/tomy-ai-dashboard.png",
+      "url": "https://mariothemaker.com/images/tomy-ai-dashboard.png",
+      "width": 1800,
+      "height": 1503,
+      "caption": "The Tomy Omnibot AI dashboard showing the live camera feed, detections, and controls.",
+      "name": "Tomy Omnibot AI dashboard with camera feed and controls",
+      "creditText": "Mario Cruz",
+      "author": {"@type": "Person", "name": "Mario Cruz", "url": "https://mariothemaker.com/"},
+      "copyrightNotice": "© 2026 Mario Cruz",
+      "creator": {"@type": "Person", "name": "Mario Cruz"}
+    }
+  ],
   "datePublished": "2026-03-28",
   "dateModified": "2026-03-28",
   "url": "https://mariothemaker.com/posts/tomy-omnibot-restoration-part-3.html",
@@ -90,13 +105,31 @@
   }
 }
   </script>
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+  <link rel="shortcut icon" href="../favicon.ico">
+  <meta name="author" content="Mario Cruz">
+  <meta name="theme-color" content="#F5F1E8">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://mariothemaker.com/"},
+      {"@type": "ListItem", "position": 2, "name": "Projects & Posts", "item": "https://mariothemaker.com/#projects"},
+      {"@type": "ListItem", "position": 3, "name": 'Restoring a 1984 Tomy Omnibot (Part 3)', "item": 'https://mariothemaker.com/posts/tomy-omnibot-restoration-part-3.html'}
+    ]
+  }
+  </script>
 </head>
 <body>
   <header>
     <nav>
-      <a href="../index.html" class="logo"><img src="../images/MarioTheMaker.jpg" alt="Mario The Maker Logo" class="logo-img"></a>
+      <a href="../index.html" class="logo"><img src="../images/MarioTheMaker.png" alt="Mario The Maker Logo" class="logo-img"></a>
       <ul class="nav-links">
         <li><a href="../index.html">Home</a></li>
+        <li><a href="../index.html#post-search">Search</a></li>
         <li><a href="../about.html">About</a></li>
       </ul>
     </nav>
@@ -113,7 +146,7 @@
 
       <div class="post-content">
         <figure>
-          <img src="../images/tomy-ai-dashboard.png" alt="Tomy Omnibot AI Dashboard showing camera feed and controls">
+          <img width="1800" height="1503" decoding="async" fetchpriority="high" src="../images/tomy-ai-dashboard.png" alt="Tomy Omnibot AI Dashboard showing camera feed and controls">
         </figure>
 
         <p>In <a href="tomy-omnibot-restoration.html">Part 1</a>, I restored the hardware. In <a href="tomy-omnibot-restoration-part-2.html">Part 2</a>, I added Bluetooth control and gave it a voice. Now it's time for the real magic: <strong>giving this 40-year-old robot eyes and a brain.</strong></p>
@@ -139,7 +172,7 @@
         <h2>Layer 1: The Eyes (<a href="https://www.raspberrypi.com/products/ai-camera/" target="_blank">IMX500 AI Camera</a>)</h2>
 
         <figure>
-          <img src="../images/raspberry-pi-ai-camera.jpg" alt="Raspberry Pi 5 with AI Camera module">
+          <img width="1024" height="685" loading="lazy" decoding="async" src="../images/raspberry-pi-ai-camera.jpg" alt="Raspberry Pi 5 with AI Camera module">
           <figcaption>The Raspberry Pi 5 with the IMX500 AI Camera module</figcaption>
         </figure>
 
@@ -319,7 +352,8 @@
           <li><a href="tomy-omnibot-restoration.html">Part 1:</a> Teardown, battery acid cleanup, first drive test</li>
           <li><a href="tomy-omnibot-restoration-part-2.html">Part 2:</a> Bluetooth control, web controller, synthesized speech</li>
           <li><strong>Part 3:</strong> AI vision, cloud LLM reasoning, autonomous behavior</li>
-          <li><strong>Part 4 (coming soon):</strong> Physical integration, power systems, calibration, and Maker Faire prep</li>
+          <li><a href="tomy-omnibot-restoration-part-4.html">Part 4:</a> Physical integration, Ring-O, debugging the AI, Maker Faire prep</li>
+          <li><a href="tomy-omnibot-restoration-part-5.html">Part 5:</a> The WiFi problem, a fifteen-second freeze at the Faire, and the fix</li>
         </ul>
 
         <p>The future of robotics isn't always about building new hardware. Sometimes it's about breathing new life into the classics. The Omnibot was a promise of a robotic future. Now, 40 years later, that promise is finally being fulfilled.</p>
@@ -330,8 +364,16 @@
   </main>
 
   <footer>
-    <p>&copy; 2026 Mario The Maker. Built with passion in Miami.</p>
-    <p><a href="https://miami.makerfaire.com/" target="_blank">Maker Faire Miami</a></p>
+    <p class="foot-bio"><strong>Mario Cruz</strong>, Miami. CTO @ Watsco Ventures. Executive Producer @ Maker Faire Miami. <a href="mailto:Mario@MarioTheMaker.com">Mario@MarioTheMaker.com</a></p>
+    <p class="foot-links">
+      <a href="https://twitter.com/mariocruz" target="_blank">Twitter</a>
+      <a href="https://instagram.com/mariothemaker" target="_blank">Instagram</a>
+      <a href="https://github.com/MarioCruz" target="_blank">GitHub</a>
+      <a href="https://www.linkedin.com/in/marioacruz/" target="_blank">LinkedIn</a>
+      <a href="https://Barbaromojo.com" target="_blank">Barbaromojo</a>
+      <a href="https://miami.makerfaire.com/" target="_blank">Maker Faire Miami</a>
+    </p>
+    <p class="foot-copyright">© 2026 Mario The Maker</p>
   </footer>
 </body>
 </html>

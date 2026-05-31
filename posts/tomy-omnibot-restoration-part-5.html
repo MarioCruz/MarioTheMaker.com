@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="What I learned at Maker Faire Miami: the robot was fine, the internet wasn't. Part 5 of the 1984 Tomy Omnibot restoration. A fifteen-second freeze on bad WiFi, a fifty-line fix, and the WiFi power-save bug that made the Pi look like it was crash-looping.">
+  <meta property="og:title" content="Restoring a 1984 Tomy Omnibot (Part 5): The WiFi Problem - Mario The Maker">
+  <meta property="og:description" content="The robot was fine. The internet wasn't. A cloud LLM that hung silently on bad WiFi, the fifty-line fix, and the WiFi power-save bug that looked like a crash loop.">
+  <meta property="og:image" content="https://mariothemaker.com/images/omnibot-ringo-hero.jpg">
+  <meta property="og:url" content="https://mariothemaker.com/posts/tomy-omnibot-restoration-part-5.html">
+  <meta property="og:type" content="article">
+  <meta property="article:author" content="Mario Cruz">
+  <meta property="article:published_time" content="2026-05-31">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://mariothemaker.com/posts/tomy-omnibot-restoration-part-5.html">
+  <title>Restoring a 1984 Tomy Omnibot (Part 5): The WiFi Problem - Mario The Maker</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Restoring a 1984 Tomy Omnibot (Part 5): The WiFi Problem",
+    "description": "The robot was fine. The internet wasn't. A cloud LLM that hung silently on bad WiFi, the fifty-line fix, and the WiFi power-save bug that looked like a crash loop.",
+    "image": [
+      "https://mariothemaker.com/images/omnibot-ringo-hero.jpg",
+      {
+        "@type": "ImageObject",
+        "contentUrl": "https://mariothemaker.com/images/omnibot-faire-placitech.jpg",
+        "url": "https://mariothemaker.com/images/omnibot-faire-placitech.jpg",
+        "width": 854,
+        "height": 1400,
+        "caption": "A kid reaches out to touch Ring-O's domed eye on the booth table at Maker Faire Miami 2026 while PLACITECH looks on.",
+        "name": "Ring-O and the 1984 Tomy Omnibot at the PLACITECH booth, Maker Faire Miami 2026",
+        "creditText": "Mario Cruz",
+        "author": {"@type": "Person", "name": "Mario Cruz", "url": "https://mariothemaker.com/"},
+        "copyrightNotice": "© 2026 Mario Cruz",
+        "creator": {"@type": "Person", "name": "Mario Cruz"},
+        "contentLocation": {"@type": "Place", "name": "Maker Faire Miami 2026"}
+      }
+    ],
+    "datePublished": "2026-05-31",
+    "dateModified": "2026-05-31",
+    "url": "https://mariothemaker.com/posts/tomy-omnibot-restoration-part-5.html",
+    "author": {"@type": "Person", "name": "Mario Cruz", "url": "https://mariothemaker.com/"},
+    "publisher": {"@type": "Person", "name": "Mario The Maker", "url": "https://mariothemaker.com/"},
+    "mainEntityOfPage": {"@type": "WebPage", "@id": "https://mariothemaker.com/posts/tomy-omnibot-restoration-part-5.html"},
+    "keywords": "Tomy Omnibot, Ring-O, Raspberry Pi 5, Maker Faire Miami, WiFi power save, Groq LLM, request timeout, graceful degradation, robotics project, Python robot, Mario The Maker, public demo, brcmfmac, NetworkManager",
+    "about": [
+      {"@type": "Thing", "name": "Tomy Omnibot", "sameAs": "https://en.wikipedia.org/wiki/Omnibot"},
+      {"@type": "Thing", "name": "Raspberry Pi", "sameAs": "https://en.wikipedia.org/wiki/Raspberry_Pi"},
+      {"@type": "Thing", "name": "Wi-Fi", "sameAs": "https://en.wikipedia.org/wiki/Wi-Fi"},
+      {"@type": "Thing", "name": "Transmission Control Protocol", "sameAs": "https://en.wikipedia.org/wiki/Transmission_Control_Protocol"},
+      {"@type": "Thing", "name": "Robotics", "sameAs": "https://en.wikipedia.org/wiki/Robotics"},
+      {"@type": "Thing", "name": "Maker Faire", "sameAs": "https://en.wikipedia.org/wiki/Maker_Faire"}
+    ],
+    "mentions": [
+      {"@type": "SoftwareSourceCode", "name": "omnibotAi", "codeRepository": "https://github.com/MarioCruz/omnibotAi"},
+      {"@type": "Event", "name": "Maker Faire Miami 2026"}
+    ],
+    "isPartOf": {
+      "@type": "BlogPosting",
+      "headline": "Restoring a 1984 Tomy Omnibot series",
+      "url": "https://mariothemaker.com/posts/tomy-omnibot-restoration.html"
+    }
+  }
+  </script>
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+  <link rel="shortcut icon" href="../favicon.ico">
+  <meta name="author" content="Mario Cruz">
+  <meta name="theme-color" content="#F5F1E8">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://mariothemaker.com/"},
+      {"@type": "ListItem", "position": 2, "name": "Projects & Posts", "item": "https://mariothemaker.com/#projects"},
+      {"@type": "ListItem", "position": 3, "name": "Restoring a 1984 Tomy Omnibot (Part 5): The WiFi Problem", "item": 'https://mariothemaker.com/posts/tomy-omnibot-restoration-part-5.html'}
+    ]
+  }
+  </script>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="../index.html" class="logo"><img src="../images/MarioTheMaker.png" alt="Mario The Maker Logo" class="logo-img"></a>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../index.html#post-search">Search</a></li>
+        <li><a href="../about.html">About</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <a href="../index.html" class="back-link">&larr; Back to all posts</a>
+
+    <article>
+      <header class="post-header">
+        <h1>Restoring a 1984 Tomy Omnibot (Part 5): The WiFi Problem</h1>
+        <p class="post-meta">May 2026</p>
+      </header>
+
+      <div class="post-content">
+        <p><em>What I learned at Maker Faire Miami: the robot was fine. The internet wasn't.</em></p>
+
+        <p>In <a href="tomy-omnibot-restoration-part-4.html">Part 4</a>, the Omnibot/Ring-O stack was Faire-ready. The robot would approach a person, say <em>"I found it,"</em> and entertain kids.</p>
+
+        <p>It performed exactly as planned, for about an hour.</p>
+
+        <p>Then a kid tapped <strong>What Do You See?</strong></p>
+
+        <p>And nothing happened.</p>
+
+        <p>The dashboard sat there. The eye blinked. Fifteen seconds passed. The kid wandered away. Then, finally, the robot said something like <em>"I can see 3 things: person, chair, laptop."</em> By then nobody was listening.</p>
+
+        <p>This post is about what went wrong and the fifty-line fix that's now in v1.1.0.</p>
+
+        <figure>
+          <img src="../images/omnibot-faire-placitech.jpg" width="854" height="1400" loading="lazy" decoding="async" title="Ring-O and the Omnibot at the PLACITECH booth, Maker Faire Miami 2026" alt="A kid reaching out to touch Ring-O's domed eye on the booth table at Maker Faire Miami while PLACITECH looks on, a PLACITECH banner behind them">
+          <figcaption>The good part: a kid walks up and reaches for Ring-O at the Maker Faire Miami booth, with <a href="https://placitech.com/" target="_blank">PLACITECH</a> watching on. The autonomous behavior never missed. It was the cloud feature behind it that froze.</figcaption>
+        </figure>
+
+        <h2>The setup</h2>
+
+        <p>Maker Faire Miami uses the convention center's public WiFi for vendors. It is, generously, "best effort." Hundreds of devices, lots of HTTPS streams, intermittent everything. My setup is the standard kit:</p>
+
+        <ul>
+          <li>Pi 5 with Ring-O on top of the Omnibot, on a dolly</li>
+          <li>iPad on a stand running the kids dashboard at <code>https://omniai.local:8080/kids</code></li>
+          <li>A small monitor showing the operator dashboard with the live detection feed</li>
+        </ul>
+
+        <p>The autonomous behavior was rock solid. Detection runs on the IMX500 itself; navigation is pure math; motor commands go over Bluetooth from the Pi to the Omnibot's chest speaker. None of that touches the internet. Kid presses <strong>Find Human</strong>; the robot turns toward them, rolls over, and stops at conversational distance. <em>"I found it."</em> The crowd loves it.</p>
+
+        <p>The problem was the one feature I was secretly proudest of: <strong>the robot describing what it sees, out loud, in natural language.</strong></p>
+
+        <h2>What that button was doing</h2>
+
+        <p>The <strong>What Do You See?</strong> button on the kids dashboard sends the current YOLO detections to Groq's hosted Llama 3.3 70B with a prompt like <em>"You are a robot. Say what you see in under 10 words."</em> The model returns something like <em>"Person and laptop in the room"</em>; the Pi runs that through espeak, and the robot says it.</p>
+
+        <p>When it works, it's the most personal-feeling part of the whole demo. It's the difference between a list of object labels and a robot that talks to you.</p>
+
+        <p>The relevant code, simplified, looked like this:</p>
+
+        <pre><code>api_key = os.environ.get('GROQ_API_KEY')
+if api_key:
+    try:
+        resp = requests.post(
+            "https://api.groq.com/openai/v1/chat/completions",
+            json=payload,
+            timeout=15,
+        )
+        description = resp.json()['choices'][0]['message']['content']
+    except Exception as e:
+        print(f"Groq error: {e}")
+
+if not description:
+    # fallback: just join the labels
+    description = f"I can see {n} things: {', '.join(labels)}"</code></pre>
+
+        <p>Read that timeout again. <strong>Fifteen seconds.</strong></p>
+
+        <p>I wrote that timeout when my home WiFi takes ~120 ms to reach Groq. I wrote it on a couch. I never tested what happens when the WiFi <em>can't</em> reach Groq, when the TCP connection itself stalls and just sits there, waiting for the kernel to give up.</p>
+
+        <p>At the Faire, that's exactly what happened. The convention's WiFi was so bad that connections to <code>api.groq.com</code> were being blackholed. The HTTP client wasn't getting an error. It was getting <em>nothing</em>. Fifteen full seconds of nothing.</p>
+
+        <p>In dashboard time, that's an eternity. The Flask request thread is blocked the whole time. The button looks dead. The kid taps it again; now there are two of them blocked. The eye on Ring-O is still blinking happily because the autonomous loop is running on a different thread, but the kids' dashboard is frozen.</p>
+
+        <p>By the time the timeout finally fires and the local fallback speaks, the kid is at the next booth.</p>
+
+        <h2>Why I missed it</h2>
+
+        <p>Three reasons, in increasing order of embarrassment:</p>
+
+        <ol>
+          <li><strong>My fallback existed and worked.</strong> Three lines below the Groq call, there was a perfectly fine <code>"I can see 3 things: person, laptop, chair"</code> fallback. I knew the LLM might fail, so I wrote one. I just didn't think about the <em>time</em> it took to <em>get</em> to the fallback.</li>
+          <li><strong>I tested without internet at home, but with my home router off.</strong> That's a different failure mode. The router refuses the connection immediately. <code>requests.post</code> raises <code>ConnectionError</code> in milliseconds and falls through to the fallback. Looks like it works. Doesn't.</li>
+          <li><strong>I had no model of what "the WiFi is bad" actually feels like to a TCP socket.</strong> "Bad WiFi" means packets get dropped. TCP retransmits. The retransmissions also get dropped. The kernel waits. There's no error to catch. There's just silence until your timeout kicks in.</li>
+        </ol>
+
+        <p>The lesson, and this took the Faire to teach me, is that <strong>a long timeout is not graceful degradation. A long timeout is just a long failure.</strong></p>
+
+        <h2>The fix</h2>
+
+        <p>Two changes, one local file. About fifty lines.</p>
+
+        <h3>Change 1: A background internet probe</h3>
+
+        <p>Instead of finding out the internet is down by <em>trying to use the internet</em>, I now have a thread that quietly checks every fifteen seconds:</p>
+
+        <pre><code>def _poll_internet_once():
+    try:
+        s = socket.create_connection(("1.1.1.1", 53), timeout=1.5)
+        s.close()
+        return True
+    except Exception:
+        return False</code></pre>
+
+        <p>That's it. A TCP connect to Cloudflare's DNS port. No DNS lookup (the IP is hardcoded), no payload, no actual data. Just "can I open a socket?" If it succeeds in 1.5 seconds or less, we have internet. If it fails or times out, we don't.</p>
+
+        <p>The result is cached in a global flag, refreshed every 15 seconds:</p>
+
+        <pre><code>internet_cache = {'alive': False, 'updated_at': 0.0}
+INTERNET_POLL_INTERVAL = 15.0</code></pre>
+
+        <p>This pattern already existed in the codebase for Bluetooth status. A kid mashing the dashboard buttons should never block on <code>bluetoothctl</code> either. I just stole the same shape.</p>
+
+        <h3>Change 2: Read the flag before calling Groq</h3>
+
+        <pre><code>with internet_cache_lock:
+    net_alive = internet_cache['alive']
+
+if api_key and net_alive:
+    # try Groq
+    ...
+else:
+    # skip straight to the local fallback
+    ...</code></pre>
+
+        <p>When the probe says offline, we don't even attempt the Groq call. Local fallback fires immediately. The kid taps the button, hears <em>"I can see 3 things: person, laptop, chair"</em> in under 200 ms, and is delighted.</p>
+
+        <h3>Change 3: Tighten the timeout</h3>
+
+        <p>The 15-second timeout is now 3 seconds. That's the safety net for a hairline case where the probe reports "alive," but the actual API request still takes too long. Three seconds is roughly long enough that a healthy Groq call (~1 second on good WiFi) doesn't get cut off, but short enough that a frozen call doesn't stall the dashboard meaningfully.</p>
+
+        <h2>What this looks like to a kid now</h2>
+
+        <table>
+          <thead>
+            <tr><th>Scenario</th><th>Before</th><th>After</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Internet up, Groq healthy</td><td>Natural sentence in ~1 s</td><td>Same</td></tr>
+            <tr><td>Internet up, Groq slow</td><td>UI freezes 15 s, then local fallback</td><td>UI freezes &le;3 s, then local fallback</td></tr>
+            <tr><td><strong>WiFi dead at the Faire</strong></td><td>UI freezes 15 s, then local fallback</td><td><strong>Instant local fallback</strong></td></tr>
+            <tr><td>First few seconds of boot</td><td>n/a</td><td>Tentative Groq call with 3 s cap</td></tr>
+          </tbody>
+        </table>
+
+        <p>The third row is the one that actually mattered. That's the row that sent kids walking away.</p>
+
+        <h2>The other slowness: the robot itself</h2>
+
+        <p>The WiFi/Groq issue was the headline, but it wasn't the only thing that felt slow at the Faire. A few times, a kid would tap <strong>Find Human</strong>, the robot would start turning to face them, and they'd say <em>"why is it taking so long?"</em> even though the autonomous loop was working perfectly.</p>
+
+        <p>It wasn't the network. It was the robot.</p>
+
+        <p>With Bluetooth-audio-tone motor control, each command is a sound that must finish before the next starts. A forward step: 500 ms. A full turn: 750 ms. While moving, it can't act on new detections.</p>
+
+        <p>So if a kid walks left while Ring-O is mid-turn-right, you can see the robot finish the right turn before it notices and corrects. To an adult, that's "the robot is committed to its decision; it'll catch up." To a six-year-old, that's "the robot is broken."</p>
+
+        <p>The fix here wasn't to break the model. The audio-tone protocol is the protocol. You can't shorten the tone past about 100 ms or the Omnibot's relay misses it entirely (I know, I tried). The fix was to make the durations <em>tunable</em> without redeploying:</p>
+
+        <pre><code>{
+  "step_duration": 500,
+  "turn_duration": 750,
+  "nudge_duration": 300
+}</code></pre>
+
+        <p>These three keys are now in <code>config.json</code>. Edit them on the Pi, restart the service, and watch how it reacts. For the next event, I'll start at <code>350 / 500 / 200</code>, about 30% smaller bites, so the robot re-evaluates more often. The trade-off is that each individual movement is shorter, so it issues more of them to cover the same ground. The kid sees a robot that's constantly micro-adjusting toward them rather than committing to a long arc and finishing it before noticing they moved.</p>
+
+        <pre><code># robot_executor.py — clamped server-side so a typo can't break the relay
+self.step_duration = max(100, min(2000, int(step_duration)))
+self.turn_duration = max(100, min(3000, int(turn_duration)))
+self.nudge_duration = max(100, min(2000, int(nudge_duration)))</code></pre>
+
+        <p>This one was <a href="https://github.com/MarioCruz/omnibotAi/commit/39287e6" target="_blank"><code>39287e6</code></a>. Smaller change than the WiFi fix. About ten lines, plus the new entries in <code>config.json</code> and a README note. The point of putting it in config is that I don't want to have to make a code change at the Faire to find out whether the robot feels snappier at 300 ms steps or 400 ms steps. I want to edit a number, restart the service, and see.</p>
+
+        <h2>The bigger lesson</h2>
+
+        <p>The autonomous behavior worked at the Faire. The robot could see, decide, and move. But what I learned is that for public demos, responsiveness matters as much as correctness: people remember how quickly something reacts, not just what it does.</p>
+
+        <p>In one case, the answer eventually came, but it felt like an eternity because a cloud dependency hung without erroring. In the other, the answer came on time but felt sluggish, because the robot was committed to a half-second physical action before it could consider new input.</p>
+
+        <p>Both are slowness, but they're different shapes:</p>
+
+        <table>
+          <thead>
+            <tr><th>Symptom</th><th>Root cause</th><th>Fix shape</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>What Do You See? froze 15 seconds</strong></td><td>Cloud LLM hanging silently with no offline detection</td><td>Background internet probe + skip-when-offline + 3 s timeout</td></tr>
+            <tr><td><strong>Robot took too long to react to a moving kid</strong></td><td>Audio-tone duration is the dispatch interval</td><td>Move durations to <code>config.json</code>, tune at the venue without code changes</td></tr>
+          </tbody>
+        </table>
+
+        <p>If I could give one piece of advice to anyone building a demo for a public event:</p>
+
+        <blockquote>
+          <p><strong>Every feature that talks to the internet needs to know whether the internet is currently a thing. If it doesn't, your demo's slowest part is your network's worst day.</strong></p>
+        </blockquote>
+
+        <p>This isn't a Pi or a robot or even a Maker Faire-specific lesson. It's the same lesson you learn the first time a backend service you depend on goes down, and your frontend hangs because nobody set a timeout. Just, for me, this time it was happening in front of a six-year-old.</p>
+
+        <h2>What's next</h2>
+
+        <p>Both fixes are in <code>main</code>. The robot is going back to the Faire. The autonomous behavior is unchanged because it never needed changing. It just needed two things around it to stop standing in its way.</p>
+
+        <ul>
+          <li>WiFi handling: <a href="https://github.com/MarioCruz/omnibotAi/commit/5cf4a1d" target="_blank"><code>5cf4a1d</code></a>, about sixty lines. Adds the background internet probe and the skip-when-offline path on the describe endpoint.</li>
+          <li>Movement tuning: <a href="https://github.com/MarioCruz/omnibotAi/commit/39287e6" target="_blank"><code>39287e6</code></a>, about ten lines plus the new <code>config.json</code> keys, so I can dial the robot's snappiness at the venue without redeploying code.</li>
+        </ul>
+
+        <p>Next time a kid presses <strong>What Do You See?</strong> on bad WiFi, Ring-O will instantly say something. Maybe not as poetic as <em>"Person and laptop in the room"</em>, but he won't go quiet. And next time a kid moves while the robot is mid-turn, I can adjust how long that turn is in fifteen seconds, on the dolly, in the middle of the show floor.</p>
+
+        <p>The code is at <a href="https://github.com/MarioCruz/omnibotAi" target="_blank">github.com/MarioCruz/omnibotAi</a>.</p>
+
+        <p>The robot is fine. It was the things around it I hadn't given enough room to fail.</p>
+
+        <h2>Postscript: the <em>third</em> WiFi problem</h2>
+
+        <p><em>Added weeks later, prepping the robot for its next outing.</em></p>
+
+        <p>WiFi bit me a third time, and this one had nothing to do with Groq or timeouts.</p>
+
+        <p>The robot kept <em>vanishing</em>. I'd open <code>https://omniai.local:8080</code> and the page wouldn't load. SSH would hang. <code>ping omniai.local</code> returned "cannot resolve." Thirty seconds later, fine again. It looked exactly like the Pi was crash-looping, and I spent a while convinced I had a hardware fault: under-voltage, overheating, a dying SD card. Checked all of them. <code>throttled=0x0</code>. 49 &deg;C. Disk fine. No kernel panic. The robot was, once again, completely fine.</p>
+
+        <p>The tell was in the boot log:</p>
+
+        <pre><code>brcmfmac: brcmf_cfg80211_set_power_mgmt: power save enabled</code></pre>
+
+        <p><strong>WiFi power-save.</strong> By default, the Pi's WiFi radio is allowed to doze between packets to save power. On a phone, that's great. On a headless robot you only ever reach <em>over</em> the network, it means the radio periodically naps and is slow, or just fails, to answer mDNS, pings, and SSH, then wakes up and acts as if nothing happened. The robot wasn't down. Its radio was asleep.</p>
+
+        <p>Same lesson as the rest of this post, wearing a different hat: <em>the robot is fine; it's the thing around it.</em> Last time, the thing around it was a cloud API with no offline detection. This time it was the robot's own network card optimizing for a battery it doesn't have.</p>
+
+        <p>The fix is two lines, one for now, one for forever:</p>
+
+        <pre><code>sudo iw dev wlan0 set power_save off                                # this boot
+sudo nmcli connection modify "&lt;wifi&gt;" 802-11-wireless.powersave 2   # every boot</code></pre>
+
+        <p>The first disables it live; the second persists it through NetworkManager so it survives reboots. I power-cycled the Pi half a dozen times to confirm WiFi came back every time. It did.</p>
+
+        <h3>While I was in there, dropping the <code>:8080</code></h3>
+
+        <p>One more bit of polish from the same session. Every URL in this series has been <code>https://omniai.local:8080</code>. The port is there because the dashboard runs as a normal user, and only root can bind the friendly ports. I finally fixed that with a tiny redirect service on ports 80/443 that forwards to <code>:8080</code>, so the iPad on the stand can just point at <strong><code>https://omniai.local</code></strong>. Small thing, the kind of papercut you stop noticing until you watch a kid try to type a port number.</p>
+
+        <p>Both of these, plus a pile of cleanup (the dashboard's HTML/CSS/JS finally split out of the Python, a real test suite, optional API auth, a boot screen that shows the robot's IP), are tagged <code>v1.1.5</code>. And the README's troubleshooting section now has the power-save fix written down, because the next person to watch this robot "crash-loop" is probably me, a year from now, and I'd like to lose that afternoon only once.</p>
+
+        <hr>
+
+        <p><em>The Omnibot restoration series:</em></p>
+        <ul>
+          <li><em><a href="tomy-omnibot-restoration.html">Part 1: Hardware restoration</a></em></li>
+          <li><em><a href="tomy-omnibot-restoration-part-2.html">Part 2: Bluetooth control and voice</a></em></li>
+          <li><em><a href="tomy-omnibot-restoration-part-3.html">Part 3: AI camera and software stack</a></em></li>
+          <li><em><a href="tomy-omnibot-restoration-part-4.html">Part 4: It's alive</a></em></li>
+          <li><em>Part 5: The WiFi problem (this post)</em></li>
+        </ul>
+
+        <p><em>All code: <a href="https://github.com/MarioCruz/omnibotAi" target="_blank">github.com/MarioCruz/omnibotAi</a></em></p>
+      </div>
+    </article>
+  </main>
+
+  <footer>
+    <p class="foot-bio"><strong>Mario Cruz</strong>, Miami. CTO @ Watsco Ventures. Executive Producer @ Maker Faire Miami. <a href="mailto:Mario@MarioTheMaker.com">Mario@MarioTheMaker.com</a></p>
+    <p class="foot-links">
+      <a href="https://twitter.com/mariocruz" target="_blank">Twitter</a>
+      <a href="https://instagram.com/mariothemaker" target="_blank">Instagram</a>
+      <a href="https://github.com/MarioCruz" target="_blank">GitHub</a>
+      <a href="https://www.linkedin.com/in/marioacruz/" target="_blank">LinkedIn</a>
+      <a href="https://Barbaromojo.com" target="_blank">Barbaromojo</a>
+      <a href="https://miami.makerfaire.com/" target="_blank">Maker Faire Miami</a>
+    </p>
+    <p class="foot-copyright">© 2026 Mario The Maker</p>
+  </footer>
+</body>
+</html>

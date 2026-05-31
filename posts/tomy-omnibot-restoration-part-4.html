@@ -21,7 +21,22 @@
     "@type": "BlogPosting",
     "headline": "Restoring a 1984 Tomy Omnibot (Part 4): It's Alive",
     "description": "The robot sees. The robot moves. The robot finds you. Meet Ring-O, the tiny AI companion that finally delivers on Omnibot's 1984 promise.",
-    "image": "https://mariothemaker.com/images/omnibot-ringo-hero.jpg",
+    "image": [
+      "https://mariothemaker.com/images/omnibot-ringo-hero.jpg",
+      {
+        "@type": "ImageObject",
+        "contentUrl": "https://mariothemaker.com/images/omnibot-ringo-hero.jpg",
+        "url": "https://mariothemaker.com/images/omnibot-ringo-hero.jpg",
+        "width": 1360,
+        "height": 768,
+        "caption": "The restored 1984 Tomy Omnibot with Ring-O, its Raspberry Pi companion, mounted on top, OLED eye glowing.",
+        "name": "Tomy Omnibot with the Ring-O AI companion mounted on top",
+        "creditText": "PLACITECH",
+        "author": {"@type": "Person", "name": "PLACITECH"},
+        "copyrightNotice": "© 2026 PLACITECH",
+        "creator": {"@type": "Person", "name": "PLACITECH"}
+      }
+    ],
     "datePublished": "2026-04-17",
     "dateModified": "2026-04-18",
     "url": "https://mariothemaker.com/posts/tomy-omnibot-restoration-part-4.html",
@@ -49,13 +64,31 @@
     }
   }
   </script>
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+  <link rel="shortcut icon" href="../favicon.ico">
+  <meta name="author" content="Mario Cruz">
+  <meta name="theme-color" content="#F5F1E8">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://mariothemaker.com/"},
+      {"@type": "ListItem", "position": 2, "name": "Projects & Posts", "item": "https://mariothemaker.com/#projects"},
+      {"@type": "ListItem", "position": 3, "name": "Restoring a 1984 Tomy Omnibot (Part 4): It's Alive", "item": 'https://mariothemaker.com/posts/tomy-omnibot-restoration-part-4.html'}
+    ]
+  }
+  </script>
 </head>
 <body>
   <header>
     <nav>
-      <a href="../index.html" class="logo"><img src="../images/MarioTheMaker.jpg" alt="Mario The Maker Logo" class="logo-img"></a>
+      <a href="../index.html" class="logo"><img src="../images/MarioTheMaker.png" alt="Mario The Maker Logo" class="logo-img"></a>
       <ul class="nav-links">
         <li><a href="../index.html">Home</a></li>
+        <li><a href="../index.html#post-search">Search</a></li>
         <li><a href="../about.html">About</a></li>
       </ul>
     </nav>
@@ -72,7 +105,7 @@
 
       <div class="post-content">
         <figure>
-          <img src="../images/omnibot-ringo-hero.jpg" alt="Tomy Omnibot with Ring-O companion robot mounted on top, OLED eye glowing">
+          <img width="1360" height="768" decoding="async" fetchpriority="high" src="../images/omnibot-ringo-hero.jpg" alt="Tomy Omnibot with Ring-O companion robot mounted on top, OLED eye glowing">
           <figcaption>Omnibot meets Ring-O. The tiny Pi-powered companion that finally gives the 1984 robot a brain. <em>Photo by PLACITECH.</em></figcaption>
         </figure>
 
@@ -89,7 +122,7 @@
         <p>Meet <strong>Ring-O</strong>, a tiny companion robot whose job is to give Omnibot computer vision. He's basically a <a href="https://www.raspberrypi.com/products/raspberry-pi-5/" target="_blank">Raspberry Pi 5</a> with an <a href="https://www.raspberrypi.com/products/ai-camera/" target="_blank">IMX500 AI camera</a> and an OLED eye display, packed into a custom enclosure that sits on top of Omnibot. The name comes from looking like a Ring camera. He runs all the AI (object detection, navigation, the dashboard) and tells Omnibot where to go via Bluetooth audio tones.</p>
 
         <figure>
-          <img src="../images/ring-o-cad-drawing.png" alt="CAD rendering of Ring-O, a small robot enclosure with an OLED eye, arms, camera lens, and battery base">
+          <img width="1800" height="1114" loading="lazy" decoding="async" src="../images/ring-o-cad-drawing.png" alt="CAD rendering of Ring-O, a small robot enclosure with an OLED eye, arms, camera lens, and battery base">
           <figcaption>Ring-O CAD design. Companion robot with OLED eye, tiny arms, and battery base.</figcaption>
         </figure>
 
@@ -206,7 +239,7 @@
           <li>LED status indicators for power, status, and Bluetooth</li>
         </ul>
 
-        <p>The kids version was designed so my son and other kids at Maker Faire can operate the robot without knowing anything about AI or Python. Press "Find Human" and the robot goes looking. Press "What See?" and it tells you what it found. Press "Dance" and it dances. Press the big red STOP button when things go wrong.</p>
+        <p>The kids version is built so my son and other kids at Maker Faire can run the robot without knowing a thing about AI or Python. Press "Find Human" and the robot goes looking. Press "What See?" and it tells you what it found. Press "Dance" and it dances. Press the big red STOP button when things go wrong.</p>
 
         <h2>"What Do You See?"</h2>
 
@@ -218,7 +251,7 @@
 
         <h2>Upgrading to YOLO11</h2>
 
-        <p>The project started with YOLOv8, and at one point I tried upgrading to YOLO11 nano which was already installed on the Pi (<code>imx500_network_yolo11n_pp.rpk</code>). When the bounding boxes were still broken after the switch, I thought maybe YOLO11 was too heavy and pulling too much CPU. So I went back to YOLOv8 to rule that out. Turns out the model wasn't the problem at all. It was the coordinate math the whole time. Once I fixed the actual bugs, I switched back to YOLO11 and it ran fine. Same 80 COCO classes, same 640x640 input, slightly better accuracy, and inference still runs on-chip so the Pi CPU barely notices. The upgrade was a one-line change in <code>object_detector.py</code>.</p>
+        <p>The project started with YOLOv8. At one point I upgraded to YOLO11 nano, already installed on the Pi as <code>imx500_network_yolo11n_pp.rpk</code>. The boxes were still broken after the switch, so I blamed the model and rolled back. Wrong model. The coordinate math was broken the whole time. Once the real bugs were fixed, I switched back to YOLO11 and it ran fine. Same 80 COCO classes, same 640x640 input, slightly better accuracy, and inference still runs on-chip so the Pi CPU barely notices. One-line change in <code>object_detector.py</code>.</p>
 
         <p>The IMX500 model ecosystem is actually impressive. The camera chip has 16MB of flash that can cache multiple models. You can swap between object detection, pose estimation, and image classification without re-uploading firmware. For this project I'm sticking with detection, but the pose estimation model could be interesting for gesture-controlled driving.</p>
 
@@ -252,7 +285,7 @@
         <h2>Ring-O's Eye</h2>
 
         <figure>
-          <img src="../images/ring-o-eye-expressions.gif" alt="Animated eye cycling through happy, surprised, sleepy, and blinking expressions on Ring-O's OLED display">
+          <img width="512" height="512" loading="lazy" decoding="async" src="../images/ring-o-eye-expressions.gif" alt="Animated eye cycling through happy, surprised, sleepy, and blinking expressions on Ring-O's OLED display">
           <figcaption>Ring-O's OLED eye cycles through expressions. Happy, surprised, tracking, blinking, sleepy.</figcaption>
         </figure>
 
@@ -308,7 +341,7 @@
         <h2>Come See It Live</h2>
 
         <figure>
-          <img src="../images/omnibot-at-makerspace.jpg" alt="Omnibot on a workbench at Moonlighter FabLab with two makers working on it">
+          <img width="1600" height="950" loading="lazy" decoding="async" src="../images/omnibot-at-makerspace.jpg" alt="Omnibot on a workbench at Moonlighter FabLab with two makers working on it">
           <figcaption>Omnibot on the bench with Mario The Maker and PLACITECH. Almost ready for <a href="https://miami.makerfaire.com/" target="_blank">Maker Faire Miami</a> 2026.</figcaption>
         </figure>
 
@@ -343,6 +376,7 @@
           <li><em><a href="tomy-omnibot-restoration-part-2.html">Part 2: Bluetooth control and voice</a></em></li>
           <li><em><a href="tomy-omnibot-restoration-part-3.html">Part 3: AI camera and software stack</a></em></li>
           <li><em>Part 4: It's alive (this post)</em></li>
+          <li><em><a href="tomy-omnibot-restoration-part-5.html">Part 5: The WiFi problem</a></em></li>
         </ul>
 
         <p><em>All code: <a href="https://github.com/MarioCruz/omnibotAi" target="_blank">github.com/MarioCruz/omnibotAi</a></em></p>
@@ -351,7 +385,16 @@
   </main>
 
   <footer>
-    <p>&copy; 2026 Mario The Maker. Built with passion in Miami.</p>
+    <p class="foot-bio"><strong>Mario Cruz</strong>, Miami. CTO @ Watsco Ventures. Executive Producer @ Maker Faire Miami. <a href="mailto:Mario@MarioTheMaker.com">Mario@MarioTheMaker.com</a></p>
+    <p class="foot-links">
+      <a href="https://twitter.com/mariocruz" target="_blank">Twitter</a>
+      <a href="https://instagram.com/mariothemaker" target="_blank">Instagram</a>
+      <a href="https://github.com/MarioCruz" target="_blank">GitHub</a>
+      <a href="https://www.linkedin.com/in/marioacruz/" target="_blank">LinkedIn</a>
+      <a href="https://Barbaromojo.com" target="_blank">Barbaromojo</a>
+      <a href="https://miami.makerfaire.com/" target="_blank">Maker Faire Miami</a>
+    </p>
+    <p class="foot-copyright">© 2026 Mario The Maker</p>
   </footer>
 </body>
 </html>

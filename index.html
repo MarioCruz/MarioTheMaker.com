@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Mario Cruz is a Hacker, Maker, and Inventor from Miami, FL. Building robots, IoT devices, and interactive installations at Moonlighter Makerspace.">
-  <meta property="og:title" content="Mario The Maker - Hacker, Maker, Inventor from Miami">
-  <meta property="og:description" content="Building robots, IoT devices, and interactive installations at Moonlighter Makerspace in Wynwood, Miami.">
-  <meta property="og:image" content="images/MarioTheMaker.jpg">
+  <meta name="description" content="Mario the Maker figures things out by building them, and pulls more folks into making. Technologist, founder, speaker, and Executive Producer of Maker Faire Miami.">
+  <meta property="og:title" content="Mario The Maker — figuring things out by building them">
+  <meta property="og:description" content="Technologist, founder, speaker, and Executive Producer of Maker Faire Miami. Robots, restorations, and interactive installations.">
+  <meta property="og:image" content="https://mariothemaker.com/images/MarioTheMaker.jpg">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
   <meta property="og:url" content="https://mariothemaker.com/">
   <meta property="og:site_name" content="Mario The Maker">
   <link rel="canonical" href="https://mariothemaker.com/">
-  <title>Mario The Maker - Hacker, Maker, Inventor from Miami</title>
+  <title>Mario The Maker — figuring things out by building them</title>
   <link rel="stylesheet" href="css/style.css">
   <script type="application/ld+json">
   {
@@ -69,329 +69,443 @@
     "url": "https://mariothemaker.com/",
     "author": {"@type": "Person", "name": "Mario Cruz"},
     "inLanguage": "en-US",
-    "keywords": "Mario The Maker, Mario Cruz, Miami maker, Moonlighter FabLab, Maker Faire Miami, poetry robots, Tomy Omnibot, Raspberry Pi projects, hacker maker inventor, IoT Miami, BMO build, open source hardware"
+    "keywords": "Mario The Maker, Mario Cruz, Miami maker, Moonlighter FabLab, Maker Faire Miami, poetry robots, Tomy Omnibot, Raspberry Pi projects, hacker maker inventor, IoT Miami, BMO build, open source hardware",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://mariothemaker.com/?search={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
+    }
   }
   </script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Blog",
-    "name": "Mario The Maker",
-    "description": "Maker projects, robotics builds, and interactive installations by Mario Cruz, based in Miami at Moonlighter FabLab.",
-    "url": "https://mariothemaker.com/",
-    "inLanguage": "en-US",
-    "author": {"@type": "Person", "name": "Mario Cruz", "url": "https://mariothemaker.com/"},
-    "publisher": {"@type": "Person", "name": "Mario The Maker", "url": "https://mariothemaker.com/"},
-    "about": [
-      {"@type": "Thing", "name": "Maker culture", "sameAs": "https://en.wikipedia.org/wiki/Maker_culture"},
-      {"@type": "Thing", "name": "Robotics", "sameAs": "https://en.wikipedia.org/wiki/Robotics"},
-      {"@type": "Thing", "name": "Raspberry Pi", "sameAs": "https://en.wikipedia.org/wiki/Raspberry_Pi"},
-      {"@type": "Thing", "name": "Arduino", "sameAs": "https://en.wikipedia.org/wiki/Arduino"},
-      {"@type": "Thing", "name": "Internet of Things", "sameAs": "https://en.wikipedia.org/wiki/Internet_of_things"}
-    ]
+    "@type": "VideoObject",
+    "name": "Omnibot finds you — autonomous 1984 Tomy Omnibot with YOLO11 vision",
+    "description": "A restored 1984 Tomy Omnibot with Ring-O, a Raspberry Pi 5 + IMX500 AI camera companion that runs YOLO11 object detection and steers the robot toward whatever you ask for. Built for Maker Faire Miami 2026.",
+    "thumbnailUrl": "https://mariothemaker.com/images/omnibot-ringo-hero.jpg",
+    "uploadDate": "2026-04-17",
+    "contentUrl": "https://mariothemaker.com/images/omnibot-in-action.mp4",
+    "embedUrl": "https://mariothemaker.com/",
+    "publisher": {"@type": "Person", "name": "Mario Cruz", "url": "https://mariothemaker.com/"}
   }
   </script>
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="shortcut icon" href="favicon.ico">
+  <meta name="author" content="Mario Cruz">
+  <meta name="theme-color" content="#F5F1E8">
 </head>
 <body>
   <header>
     <nav>
       <a href="index.html" class="logo">
-        <img src="images/MarioTheMaker.jpg" alt="Mario The Maker" class="logo-img">
+        <img src="images/MarioTheMaker.png" alt="Mario The Maker" class="logo-img">
       </a>
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#post-search">Search</a></li>
         <li><a href="about.html">About</a></li>
       </ul>
     </nav>
   </header>
 
   <section class="hero">
-    <h1>Mario The Maker</h1>
-    <p class="tagline"><strong>Hacker</strong>, <strong>Maker</strong>, <strong>Inventor</strong>, and <strong>Musician</strong> from Miami. Working out of <strong><a href="https://moonlighterfablab.org/" target="_blank">Moonlighter Makerspace</a></strong>. <a href="https://barbaromojo.com" target="_blank">Hot Sauce Maker</a>.</p>
-    <p class="intro">I'm Mario Cruz. A Miami-based maker, technologist, and inventor. I build poetry robots, restore vintage toys with modern AI, and run <a href="https://miami.makerfaire.com/" target="_blank">Maker Faire Miami</a> as its Executive Producer. This site documents the projects I've built at <a href="https://moonlighterfablab.org/" target="_blank">Moonlighter FabLab</a>, from interactive installations for the <a href="https://www.omiami.org/" target="_blank">O, Miami</a> Poetry Festival to open-source hardware on <a href="https://github.com/MarioCruz" target="_blank">GitHub</a>. Follow along on <a href="https://www.instagram.com/mariothemaker/" target="_blank">Instagram</a>. <a href="about.html">More about me →</a></p>
-    <div class="hero-scroll">scroll</div>
+    <figure class="hero-photo">
+      <img src="images/MarioTheMaker.jpg" alt="Mario Cruz at his desk with a vintage Macintosh Plus and Apple II">
+    </figure>
+    <div class="hero-text">
+      <p class="tagline">Hacker · Maker · Inventor · Musician</p>
+      <h1>Mario the Maker figures things out by building them, and pulls more folks into making.</h1>
+      <p class="subtitle">Technologist, founder, speaker, and Executive Producer of Maker Faire Miami.</p>
+      <p class="intro">I build robots and interactive installations out of <a href="https://moonlighterfablab.org/" target="_blank">Moonlighter FabLab</a> in Miami, including a decade of Poetry Robots commissioned by the <a href="https://www.omiami.org/" target="_blank">O, Miami</a> Poetry Festival. Hardware on <a href="https://github.com/MarioCruz" target="_blank">GitHub</a>. Hot sauce at <a href="https://barbaromojo.com" target="_blank">Barbaromojo</a>. <a href="about.html">More about me →</a></p>
+    </div>
+  </section>
+
+  <section class="reel">
+    <div class="reel-frame">
+      <video autoplay loop muted playsinline poster="images/omnibot-ringo-hero.jpg">
+        <source src="images/omnibot-in-action.mp4" type="video/mp4">
+      </video>
+    </div>
+    <p class="reel-caption">Omnibot finds you. A 1984 toy robot, a Raspberry Pi, and a YOLO11 model in a $20 enclosure. <a href="posts/tomy-omnibot-restoration-part-4.html">Read the build →</a></p>
   </section>
 
   <main>
-    <h2 class="section-title">Projects & Posts</h2>
+    <section class="post-section">
+      <div class="section-head">
+        <h2>Featured</h2>
+        <span class="meta">Working on now</span>
+      </div>
 
-    <div class="posts-grid">
-      <!-- 2026 -->
-      <div class="year-divider">2026</div>
-
-      <article class="post-card">
-        <img src="images/omnibot-ringo-hero.jpg" alt="Tomy Omnibot with Ring-O companion robot mounted on top">
-        <div class="post-card-content">
-          <p class="date">April 2026</p>
-          <h2><a href="posts/tomy-omnibot-restoration-part-4.html">Restoring a 1984 Tomy Omnibot (Part 4): It's Alive</a></h2>
-          <p class="excerpt">Meet Ring-O, the Pi-powered companion that gives Omnibot eyes, a brain, and a soul. Debugging YOLO11, ditching the LLM for math, and shipping to Maker Faire Miami.</p>
+      <article class="featured-card">
+        <div class="featured-image">
+          <img src="images/omnibot-ringo-hero.jpg" alt="Tomy Omnibot with Ring-O companion robot mounted on top">
+        </div>
+        <div class="featured-content">
+          <span class="featured-tag">New</span>
+          <span class="date">May 2026</span>
+          <h3><a href="posts/tomy-omnibot-restoration-part-5.html">Restoring a 1984 Tomy Omnibot — Part 5: The WiFi Problem</a></h3>
+          <p class="excerpt">The robot was fine. The internet wasn't. A cloud LLM that hung fifteen seconds on bad Faire WiFi, the fifty-line fix, and the power-save bug that looked like a crash loop.</p>
         </div>
       </article>
+    </section>
 
-      <article class="post-card">
-        <img src="images/poetry-phone-topdown.jpeg" alt="Banana Poetry Phone">
-        <div class="post-card-content">
-          <p class="date">March 2026</p>
-          <h2><a href="posts/poetry-phone-part-4.html">Poetry Phone — Part 4: Making It a Banana</a></h2>
-          <p class="excerpt">Sculpting a banana handset, painting the phone yellow, and dyeing the cord for its home at Peel in Miami.</p>
+    <section class="post-section" id="projects">
+      <div class="section-head">
+        <h2>All projects &amp; <em>posts</em></h2>
+        <div class="section-search">
+          <label for="post-search">Search</label>
+          <input type="search" id="post-search" placeholder="poetry, omnibot, BMO…" autocomplete="off">
         </div>
-      </article>
+      </div>
 
-      <article class="post-card">
-        <img src="images/poetry-phone-inside-wide.jpeg" alt="Poetry Phone electronics inside">
-        <div class="post-card-content">
-          <p class="date">March 2026</p>
-          <h2><a href="posts/poetry-phone-part-3.html">Poetry Phone — Part 3: Kid-Proofing and Easter Eggs</a></h2>
-          <p class="excerpt">Watchdog timers, crash recovery, and hiding Poemafone at 777-FILM for the O, Miami Poetry Festival.</p>
-        </div>
-      </article>
+      <div class="posts-grid" id="posts-grid">
+        <div class="search-empty" id="search-empty">No posts match that yet. Try a different word.</div>
+        <div class="year-divider">2026</div>
 
-      <article class="post-card">
-        <img src="images/poetry-phone-pico-keypad.jpeg" alt="Pico wired to phone keypad">
-        <div class="post-card-content">
-          <p class="date">March 2026</p>
-          <h2><a href="posts/poetry-phone-part-2.html">Poetry Phone — Part 2: Wrangling the DFPlayer Mini</a></h2>
-          <p class="excerpt">A $3 MP3 module, a broken is_playing() function, and the hardware pin that saved the project.</p>
-        </div>
-      </article>
+        <article class="post-card">
+          <img src="images/omnibot-ringo-hero.jpg" alt="Tomy Omnibot with Ring-O companion robot mounted on top">
+          <div class="post-card-content">
+            <p class="date">April 2026</p>
+            <h2><a href="posts/tomy-omnibot-restoration-part-4.html">Tomy Omnibot — Part 4: It's Alive</a></h2>
+            <p class="excerpt">Meet Ring-O, the Pi-powered companion that gives Omnibot eyes, a brain, and a soul. Debugging YOLO11, ditching the LLM for math, and shipping to Maker Faire Miami 2026.</p>
+          </div>
+        </article>
 
-      <article class="post-card">
-        <img src="images/poetry-phone-teardown.jpeg" alt="Phone teardown for Poetry Phone project">
-        <div class="post-card-content">
-          <p class="date">March 2026</p>
-          <h2><a href="posts/poetry-phone-part-1.html">Poetry Phone — Part 1: Cracking the Keypad Matrix</a></h2>
-          <p class="excerpt">Brute-forcing a salvaged phone keypad's pin matrix and taming a bouncy bottom row for O, Miami.</p>
-        </div>
-      </article>
+        <article class="post-card">
+          <img src="images/poetry-phone-topdown.jpeg" alt="Banana Poetry Phone">
+          <div class="post-card-content">
+            <p class="date">March 2026</p>
+            <h2><a href="posts/poetry-phone-part-4.html">Poetry Phone — Part 4: Making It a Banana</a></h2>
+            <p class="excerpt">Sculpting a banana handset, painting the phone yellow, and dyeing the cord for its home at Peel in Miami.</p>
+          </div>
+        </article>
 
-      <article class="post-card">
-        <img src="images/tomy-ai-dashboard.png" alt="Tomy Omnibot AI Dashboard">
-        <div class="post-card-content">
-          <p class="date">January 2026</p>
-          <h2><a href="posts/tomy-omnibot-restoration-part-3.html">Restoring a 1984 Tomy Omnibot (Part 3)</a></h2>
-          <p class="excerpt">Adding AI vision, cloud LLM reasoning, and autonomous behavior to a vintage robot.</p>
-        </div>
-      </article>
+        <article class="post-card">
+          <img src="images/poetry-phone-inside-wide.jpeg" alt="Poetry Phone electronics inside">
+          <div class="post-card-content">
+            <p class="date">March 2026</p>
+            <h2><a href="posts/poetry-phone-part-3.html">Poetry Phone — Part 3: Kid-Proofing and Easter Eggs</a></h2>
+            <p class="excerpt">Watchdog timers, crash recovery, and hiding Poemafone at 777-FILM for the O, Miami Poetry Festival.</p>
+          </div>
+        </article>
 
-      <article class="post-card">
-        <img src="images/tomy-controller.png" alt="Tomy Omnibot Web Controller">
-        <div class="post-card-content">
-          <p class="date">January 2026</p>
-          <h2><a href="posts/tomy-omnibot-restoration-part-2.html">Restoring a 1984 Tomy Omnibot (Part 2)</a></h2>
-          <p class="excerpt">Bluetooth control via cassette adapter, web-based controller, and giving an 80s robot a modern voice.</p>
-        </div>
-      </article>
+        <article class="post-card">
+          <img src="images/poetry-phone-pico-keypad.jpeg" alt="Pico wired to phone keypad">
+          <div class="post-card-content">
+            <p class="date">March 2026</p>
+            <h2><a href="posts/poetry-phone-part-2.html">Poetry Phone — Part 2: Wrangling the DFPlayer Mini</a></h2>
+            <p class="excerpt">A $3 MP3 module, a broken is_playing() function, and the hardware pin that saved the project.</p>
+          </div>
+        </article>
 
-      <article class="post-card">
-        <img src="images/Tomy-in-Parts.jpeg" alt="Tomy Omnibot Restoration">
-        <div class="post-card-content">
-          <p class="date">January 2026</p>
-          <h2><a href="posts/tomy-omnibot-restoration.html">Restoring a 1984 Tomy Omnibot (Part 1)</a></h2>
-          <p class="excerpt">Bringing a 40-year-old robot back to life — teardown, electronics inspection, and first drive test.</p>
-        </div>
-      </article>
+        <article class="post-card">
+          <img src="images/poetry-phone-teardown.jpeg" alt="Phone teardown for Poetry Phone project">
+          <div class="post-card-content">
+            <p class="date">March 2026</p>
+            <h2><a href="posts/poetry-phone-part-1.html">Poetry Phone — Part 1: Cracking the Keypad Matrix</a></h2>
+            <p class="excerpt">Brute-forcing a salvaged phone keypad's pin matrix and taming a bouncy bottom row for O, Miami.</p>
+          </div>
+        </article>
 
-      <!-- 2025 -->
-      <div class="year-divider">2025</div>
+        <article class="post-card">
+          <img src="images/tomy-ai-dashboard.png" alt="Tomy Omnibot AI Dashboard">
+          <div class="post-card-content">
+            <p class="date">January 2026</p>
+            <h2><a href="posts/tomy-omnibot-restoration-part-3.html">Tomy Omnibot — Part 3: AI Vision &amp; Cloud LLM</a></h2>
+            <p class="excerpt">Giving the Omnibot eyes and a brain. Pi 5, an AI camera, and a cloud LLM that decides what to do next.</p>
+          </div>
+        </article>
 
-      <article class="post-card">
-        <img src="images/maker-cities.jpg" alt="Maker Cities Program">
-        <div class="post-card-content">
-          <p class="date">November 2025</p>
-          <h2><a href="posts/maker-cities.html">The Future of Work Isn't Robots. It's Makers!</a></h2>
-          <p class="excerpt">Introducing Maker Cities, an NSF-funded program preparing adults for future careers through hands-on maker training.</p>
-        </div>
-      </article>
+        <article class="post-card">
+          <img src="images/tomy-controller.png" alt="Tomy Omnibot Web Controller">
+          <div class="post-card-content">
+            <p class="date">January 2026</p>
+            <h2><a href="posts/tomy-omnibot-restoration-part-2.html">Tomy Omnibot — Part 2: Bluetooth &amp; Web Control</a></h2>
+            <p class="excerpt">Bluetooth control via cassette adapter, web-based controller, and giving an 80s robot a modern voice.</p>
+          </div>
+        </article>
 
-      <article class="post-card">
-        <img src="images/maker-faire-bay-area-2025.jpg" alt="Mario Cruz at Maker Faire Bay Area 2025">
-        <div class="post-card-content">
-          <p class="date">October 2025</p>
-          <h2><a href="posts/maker-faire-bay-area-2025.html">Producer in Residence at Maker Faire Bay Area</a></h2>
-          <p class="excerpt">Hosting the Make: Live Stage, supporting 7,500 students, and awarding Blue Ribbons to standout makers.</p>
-        </div>
-      </article>
+        <article class="post-card">
+          <img src="images/Tomy-in-Parts.jpeg" alt="Tomy Omnibot Restoration">
+          <div class="post-card-content">
+            <p class="date">January 2026</p>
+            <h2><a href="posts/tomy-omnibot-restoration.html">Tomy Omnibot — Part 1: Teardown</a></h2>
+            <p class="excerpt">Opening up a 40-year-old robot. Teardown, inspection, and first drive test.</p>
+          </div>
+        </article>
 
-      <article class="post-card">
-        <img src="images/dawn-of-digital.png" alt="Dawn of Digital Exhibition">
-        <div class="post-card-content">
-          <p class="date">October 2025</p>
-          <h2><a href="posts/dawn-of-digital.html">Dawn of Digital: The Art and Soul of Early Computing</a></h2>
-          <p class="excerpt">Celebrating the design and innovation of the technologies that sparked the digital revolution.</p>
-        </div>
-      </article>
+        <div class="year-divider">2025</div>
 
-      <article class="post-card">
-        <img src="images/domino-table.jpeg" alt="Lo Que Tengo Son Letras Domino Table">
-        <div class="post-card-content">
-          <p class="date">April 2025</p>
-          <h2><a href="posts/lo-que-tengo-son-letras.html">Lo Que Tengo Son Letras – Domino Table</a></h2>
-          <p class="excerpt">Reimagining dominos with cultural phrases for O, Miami Poetry Festival.</p>
-        </div>
-      </article>
+        <article class="post-card">
+          <img src="images/maker-cities.jpg" alt="Maker Cities Program">
+          <div class="post-card-content">
+            <p class="date">November 2025</p>
+            <h2><a href="posts/maker-cities.html">The Future of Work Isn't Robots. It's Makers.</a></h2>
+            <p class="excerpt">Introducing Maker Cities, an NSF-funded program preparing adults for future careers through hands-on maker training.</p>
+          </div>
+        </article>
 
-      <article class="post-card">
-        <img src="images/alphie-hero.jpeg" alt="Alphie the Poetry Robot">
-        <div class="post-card-content">
-          <p class="date">April 2025</p>
-          <h2><a href="posts/poetry-robots.html">Poetry Robots: From Poem-o-matic to Alphie 2.0</a></h2>
-          <p class="excerpt">A decade of robotic poetry with O, Miami — from receipt printers to AI-powered vintage robots.</p>
-        </div>
-      </article>
+        <article class="post-card">
+          <img src="images/maker-faire-bay-area-2025.jpg" alt="Mario Cruz at Maker Faire Bay Area 2025">
+          <div class="post-card-content">
+            <p class="date">October 2025</p>
+            <h2><a href="posts/maker-faire-bay-area-2025.html">Producer in Residence at Maker Faire Bay Area</a></h2>
+            <p class="excerpt">Hosting the Make: Live Stage, supporting 7,500 students, and awarding Blue Ribbons to standout makers.</p>
+          </div>
+        </article>
 
-      <!-- 2023 -->
-      <div class="year-divider">2023</div>
+        <article class="post-card">
+          <img src="images/dawn-of-digital.png" alt="Dawn of Digital Exhibition">
+          <div class="post-card-content">
+            <p class="date">October 2025</p>
+            <h2><a href="posts/dawn-of-digital.html">Dawn of Digital: The Art and Soul of Early Computing</a></h2>
+            <p class="excerpt">An exhibit of vintage personal computers from my collection, on view October 2025 through February 2026.</p>
+          </div>
+        </article>
 
-      <article class="post-card">
-        <img src="images/maker-faire-miami-2023.jpg" alt="Maker Faire Miami 2023">
-        <div class="post-card-content">
-          <p class="date">March 2023</p>
-          <h2><a href="posts/maker-faire-miami-2023.html">Why You Should Attend Maker Faire Miami 2023</a></h2>
-          <p class="excerpt">Celebrating creativity, innovation, and the DIY spirit with Miami's maker community.</p>
-        </div>
-      </article>
+        <article class="post-card">
+          <img src="images/domino-table.jpeg" alt="Lo Que Tengo Son Letras Domino Table">
+          <div class="post-card-content">
+            <p class="date">April 2025</p>
+            <h2><a href="posts/lo-que-tengo-son-letras.html">Lo Que Tengo Son Letras — Domino Table</a></h2>
+            <p class="excerpt">Reimagining dominos with cultural phrases for O, Miami Poetry Festival.</p>
+          </div>
+        </article>
 
-      <article class="post-card">
-        <img src="images/first-robotics-2023.jpg" alt="FIRST Robotics Competition 2023">
-        <div class="post-card-content">
-          <p class="date">March 2023</p>
-          <h2><a href="posts/first-robotics-2023.html">Judging the South Florida Regional FIRST Robotics Competition</a></h2>
-          <p class="excerpt">Volunteering as a judge and meeting incredible robotics teams from Panama, Colombia, Ohio, and Florida.</p>
-        </div>
-      </article>
+        <article class="post-card">
+          <img src="images/alphie-hero.jpeg" alt="Alphie the Poetry Robot">
+          <div class="post-card-content">
+            <p class="date">April 2025</p>
+            <h2><a href="posts/poetry-robots.html">Poetry Robots: From Poem-o-matic to Alphie 2.0</a></h2>
+            <p class="excerpt">Ten years of robotic poetry with O, Miami. From receipt printers to AI-powered vintage robots.</p>
+          </div>
+        </article>
 
-      <!-- 2020 -->
-      <div class="year-divider">2020</div>
+        <div class="year-divider">2023</div>
 
-      <article class="post-card">
-        <img src="images/poem-robots-main.png" alt="Optimus Rhyme Poetry Robot">
-        <div class="post-card-content">
-          <p class="date">December 3, 2020</p>
-          <h2><a href="posts/building-poem-robots.html">Building Poem Robots for O'Miami</a></h2>
-          <p class="excerpt">Poetry Robots are original machines to disseminate poems through technology.</p>
-        </div>
-      </article>
+        <article class="post-card">
+          <img src="images/maker-faire-miami-2023.jpg" alt="Maker Faire Miami 2023">
+          <div class="post-card-content">
+            <p class="date">March 2023</p>
+            <h2><a href="posts/maker-faire-miami-2023.html">Why You Should Attend Maker Faire Miami 2023</a></h2>
+            <p class="excerpt">Why to come and what to expect at Miami's annual maker gathering.</p>
+          </div>
+        </article>
 
-      <article class="post-card">
-        <img src="images/shell-poems.png" alt="3D printed shell with Bluetooth speaker" loading="lazy">
-        <div class="post-card-content">
-          <p class="date">December 3, 2020</p>
-          <h2><a href="posts/shell-poems.html">Shell Poems</a></h2>
-          <p class="excerpt">3D printed shells with hidden Bluetooth speakers playing Ocean Vuong poems on Miami Beach.</p>
-        </div>
-      </article>
+        <article class="post-card">
+          <img src="images/first-robotics-2023.jpg" alt="FIRST Robotics Competition 2023">
+          <div class="post-card-content">
+            <p class="date">March 2023</p>
+            <h2><a href="posts/first-robotics-2023.html">Judging the South Florida Regional FIRST Robotics</a></h2>
+            <p class="excerpt">Volunteering as a judge and meeting incredible robotics teams from Panama, Colombia, Ohio, and Florida.</p>
+          </div>
+        </article>
 
-      <article class="post-card">
-        <img src="images/opa-locka-light.jpg" alt="Opa Locka Light District" loading="lazy">
-        <div class="post-card-content">
-          <p class="date">May 2020</p>
-          <h2><a href="posts/opa-locka-light-district.html">Opa Locka Light District</a></h2>
-          <p class="excerpt">Poetry projectors illuminating Opa-Locka streets with poems from local students and residents.</p>
-        </div>
-      </article>
+        <div class="year-divider">2020</div>
 
-      <article class="post-card">
-        <img src="images/face-shields.jpg" alt="Open Source Face Shields" loading="lazy">
-        <div class="post-card-content">
-          <p class="date">February 2020</p>
-          <h2><a href="posts/open-source-face-shields.html">Open Source Face Shields</a></h2>
-          <p class="excerpt">How our maker community delivered 18,000+ pieces of free PPE during the pandemic.</p>
-        </div>
-      </article>
+        <article class="post-card">
+          <img src="images/poem-robots-main.png" alt="Optimus Rhyme Poetry Robot">
+          <div class="post-card-content">
+            <p class="date">December 2020</p>
+            <h2><a href="posts/building-poem-robots.html">Building Poem Robots for O, Miami</a></h2>
+            <p class="excerpt">Poetry Robots are original machines to disseminate poems through technology.</p>
+          </div>
+        </article>
 
-      <!-- 2019 -->
-      <div class="year-divider">2019</div>
+        <article class="post-card">
+          <img src="images/shell-poems.png" alt="3D printed shell with Bluetooth speaker">
+          <div class="post-card-content">
+            <p class="date">December 2020</p>
+            <h2><a href="posts/shell-poems.html">Shell Poems</a></h2>
+            <p class="excerpt">3D printed shells with hidden Bluetooth speakers playing Ocean Vuong poems on Miami Beach.</p>
+          </div>
+        </article>
 
-      <article class="post-card">
-        <img src="images/maker-workshop.jpg" alt="Kids at maker workshop" loading="lazy">
-        <div class="post-card-content">
-          <p class="date">May 18, 2019</p>
-          <h2><a href="posts/how-i-became-a-maker.html">How I became a Maker (again)</a></h2>
-          <p class="excerpt">Join the movement. Let's make Miami a Maker town!</p>
-        </div>
-      </article>
+        <article class="post-card">
+          <img src="images/opa-locka-light.jpg" alt="Opa Locka Light District">
+          <div class="post-card-content">
+            <p class="date">May 2020</p>
+            <h2><a href="posts/opa-locka-light-district.html">Opa Locka Light District</a></h2>
+            <p class="excerpt">Poetry projectors illuminating Opa-Locka streets with poems from local students and residents.</p>
+          </div>
+        </article>
 
-      <article class="post-card">
-        <img src="images/maker-faire-hero.jpeg" alt="Miami Maker Faire" loading="lazy">
-        <div class="post-card-content">
-          <p class="date">April 17, 2019</p>
-          <h2><a href="posts/miami-maker-faire-2019.html">Miami Maker Faire 2019</a></h2>
-          <p class="excerpt">Where the future is now, robots reigned and high-tech dresses impressed.</p>
-        </div>
-      </article>
+        <article class="post-card">
+          <img src="images/face-shields.jpg" alt="Open Source Face Shields">
+          <div class="post-card-content">
+            <p class="date">February 2020</p>
+            <h2><a href="posts/open-source-face-shields.html">Open Source Face Shields</a></h2>
+            <p class="excerpt">How our maker community delivered 18,000+ pieces of free PPE during the pandemic.</p>
+          </div>
+        </article>
 
-      <!-- 2018 -->
-      <div class="year-divider">2018</div>
+        <div class="year-divider">2019</div>
 
-      <article class="post-card">
-        <img src="images/why-makers.jpeg" alt="Young maker" loading="lazy">
-        <div class="post-card-content">
-          <p class="date">November 19, 2018</p>
-          <h2><a href="posts/why-cant-we-all-be-makers.html">Why can't we all be Makers?</a></h2>
-          <p class="excerpt">Spreading the maker mindset across Miami and empowering people to join the movement.</p>
-        </div>
-      </article>
+        <article class="post-card">
+          <img src="images/maker-workshop.jpg" alt="Kids at maker workshop">
+          <div class="post-card-content">
+            <p class="date">May 2019</p>
+            <h2><a href="posts/how-i-became-a-maker.html">How I Became a Maker (Again)</a></h2>
+            <p class="excerpt">Join the movement. Let's make Miami a Maker town.</p>
+          </div>
+        </article>
 
-      <article class="post-card">
-        <img src="images/poem-o-matic.jpg" alt="Poem-O-Matic printer" loading="lazy">
-        <div class="post-card-content">
-          <p class="date">August 24, 2018</p>
-          <h2><a href="posts/poem-o-matic.html">O, Miami Poem-O-Matic</a></h2>
-          <p class="excerpt">A friendly bot-in-a-box that prints out a keepsake poem with the press of a button.</p>
-        </div>
-      </article>
+        <article class="post-card">
+          <img src="images/maker-faire-hero.jpeg" alt="Miami Maker Faire">
+          <div class="post-card-content">
+            <p class="date">April 2019</p>
+            <h2><a href="posts/miami-maker-faire-2019.html">Miami Maker Faire 2019</a></h2>
+            <p class="excerpt">Where the future is now, robots reigned and high-tech dresses impressed.</p>
+          </div>
+        </article>
 
-      <article class="post-card">
-        <img src="images/chladni-sketch.png" alt="Chladni Plate sketch" loading="lazy">
-        <div class="post-card-content">
-          <p class="date">January 23, 2018</p>
-          <h2><a href="posts/chladni-plate.html">Building a Chladni Plate</a></h2>
-          <p class="excerpt">Visualizing sound vibrations for the Frost Science Museum LATE event.</p>
-        </div>
-      </article>
+        <div class="year-divider">2018</div>
 
-      <!-- 2017 -->
-      <div class="year-divider">2017</div>
+        <article class="post-card">
+          <img src="images/why-makers.jpeg" alt="Young maker">
+          <div class="post-card-content">
+            <p class="date">November 2018</p>
+            <h2><a href="posts/why-cant-we-all-be-makers.html">Why Can't We All Be Makers?</a></h2>
+            <p class="excerpt">Taking on the Producer role at Maker Faire Miami in 2018, and what I hoped to build next.</p>
+          </div>
+        </article>
 
-      <article class="post-card">
-        <img src="images/docker-captain.jpg" alt="Docker shipping container case" loading="lazy">
-        <div class="post-card-content">
-          <p class="date">July 10, 2017</p>
-          <h2><a href="posts/docker-captain.html">Meeting & Working with a Docker Captain</a></h2>
-          <p class="excerpt">Collaboration across the pond with Docker Captain Alex Ellis on an IoT project.</p>
-        </div>
-      </article>
+        <article class="post-card">
+          <img src="images/poem-o-matic.jpg" alt="Poem-O-Matic printer">
+          <div class="post-card-content">
+            <p class="date">August 2018</p>
+            <h2><a href="posts/poem-o-matic.html">O, Miami Poem-O-Matic</a></h2>
+            <p class="excerpt">A friendly bot-in-a-box that prints out a keepsake poem with the press of a button.</p>
+          </div>
+        </article>
 
-      <article class="post-card">
-        <img src="images/bmo-part-two.jpeg" alt="BMO build" loading="lazy">
-        <div class="post-card-content">
-          <p class="date">July 3, 2017</p>
-          <h2><a href="posts/bmo-part-two.html">The Making of BMO (Part Two)</a></h2>
-          <p class="excerpt">Getting the colors right and finishing BMO for Miami Maker Faire.</p>
-        </div>
-      </article>
+        <article class="post-card">
+          <img src="images/chladni-sketch.png" alt="Chladni Plate sketch">
+          <div class="post-card-content">
+            <p class="date">January 2018</p>
+            <h2><a href="posts/chladni-plate.html">Building a Chladni Plate</a></h2>
+            <p class="excerpt">Visualizing sound vibrations for the Frost Science Museum LATE event.</p>
+          </div>
+        </article>
 
-      <article class="post-card">
-        <div class="post-card-placeholder">BMO</div>
-        <div class="post-card-content">
-          <p class="date">March 7, 2017</p>
-          <h2><a href="posts/bmo-part-one.html">The Making of BMO (Part One)</a></h2>
-          <p class="excerpt">Documenting the start of my BMO video game unit build for Miami Maker Faire.</p>
-        </div>
-      </article>
+        <div class="year-divider">2017</div>
 
-    </div>
+        <article class="post-card">
+          <img src="images/docker-captain.jpg" alt="Docker shipping container case">
+          <div class="post-card-content">
+            <p class="date">July 2017</p>
+            <h2><a href="posts/docker-captain.html">Meeting &amp; Working with a Docker Captain</a></h2>
+            <p class="excerpt">Collaboration across the pond with Docker Captain Alex Ellis on an IoT project.</p>
+          </div>
+        </article>
+
+        <article class="post-card">
+          <img src="images/bmo-part-two.jpeg" alt="BMO build">
+          <div class="post-card-content">
+            <p class="date">July 2017</p>
+            <h2><a href="posts/bmo-part-two.html">The Making of BMO — Part Two</a></h2>
+            <p class="excerpt">Getting the colors right and finishing BMO for Miami Maker Faire.</p>
+          </div>
+        </article>
+
+        <article class="post-card">
+          <img src="images/bmo-build-3.jpeg" alt="BMO build in progress">
+          <div class="post-card-content">
+            <p class="date">March 2017</p>
+            <h2><a href="posts/bmo-part-one.html">The Making of BMO — Part One</a></h2>
+            <p class="excerpt">Documenting the start of my BMO video game unit build for Miami Maker Faire.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
   </main>
 
+  <section class="cta-band">
+    <div class="cta-band-inner">
+      <h2>Currently booking talks, ideas, and <em>collaborations</em>.</h2>
+      <p>Whether you've got a stage, a problem to solve, or a wild idea, reach out.</p>
+      <a href="mailto:Mario@MarioTheMaker.com?subject=Booking%20inquiry" class="cta-link">Mario@MarioTheMaker.com</a>
+    </div>
+  </section>
+
   <footer>
-    <p>&copy; 2026 Mario The Maker. Built with passion in Miami.</p>
-    <p>
+    <p class="foot-bio"><strong>Mario Cruz</strong>, Miami. CTO @ Watsco Ventures. Executive Producer @ Maker Faire Miami. <a href="mailto:Mario@MarioTheMaker.com">Mario@MarioTheMaker.com</a></p>
+    <p class="foot-links">
       <a href="https://twitter.com/mariocruz" target="_blank">Twitter</a>
       <a href="https://instagram.com/mariothemaker" target="_blank">Instagram</a>
       <a href="https://github.com/MarioCruz" target="_blank">GitHub</a>
+      <a href="https://www.linkedin.com/in/marioacruz/" target="_blank">LinkedIn</a>
       <a href="https://Barbaromojo.com" target="_blank">Barbaromojo</a>
       <a href="https://miami.makerfaire.com/" target="_blank">Maker Faire Miami</a>
     </p>
+    <p class="foot-copyright">© 2026 Mario The Maker</p>
   </footer>
+
+  <script>
+    (function () {
+      var input = document.getElementById('post-search');
+      var grid = document.getElementById('posts-grid');
+      var empty = document.getElementById('search-empty');
+      if (!input || !grid) return;
+
+      var cards = Array.prototype.slice.call(grid.querySelectorAll('.post-card'));
+      var index = cards.map(function (card) {
+        return {
+          el: card,
+          text: (card.textContent || '').toLowerCase()
+        };
+      });
+
+      function filter(q) {
+        q = (q || '').trim().toLowerCase();
+        if (!q) {
+          grid.classList.remove('searching');
+          empty.classList.remove('show');
+          cards.forEach(function (c) { c.classList.remove('search-hidden'); });
+          return;
+        }
+        grid.classList.add('searching');
+        var visible = 0;
+        index.forEach(function (item) {
+          if (item.text.indexOf(q) !== -1) {
+            item.el.classList.remove('search-hidden');
+            visible++;
+          } else {
+            item.el.classList.add('search-hidden');
+          }
+        });
+        empty.classList.toggle('show', visible === 0);
+      }
+
+      input.addEventListener('input', function () { filter(input.value); });
+
+      // Honor ?search= URL param (matches WebSite SearchAction schema)
+      var params = new URLSearchParams(window.location.search);
+      var initial = params.get('search');
+      if (initial) {
+        input.value = initial;
+        filter(initial);
+      }
+
+      // Focus the search input when arriving via #post-search (from nav)
+      function focusIfHash() {
+        if (window.location.hash === '#post-search') {
+          setTimeout(function () {
+            try { input.focus({ preventScroll: true }); }
+            catch (e) { input.focus(); }
+          }, 100);
+        }
+      }
+      focusIfHash();
+      window.addEventListener('hashchange', focusIfHash);
+    })();
+  </script>
 </body>
 </html>
