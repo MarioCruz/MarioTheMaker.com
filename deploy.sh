@@ -12,6 +12,7 @@ aws s3 sync . s3://$S3_BUCKET/ \
   --exclude ".claude/*" \
   --exclude "*.md" \
   --exclude "deploy.sh" \
+  --exclude "indexnow.sh" \
   --exclude ".DS_Store" \
   --exclude "*/.DS_Store" \
   --exclude "mockups/*" \
