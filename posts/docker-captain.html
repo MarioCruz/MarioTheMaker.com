@@ -41,13 +41,31 @@
   }
 }
   </script>
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+  <link rel="shortcut icon" href="../favicon.ico">
+  <meta name="author" content="Mario Cruz">
+  <meta name="theme-color" content="#F5F1E8">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://mariothemaker.com/"},
+      {"@type": "ListItem", "position": 2, "name": "Projects & Posts", "item": "https://mariothemaker.com/#projects"},
+      {"@type": "ListItem", "position": 3, "name": 'Meeting & Working with a Docker Captain', "item": 'https://mariothemaker.com/posts/docker-captain.html'}
+    ]
+  }
+  </script>
 </head>
 <body>
   <header>
     <nav>
-      <a href="../index.html" class="logo"><img src="../images/MarioTheMaker.jpg" alt="Mario The Maker Logo" class="logo-img"></a>
+      <a href="../index.html" class="logo"><img src="../images/MarioTheMaker.png" alt="Mario The Maker Logo" class="logo-img"></a>
       <ul class="nav-links">
         <li><a href="../index.html">Home</a></li>
+        <li><a href="../index.html#post-search">Search</a></li>
         <li><a href="../about.html">About</a></li>
       </ul>
     </nav>
@@ -96,12 +114,34 @@
         </ul>
 
         <p>Stay tuned as Alex and I will be collaborating on future projects around IoT, Pi and whatever Alex codes or posts on his blog that I can use to make the next thing.</p>
+        <hr style="border:none;border-top:1px solid var(--rule);margin:var(--space-2xl) 0 var(--space-lg);">
+        <h2 style="font-family:var(--font-serif);font-style:italic;font-weight:400;font-size:1.25rem;color:var(--ink-muted);margin-bottom:var(--space-md);">Related</h2>
+        <ul style="list-style:none;padding:0;display:grid;gap:var(--space-md);">
+          <li style="border-top:1px solid var(--rule);padding-top:var(--space-sm);">
+            <a href="tomy-omnibot-restoration-part-4.html" style="font-family:var(--font-serif);font-weight:600;font-size:1.15rem;color:var(--ink);border:none;letter-spacing:-0.01em;">Restoring a 1984 Tomy Omnibot — Part 4: It&apos;s Alive</a>
+            <p style="font-size:0.95rem;color:var(--ink-soft);margin-top:0.35rem;">IoT and edge computing on real hardware, almost a decade later.</p>
+          </li>
+          <li style="border-top:1px solid var(--rule);padding-top:var(--space-sm);">
+            <a href="open-source-face-shields.html" style="font-family:var(--font-serif);font-weight:600;font-size:1.15rem;color:var(--ink);border:none;letter-spacing:-0.01em;">Open Source Face Shields</a>
+            <p style="font-size:0.95rem;color:var(--ink-soft);margin-top:0.35rem;">When the maker community shipped 18,000 pieces of PPE during COVID.</p>
+          </li>
+        </ul>
+
       </div>
     </article>
   </main>
 
   <footer>
-    <p>&copy; 2025 Mario The Maker. Built with passion in Miami.</p>
+    <p class="foot-bio"><strong>Mario Cruz</strong>, Miami. CTO @ Watsco Ventures. Executive Producer @ Maker Faire Miami. <a href="mailto:Mario@MarioTheMaker.com">Mario@MarioTheMaker.com</a></p>
+    <p class="foot-links">
+      <a href="https://twitter.com/mariocruz" target="_blank">Twitter</a>
+      <a href="https://instagram.com/mariothemaker" target="_blank">Instagram</a>
+      <a href="https://github.com/MarioCruz" target="_blank">GitHub</a>
+      <a href="https://www.linkedin.com/in/marioacruz/" target="_blank">LinkedIn</a>
+      <a href="https://Barbaromojo.com" target="_blank">Barbaromojo</a>
+      <a href="https://miami.makerfaire.com/" target="_blank">Maker Faire Miami</a>
+    </p>
+    <p class="foot-copyright">© 2026 Mario The Maker</p>
   </footer>
 </body>
 </html>
