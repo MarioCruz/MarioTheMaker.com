@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Wavr is a theremin you play by waving your hands at a webcam. MediaPipe hand tracking, a Web Audio synth with 7 modes and 10 scales, and a 1960s record-sleeve UI. Built for Maker Faire Miami 2026, finished six months late, and aimed at 2027.">
+  <meta property="og:title" content="Wavr: The Instrument That Missed the Faire - Mario The Maker">
+  <meta property="og:description" content="A browser theremin you play by waving at a webcam. Hand tracking, a 7-mode Web Audio synth, and a 1960s record-sleeve UI. Built for Maker Faire Miami 2026, finished for 2027.">
+  <meta property="og:image" content="https://mariothemaker.com/images/wavr-hero-live.jpg">
+  <meta property="og:url" content="https://mariothemaker.com/posts/wavr-visual-theremin.html">
+  <meta property="og:type" content="article">
+  <meta property="article:author" content="Mario Cruz">
+  <meta property="article:published_time" content="2026-08-09">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://mariothemaker.com/posts/wavr-visual-theremin.html">
+  <title>Wavr: The Instrument That Missed the Faire - Mario The Maker</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Wavr: The Instrument That Missed the Faire",
+    "description": "A browser-based visual theremin played with bare hands in front of a webcam. MediaPipe hand tracking, a Web Audio synthesizer with 7 modes and 10 scales, no build step, no backend. Built for Maker Faire Miami 2026, finished for 2027.",
+    "image": [
+      {
+        "@type": "ImageObject",
+        "contentUrl": "https://mariothemaker.com/images/wavr-hero-live.jpg",
+        "url": "https://mariothemaker.com/images/wavr-hero-live.jpg",
+        "width": 1600,
+        "height": 967,
+        "caption": "Mario Cruz playing Wavr with one hand raised, a red hand-tracking skeleton overlaid on the webcam view, while the Hand signals panel shows voice 1 holding B2 at 123 Hz.",
+        "name": "Playing the Wavr visual theremin",
+        "creditText": "Mario Cruz",
+        "author": {"@type": "Person", "name": "Mario Cruz", "url": "https://mariothemaker.com/"},
+        "copyrightNotice": "© 2026 Mario Cruz",
+        "creator": {"@type": "Person", "name": "Mario Cruz"}
+      },
+      {
+        "@type": "ImageObject",
+        "contentUrl": "https://mariothemaker.com/images/wavr-live-two-hands.jpg",
+        "url": "https://mariothemaker.com/images/wavr-live-two-hands.jpg",
+        "width": 1534,
+        "height": 801,
+        "caption": "Mario Cruz playing Wavr with both hands raised, red and cyan hand-tracking skeletons overlaid on the webcam view, while the Hand signals panel shows two voices playing D3 and A4.",
+        "name": "Playing the Wavr visual theremin with two hands",
+        "creditText": "Mario Cruz",
+        "author": {"@type": "Person", "name": "Mario Cruz", "url": "https://mariothemaker.com/"},
+        "copyrightNotice": "© 2026 Mario Cruz",
+        "creator": {"@type": "Person", "name": "Mario Cruz"}
+      },
+      {
+        "@type": "ImageObject",
+        "contentUrl": "https://mariothemaker.com/images/wavr-paused-stage.jpg",
+        "url": "https://mariothemaker.com/images/wavr-paused-stage.jpg",
+        "width": 1459,
+        "height": 812,
+        "caption": "The Wavr record-sleeve interface with the stage dark and the message Instrument is paused, shown when the tab is hidden and the camera has been released.",
+        "name": "Wavr paused stage with camera released",
+        "creditText": "Mario Cruz",
+        "author": {"@type": "Person", "name": "Mario Cruz", "url": "https://mariothemaker.com/"},
+        "copyrightNotice": "© 2026 Mario Cruz",
+        "creator": {"@type": "Person", "name": "Mario Cruz"}
+      },
+      {
+        "@type": "ImageObject",
+        "contentUrl": "https://mariothemaker.com/images/wavr-studio-console.png",
+        "url": "https://mariothemaker.com/images/wavr-studio-console.png",
+        "width": 924,
+        "height": 1294,
+        "caption": "Wavr's Studio console panel with instrument, scale, and root note selectors, glide slider, and hand tracking toggle, above the How to play liner notes.",
+        "name": "Wavr Studio console controls",
+        "creditText": "Mario Cruz",
+        "author": {"@type": "Person", "name": "Mario Cruz", "url": "https://mariothemaker.com/"},
+        "copyrightNotice": "© 2026 Mario Cruz",
+        "creator": {"@type": "Person", "name": "Mario Cruz"}
+      },
+      {
+        "@type": "ImageObject",
+        "contentUrl": "https://mariothemaker.com/images/wavr-header.png",
+        "url": "https://mariothemaker.com/images/wavr-header.png",
+        "width": 1567,
+        "height": 421,
+        "caption": "The Wavr record-sleeve header: Visual Theremin, good vibrations, no strings attached, model WVR-5050.",
+        "name": "Wavr record-sleeve header",
+        "creditText": "Mario Cruz",
+        "author": {"@type": "Person", "name": "Mario Cruz", "url": "https://mariothemaker.com/"},
+        "copyrightNotice": "© 2026 Mario Cruz",
+        "creator": {"@type": "Person", "name": "Mario Cruz"}
+      }
+    ],
+    "datePublished": "2026-08-09",
+    "dateModified": "2026-08-09",
+    "url": "https://mariothemaker.com/posts/wavr-visual-theremin.html",
+    "author": {"@type": "Person", "name": "Mario Cruz", "url": "https://mariothemaker.com/"},
+    "publisher": {"@type": "Person", "name": "Mario The Maker", "url": "https://mariothemaker.com/"},
+    "mainEntityOfPage": {"@type": "WebPage", "@id": "https://mariothemaker.com/posts/wavr-visual-theremin.html"},
+    "keywords": "Wavr, visual theremin, browser instrument, MediaPipe Hands, Web Audio API, hand tracking, webcam instrument, theremin, synthesizer, scale quantization, Maker Faire Miami, Raspberry Pi 5 kiosk, Mario The Maker, no build step, GitHub Pages",
+    "about": [
+      {"@type": "Thing", "name": "Theremin", "sameAs": "https://en.wikipedia.org/wiki/Theremin"},
+      {"@type": "Thing", "name": "Web Audio API", "sameAs": "https://en.wikipedia.org/wiki/HTML5_audio#Web_Audio_API_and_MediaStream_Processing_API"},
+      {"@type": "Thing", "name": "Gesture recognition", "sameAs": "https://en.wikipedia.org/wiki/Gesture_recognition"},
+      {"@type": "Thing", "name": "Synthesizer", "sameAs": "https://en.wikipedia.org/wiki/Synthesizer"},
+      {"@type": "Thing", "name": "Maker Faire", "sameAs": "https://en.wikipedia.org/wiki/Maker_Faire"}
+    ],
+    "mentions": [
+      {"@type": "SoftwareSourceCode", "name": "Wavr", "codeRepository": "https://github.com/MarioCruz/Wavr"},
+      {"@type": "WebApplication", "name": "Wavr Visual Theremin", "url": "https://mariocruz.github.io/Wavr/"},
+      {"@type": "Event", "name": "Maker Faire Miami 2027"}
+    ]
+  }
+  </script>
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+  <link rel="shortcut icon" href="../favicon.ico">
+  <meta name="author" content="Mario Cruz">
+  <meta name="theme-color" content="#F5F1E8">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://mariothemaker.com/"},
+      {"@type": "ListItem", "position": 2, "name": "Projects & Posts", "item": "https://mariothemaker.com/#projects"},
+      {"@type": "ListItem", "position": 3, "name": "Wavr: The Instrument That Missed the Faire", "item": "https://mariothemaker.com/posts/wavr-visual-theremin.html"}
+    ]
+  }
+  </script>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="../index.html" class="logo"><img src="../images/MarioTheMaker.png" alt="Mario The Maker Logo" class="logo-img"></a>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../index.html#post-search">Search</a></li>
+        <li><a href="../about.html">About</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <a href="../index.html" class="back-link">&larr; Back to all posts</a>
+
+    <article>
+      <header class="post-header">
+        <h1>Wavr: The Instrument That Missed the Faire</h1>
+        <p class="post-meta">August 2026</p>
+      </header>
+
+      <div class="post-content">
+        <p><em>A theremin you play by waving your hands at a webcam. Built in two days for Maker Faire Miami 2026. Finished six months late. Aimed at 2027.</em></p>
+
+        <p>Every maker has a folder of projects that missed their deadline. This is the story of mine.</p>
+
+        <p>In February I built a musical instrument in a weekend. It ran in the browser, used the webcam to track your hands, and turned movement into sound. No strings, no keys, no touching anything. I wanted it on a big screen at Maker Faire Miami 2026, next to the robot.</p>
+
+        <p>The robot is why it never got there. The <a href="tomy-omnibot-restoration-part-4.html">Omnibot</a> ate every spare hour between February and April, and Wavr sat in a folder making no sound at all. This weekend I finally dusted it off and finished it. Next year it gets its booth.</p>
+
+        <figure>
+          <img src="../images/wavr-hero-live.jpg" width="1600" height="967" loading="lazy" decoding="async" title="Playing the Wavr visual theremin" alt="Mario playing Wavr on a couch with one hand raised, a red hand-tracking skeleton drawn over the webcam view, while the Hand signals panel shows voice 1 holding B2 at 123 Hz at 52 percent with an open tone">
+          <figcaption>Live at <a href="https://mariocruz.github.io/Wavr/" target="_blank">mariocruz.github.io/Wavr</a>. That's me on the couch holding a B2. The red skeleton is MediaPipe's 21 landmarks, the readout on the right is the note my hand position quantized to, and the second voice slot is waiting for another hand.</figcaption>
+        </figure>
+
+        <h2>What a theremin is, and what this one isn't</h2>
+
+        <p>The theremin is the world's oldest electronic instrument you play without touching. Leon Theremin built it in 1920: two antennas, one for pitch, one for volume, and your hands moving in the air between them. It's the woo-oo-EEE-oo sound in every 1950s sci-fi movie.</p>
+
+        <p>Wavr swaps the antennas for a webcam. MediaPipe hand tracking finds your hand 30 times a second, and three things about it become three musical controls:</p>
+
+        <table>
+          <thead>
+            <tr><th>Gesture</th><th>Controls</th><th>Mapping</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Move left / right</td><td><strong>Pitch</strong></td><td>65 Hz (C2) up to 1047 Hz (C6), logarithmic</td></tr>
+            <tr><td>Move up / down</td><td><strong>Volume</strong></td><td>Quiet at the bottom, loud at the top</td></tr>
+            <tr><td>Fist / open hand</td><td><strong>Tone</strong></td><td>Low-pass filter, 200 Hz dark to 8000 Hz bright</td></tr>
+          </tbody>
+        </table>
+
+        <p>That third row is the part a real theremin can't do. An antenna knows where your hand is. A camera knows what your hand is <em>doing</em>. Closing your fist darkens the sound like rolling off a tone knob, and opening it makes the note bloom. Show a hand and it sings. Take it away and it fades out.</p>
+
+        <h2>Two days in February</h2>
+
+        <p>The first commit is dated February 12 and titled "Initial commit: Visual Thermin web app." I misspelled theremin in my own repo. That's how fast I was moving.</p>
+
+        <p>The core loop came together in an evening because the browser now ships everything you need. MediaPipe Hands gives you 21 landmarks per hand, in JavaScript, from a CDN. The Web Audio API gives you oscillators, filters, and gain nodes. Wire landmark positions to synth parameters and you have an instrument. There's no backend, no build step, no npm install. It's an <code>index.html</code> and three JS files, hosted for free on GitHub Pages.</p>
+
+        <p>By February 13 it had seven synth modes: FM Synth, Clean Wave, Warm Tone, Pad, Theremin (a sine with a vibrato LFO, out of respect for the original), Organ, and Bitcrush. Then I committed "make static," closed the laptop, and went back to teaching a 1984 robot to find humans.</p>
+
+        <h2>The booth trick: no wrong notes</h2>
+
+        <p>Here's the thing I care most about, because it's the difference between a tech demo and an instrument a six-year-old will refuse to leave.</p>
+
+        <p>A real theremin is famously one of the hardest instruments in the world. Pitch is continuous, so every note is a little flat or a little sharp, and that's with years of practice. If I put that on a booth table, every kid produces a siren and walks away.</p>
+
+        <p>So Wavr quantizes. Pick a scale, and the engine snaps your hand position to the nearest note that belongs in it. There are 10 scales in all 12 roots, from honest Chromatic all the way to Whole Tone. Set it to Minor Pentatonic and there are no wrong notes anywhere on the screen. Anything anyone plays sounds intentional. It's the same trick that makes wind chimes sound good.</p>
+
+        <p>The Glide slider decides how much theremin is left in the theremin. All the way down, notes snap instantly and it plays like an invisible keyboard. Slide it up and you get up to 500 ms of portamento, notes smearing into each other, and the ghost of Leon Theremin comes back into the room.</p>
+
+        <figure>
+          <img src="../images/wavr-studio-console.png" width="924" height="1294" loading="lazy" decoding="async" title="Wavr's Studio console and liner notes" alt="Wavr's Studio console panel with instrument, scale, and root note dropdowns, a glide slider, a one hand or two hands toggle, and a How to play liner notes panel listing the three gestures">
+          <figcaption>Side B of the sleeve: instrument, scale, root, glide, and the hand toggle. The liner notes are the entire manual. If an instrument needs more instructions than that, it's not ready for a booth.</figcaption>
+        </figure>
+
+        <h2>Two hands, two voices</h2>
+
+        <p>Flip the toggle and Wavr tracks two hands, each with its own independent voice. Left hand holds a low drone while the right plays a melody over it. Or, and this is the real reason it exists, two kids stand side by side and each one owns a hand.</p>
+
+        <figure>
+          <img src="../images/wavr-live-two-hands.jpg" width="1534" height="801" loading="lazy" decoding="async" title="Playing Wavr with two hands" alt="Mario playing Wavr with both hands raised, red and cyan hand-tracking skeletons drawn over the webcam view, while the Hand signals panel shows voice 1 on D3 at 48 percent and voice 2 on A4 at 23 percent">
+          <figcaption>Both voices going: one hand holding a D3, the other an A4. Red is voice 1, cyan is voice 2, and the blur is because I was actually playing, not posing.</figcaption>
+        </figure>
+
+        <p>This was the hardest code in the project, and none of it is audio. When two hands cross or one drops out of frame for a few milliseconds, the tracker has to decide which hand is which. Get it wrong and the voices swap: your drone jumps up two octaves and the melody falls into the basement. Wavr scores every possible assignment using handedness and recent position, remembers each hand's identity for 750 milliseconds through tracking flicker, and rejects any match that would require a hand to teleport almost half the frame in a single step. Boring, invisible, and the whole difference between a duet and a mess.</p>
+
+        <h2>The record sleeve</h2>
+
+        <p>Every instrument needs an identity. Wavr's interface is a 1960s record sleeve: cream paper, one red stripe, Side A is the performance stage, Side B is the studio console, and the instructions are liner notes. The model number badge reads WVR-5050 because the dev server runs on port 5050. The tagline wrote itself: good vibrations, no strings attached.</p>
+
+        <figure>
+          <img src="../images/wavr-header.png" width="1567" height="421" loading="lazy" decoding="async" title="The Wavr record-sleeve header" alt="The Wavr header styled like a vintage record sleeve, reading Wavr Sound Laboratory Side A, Visual Theremin, good vibrations no strings attached, with a W logo and a WVR-5050 model badge">
+          <figcaption>No external fonts, no frameworks, no build step. The whole sleeve is one CSS file.</figcaption>
+        </figure>
+
+        <h2>What "finished" actually meant</h2>
+
+        <p>The February version made sound. This weekend's version can survive a booth. Almost nothing in between was about music.</p>
+
+        <p>The Omnibot taught me this lesson <a href="tomy-omnibot-restoration-part-5.html">the hard way in front of actual children</a>: public demos don't fail at the cool part. They fail at the boring edges. This weekend's refresh touched about 2,000 lines, and the telling part is that almost none of them make a new sound. They went to the edges:</p>
+
+        <ul>
+          <li><strong>Camera recovery.</strong> Permission denied, camera busy, camera unplugged, insecure origin, CDN unreachable. Each one now gets a clear message and a retry path instead of a silently black stage.</li>
+          <li><strong>A power button that means it.</strong> Power Off stops every voice, releases the camera track, and suspends the audio context. The webcam light actually goes off. Power On brings it all back from a single click.</li>
+          <li><strong>Lifecycle cleanup.</strong> Hide the tab and Wavr lets go of your camera and audio instead of squatting on them in the background. The webcam light goes off when you stop looking at it.</li>
+          <li><strong>Startup races.</strong> Camera startup is generational: if you power off while the camera is still starting, the late callback gets discarded instead of resurrecting a zombie video stream. Nobody will ever notice this working, which is the point.</li>
+          <li><strong>Pinned dependencies.</strong> MediaPipe loads from a CDN, and the exact version is now pinned. An upstream update the night before the Faire cannot change how the instrument behaves.</li>
+        </ul>
+
+        <figure>
+          <img src="../images/wavr-paused-stage.jpg" width="1459" height="812" loading="lazy" decoding="async" title="Wavr with the stage paused and the camera released" alt="The Wavr record-sleeve interface with a dark stage panel reading Instrument is paused, return to this tab to restore camera and audio">
+          <figcaption>The unglamorous feature in action. This screenshot was taken while the tab was hidden: the stage goes dark, the message explains why, and the camera is actually released. This took more code than the synthesizer did.</figcaption>
+        </figure>
+
+        <p>None of this is why anyone builds a project. All of it is why a project survives eight hours of strangers.</p>
+
+        <h2>The plan for Maker Faire Miami 2027</h2>
+
+        <p>A booth instrument you play without touching is close to the perfect Faire exhibit. Nothing to break, nothing to sanitize, no parts to walk off the table, and it resets itself the moment a kid walks away. The setup is a Raspberry Pi 5 running Chromium in kiosk mode, a webcam, a big monitor, and a speaker with some real low end for the C2.</p>
+
+        <p>The recipe on the Pi is four lines:</p>
+
+        <pre><code>git clone https://github.com/MarioCruz/Wavr.git
+cd Wavr
+python3 -m http.server 5050 --bind 127.0.0.1
+chromium-browser --kiosk http://localhost:5050</code></pre>
+
+        <p>Scale locked to Minor Pentatonic, two-hand mode on, glide somewhere in the middle. Between now and April there's a wishlist: a visualizer trail behind the hand, maybe a simple looper so kids can layer a drone and jam over it. But the instrument itself is done, and this time it's done in August instead of "almost done" in April.</p>
+
+        <h2>Try it right now</h2>
+
+        <p>This is the best part of a browser instrument: you don't have to imagine it. Open <a href="https://mariocruz.github.io/Wavr/" target="_blank">mariocruz.github.io/Wavr</a> in Chrome or any Chromium browser, allow the camera, and wave. It needs HTTPS or localhost for camera access, and everything runs on your machine. No video leaves your computer.</p>
+
+        <p>The code is MIT licensed at <a href="https://github.com/MarioCruz/Wavr" target="_blank">github.com/MarioCruz/Wavr</a>. If you build a booth around it for your own Faire, I want to hear about it.</p>
+
+        <p>See you at Maker Faire Miami 2027. I'll be the one waving at a monitor, and this time it'll be on purpose.</p>
+
+        <hr>
+
+        <p><em>Related builds for Maker Faire Miami:</em></p>
+        <ul>
+          <li><em><a href="tomy-omnibot-restoration-part-4.html">Tomy Omnibot Part 4: It's Alive</a>, the robot that stole Wavr's schedule</em></li>
+          <li><em><a href="tomy-omnibot-restoration-part-5.html">Tomy Omnibot Part 5: The WiFi Problem</a>, where I learned what booths do to demos</em></li>
+          <li><em><a href="chladni-plate.html">The Chladni Plate</a>, more sound made visible</em></li>
+        </ul>
+      </div>
+    </article>
+  </main>
+
+  <footer>
+    <p class="foot-bio"><strong>Mario Cruz</strong>, Miami. CTO @ Watsco Ventures. Executive Producer @ Maker Faire Miami. <a href="mailto:Mario@MarioTheMaker.com">Mario@MarioTheMaker.com</a></p>
+    <p class="foot-links">
+      <a href="https://twitter.com/mariocruz" target="_blank">Twitter</a>
+      <a href="https://instagram.com/mariothemaker" target="_blank">Instagram</a>
+      <a href="https://github.com/MarioCruz" target="_blank">GitHub</a>
+      <a href="https://www.linkedin.com/in/marioacruz/" target="_blank">LinkedIn</a>
+      <a href="https://Barbaromojo.com" target="_blank">Barbaromojo</a>
+      <a href="https://miami.makerfaire.com/" target="_blank">Maker Faire Miami</a>
+    </p>
+    <p class="foot-copyright">© 2026 Mario The Maker</p>
+  </footer>
+</body>
+</html>
