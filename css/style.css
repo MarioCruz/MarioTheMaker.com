@@ -1146,6 +1146,44 @@ main {
   max-width: 60ch;
 }
 
+/* Side-by-side photos/videos inside a post */
+.post-content .figure-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-sm);
+}
+
+.post-content .figure-pair img,
+.post-content .figure-pair video {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  display: block;
+  background: #000;
+}
+
+.post-content .figure-pair.wide img,
+.post-content .figure-pair.wide video {
+  aspect-ratio: 4 / 3;
+}
+
+.post-content .figure-pair.tall img,
+.post-content .figure-pair.tall video {
+  aspect-ratio: 9 / 16;
+}
+
+@media (max-width: 600px) {
+  .post-content .figure-pair {
+    grid-template-columns: 1fr;
+  }
+
+  .post-content .figure-pair img,
+  .post-content .figure-pair video {
+    height: auto;
+  }
+}
+
 .post-content blockquote {
   border-left: 3px solid var(--rust);
   padding: var(--space-sm) var(--space-md);
