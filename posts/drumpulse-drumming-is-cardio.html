@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Four years into getting healthy, my Apple Watch tracked swimming and walking well, but drumming got a generic Light Cardio guess. So I built DrumPulse, an app that counts drumming as a real workout and tells me when I rush, drag, or fade.">
+  <meta property="og:title" content="Drumming Is Cardio. So I Built an App to Prove It - Mario The Maker">
+  <meta property="og:description" content="My Apple Watch tracked my swimming and walking, but drumming only got a Light Cardio guess. A 2 hour 40 minute gig with The Pollies burned 1,642 calories. DrumPulse is how I found out.">
+  <meta property="og:image" content="https://mariothemaker.com/images/drumpulse-og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url" content="https://mariothemaker.com/posts/drumpulse-drumming-is-cardio.html">
+  <meta property="og:type" content="article">
+  <meta property="article:author" content="Mario Cruz">
+  <meta property="article:published_time" content="2026-10-05">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://mariothemaker.com/posts/drumpulse-drumming-is-cardio.html">
+  <title>Drumming Is Cardio. So I Built an App to Prove It - Mario The Maker</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Drumming Is Cardio. So I Built an App to Prove It",
+    "description": "An Apple Watch app that detects drum hits from wrist motion, saves drumming to Apple Health as a workout, and shows whether you rush, drag, or fade over a long set.",
+    "image": ["https://mariothemaker.com/images/drumpulse-og.jpg", "https://mariothemaker.com/images/drumpulse-hero.jpg"],
+    "datePublished": "2026-10-05",
+    "dateModified": "2026-10-05",
+    "author": {"@type": "Person", "name": "Mario Cruz", "url": "https://mariothemaker.com/"},
+    "publisher": {"@type": "Person", "name": "Mario Cruz"},
+    "keywords": "drumming cardio, drum cardio, Apple Watch drumming, drumming workout",
+    "about": {"@type": "SoftwareApplication", "name": "DrumPulse", "url": "https://drumpulseapp.com/"},
+    "mainEntityOfPage": "https://mariothemaker.com/posts/drumpulse-drumming-is-cardio.html"
+  }
+  </script>
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+  <link rel="shortcut icon" href="../favicon.ico">
+  <meta name="author" content="Mario Cruz">
+  <meta name="theme-color" content="#F5F1E8">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://mariothemaker.com/"},
+      {"@type": "ListItem", "position": 2, "name": "Projects & Posts", "item": "https://mariothemaker.com/#projects"},
+      {"@type": "ListItem", "position": 3, "name": "Drumming Is Cardio. So I Built an App to Prove It", "item": "https://mariothemaker.com/posts/drumpulse-drumming-is-cardio.html"}
+    ]
+  }
+  </script>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="../index.html" class="logo"><img src="../images/MarioTheMaker.png" alt="Mario The Maker Logo" class="logo-img"></a>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../index.html#post-search">Search</a></li>
+        <li><a href="../about.html">About</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <a href="../index.html" class="back-link">&larr; Back to all posts</a>
+
+    <article>
+      <header class="post-header">
+        <h1>Drumming Is Cardio. So I Built an App to Prove It</h1>
+        <p class="post-meta">October 2026</p>
+      </header>
+
+      <div class="post-content">
+        <p><em>My Apple Watch tracked my swimming and my walking. For drumming, the best it had was Light Cardio. DrumPulse is the fix.</em></p>
+
+        <figure>
+          <img src="../images/drumpulse-hero.jpg" width="760" height="950" decoding="async" title="Mario drumming with The Pollies" alt="Mario playing drums on stage with The Pollies, mid-hit, in front of an orange and red LED wall with a blurred cymbal in the foreground">
+          <figcaption>Behind the kit with <a href="https://themiamipollies.com/" target="_blank">The Pollies</a>.</figcaption>
+        </figure>
+
+        <p>I've been working on getting healthy for the last four years. I've lost a lot of weight. The Apple Watch has been part of that, and it's great at the usual things. Swimming, walking, rings closing.</p>
+
+        <p>Then I'd play a three hour gig with <a href="https://themiamipollies.com/" target="_blank">The Pollies</a>, soaked in sweat, and the best I could do was start a generic Light Cardio workout and hope for the best. I knew it was wrong. It wasn't measuring anything about drumming. It was just guessing.</p>
+
+        <p>That bugged me. I swim every week and I play drums every week. One of them had a real workout type and real numbers. The other got a guess.</p>
+
+        <h2>Drumming counts</h2>
+
+        <p>The Pollies are a five-piece Miami cover band. Rock, pop, funk, whatever the room knows the words to. Three hours of that is a lot of hitting.</p>
+
+        <p>Here is a real night. July 15th, a set with The Pollies, started at 8:17 PM.</p>
+
+        <figure>
+          <img src="../images/drumpulse-watch-saved.png" width="422" height="446" loading="lazy" decoding="async" title="DrumPulse session saved to Apple Health" alt="Apple Watch screen showing a drumming session on Jul 15 at 8:17 PM, time 2 hours 40 minutes 35 seconds, 1642 calories, saved to Health and counting toward Activity rings">
+          <figcaption>2 hours, 40 minutes, 35 seconds. 1,642 calories. Saved to Health, and it counts toward the rings. That's a number I couldn't see before.</figcaption>
+        </figure>
+
+        <p>The calories are an estimate. DrumPulse uses the standard MET formula with your weight and an intensity setting, and it doesn't count the time I paused. But even as an estimate, it changed how I think about a gig. It isn't a night off from exercise. It's a long, loud cardio session where I happen to also be playing songs.</p>
+
+        <p>Heart rate, calories, and recovery all land in Apple Health as a workout. The Fitness app doesn't have a drumming type, so it shows up as "Other." I'll take it. Light Cardio guessed. DrumPulse measured.</p>
+
+        <h2>But I wanted more than a calorie counter</h2>
+
+        <p>The second reason I built this is the one only a drummer would care about. I wanted to know if I was getting better.</p>
+
+        <p>Any drummer knows the feeling of a set that felt great and a recording that says otherwise. I wanted something honest that wasn't a person in the room. Am I rushing? Am I dragging? Do I fade as the night goes on?</p>
+
+        <p>And on that last one, I already had a suspicion. When I'm tired in practice, I drag. The beat settles back, a little more every song. I could feel it but I couldn't prove it. Now I can see it.</p>
+
+        <figure>
+          <img src="../images/drumpulse-watch-live.png" width="410" height="502" loading="lazy" decoding="async" title="DrumPulse live on Apple Watch" alt="DrumPulse running live on an Apple Watch, showing the groove meter, tempo, heart rate, calories and hit count">
+          <figcaption>On the wrist while I play. The meter swings one way when I rush and the other when I drag, with tempo, heart rate, and calories underneath.</figcaption>
+        </figure>
+
+        <h2>What a three hour set looks like</h2>
+
+        <p>The July 15 set was 13,864 hits. After it ended, I wanted to know if I'd faded. Here's what the watch said.</p>
+
+        <figure>
+          <img src="../images/drumpulse-watch-setarc.png" width="422" height="514" loading="lazy" decoding="async" title="DrumPulse set arc summary" alt="Apple Watch set arc screen reading: hit strength held steady over the set, timing held from plus or minus 28 to plus or minus 25 milliseconds, tightest around minute 125, loosest around minute 18">
+          <figcaption>Hit strength held steady. Timing tightened a little, from ±28 ms to ±25 ms. The loosest moment was around minute 18, and the tightest was around minute 125.</figcaption>
+        </figure>
+
+        <p>I didn't fade. I got tighter. The first twenty minutes were my sloppiest, and by the second hour I was locked in. That's a very drummer thing to learn about yourself. I warm up on stage, and the early songs pay the price.</p>
+
+        <p>It also caught something else. Inside 13 of the 21 songs it analyzed, my tempo climbed. I push. Most of us do, and I'd never seen it laid out song by song.</p>
+
+        <figure>
+          <img src="../images/drumpulse-songs.png" width="320" height="695" loading="lazy" decoding="async" title="DrumPulse song breakdown on iPhone" alt="DrumPulse iPhone screen for Jul 15 showing a ghost, body and accent dynamics bar, the set arc line, and a list of songs each with tempo, timing in milliseconds and a note when the tempo pushes upward">
+          <figcaption>The phone splits the night into songs. Each one gets its own tempo, its own timing, and a flag when I push the tempo up during the song.</figcaption>
+        </figure>
+
+        <h2>How it works, in one paragraph</h2>
+
+        <p>The watch reads its accelerometer about 100 times a second. Every strike of the stick makes a spike in the motion of your wrist. DrumPulse finds the spikes, timestamps each one, and compares it to a metronome grid, or in Free Play, to your own groove. No microphone. No sensors on the drums. It works on a kit, a practice pad, or your knee.</p>
+
+        <p>I didn't want a black box, so I put all the formulas on a page with worked examples. If a score surprises you, you can check my math: <a href="https://drumpulseapp.com/the-math.html" target="_blank">drumpulseapp.com/the-math.html</a>.</p>
+
+        <p>It also keeps your drumming private. No account, no analytics, no servers. Your hits and heart rate stay on your watch and your phone.</p>
+
+        <h2>Want to turn your own practice into cardio?</h2>
+
+        <p>I wrote a guide on <a href="https://drumpulseapp.com/drumming-cardio.html" target="_blank">drumming cardio</a>, including how many calories drumming burns and a 30-minute session you can run on a pad. If you're wondering how fast to play, there's a page on <a href="https://drumpulseapp.com/drum-cardio-tempo.html" target="_blank">what tempo to drum at for cardio</a>. And if you're working on rudiments, there's a <a href="https://drumpulseapp.com/drum-rudiments.html" target="_blank">free printable rudiments PDF</a> with all 40 stickings and a stamina plan.</p>
+
+        <h2>Why I keep playing with it</h2>
+
+        <p>Four years ago, I'd have said the gym was where health happens. Now I think about it differently. Health is the swimming, the walking, and the three hours behind a kit on a Saturday night. It all counts. I just needed a tool that agreed.</p>
+
+        <p>If you play drums and wear an Apple Watch, DrumPulse (or Drum Pulse, if that's how you searched for it) is on the App Store for $3.99. No subscription. If you try it, tell me what it gets wrong. I read all of it.</p>
+
+        <p><a href="https://apps.apple.com/app/id6782245341" target="_blank">DrumPulse on the App Store</a> &middot; <a href="https://drumpulseapp.com/" target="_blank">drumpulseapp.com</a> &middot; <a href="https://instagram.com/drumpulseapp" target="_blank">@drumpulseapp</a></p>
+      </div>
+    </article>
+  </main>
+
+  <footer>
+    <p class="foot-bio"><strong>Mario Cruz</strong>, Miami. CTO @ Watsco Ventures. Executive Producer @ Maker Faire Miami. <a href="mailto:Mario@MarioTheMaker.com">Mario@MarioTheMaker.com</a></p>
+    <p class="foot-links">
+      <a href="https://twitter.com/mariocruz" target="_blank">Twitter</a>
+      <a href="https://instagram.com/mariothemaker" target="_blank">Instagram</a>
+      <a href="https://github.com/MarioCruz" target="_blank">GitHub</a>
+      <a href="https://www.linkedin.com/in/marioacruz/" target="_blank">LinkedIn</a>
+      <a href="https://Barbaromojo.com" target="_blank">Barbaromojo</a>
+      <a href="https://miami.makerfaire.com/" target="_blank">Maker Faire Miami</a>
+    </p>
+    <p class="foot-copyright">© 2026 Mario The Maker</p>
+  </footer>
+</body>
+</html>

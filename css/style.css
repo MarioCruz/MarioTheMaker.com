@@ -1041,6 +1041,7 @@ main {
 }
 
 .post-header {
+  position: static; /* override the sticky site-nav rule on header */
   margin-bottom: var(--space-xl);
   padding-bottom: var(--space-lg);
   border-bottom: 1px solid var(--rule-strong);
