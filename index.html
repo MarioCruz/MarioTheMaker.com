@@ -69,15 +69,7 @@
     "url": "https://mariothemaker.com/",
     "author": {"@type": "Person", "name": "Mario Cruz"},
     "inLanguage": "en-US",
-    "keywords": "Mario The Maker, Mario Cruz, Miami maker, Moonlighter FabLab, Maker Faire Miami, poetry robots, Tomy Omnibot, Raspberry Pi projects, hacker maker inventor, IoT Miami, BMO build, open source hardware",
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": {
-        "@type": "EntryPoint",
-        "urlTemplate": "https://mariothemaker.com/?search={search_term_string}"
-      },
-      "query-input": "required name=search_term_string"
-    }
+    "keywords": "Mario The Maker, Mario Cruz, Miami maker, Moonlighter FabLab, Maker Faire Miami, poetry robots, Tomy Omnibot, Raspberry Pi projects, hacker maker inventor, IoT Miami, BMO build, open source hardware"
   }
   </script>
   <script type="application/ld+json">
@@ -118,12 +110,12 @@
 <body>
   <header>
     <nav>
-      <a href="index.html" class="logo">
+      <a href="/" class="logo">
         <img src="images/MarioTheMaker.png" alt="Mario The Maker" class="logo-img">
       </a>
       <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="index.html#post-search">Search</a></li>
+        <li><a href="/">Home</a></li>
+        <li><a href="/#post-search">Search</a></li>
         <li><a href="about.html">About</a></li>
       </ul>
     </nav>
@@ -570,7 +562,7 @@
 
       input.addEventListener('input', function () { filter(input.value); });
 
-      // Honor ?search= URL param (matches WebSite SearchAction schema)
+      // Honor ?search= URL param so filtered views can be shared
       var params = new URLSearchParams(window.location.search);
       var initial = params.get('search');
       if (initial) {
