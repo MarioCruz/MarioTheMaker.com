@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="It started with a request from the amazing team at O, Miami — they wanted to create a custom phone shaped like a banana that would play poems about bananas,...">
+  <meta name="description" content="The Poetry Phone is a banana-shaped phone I built for O, Miami. Pick up, dial a number and hear a poem. Part 1 covers the Raspberry Pi Pico and decoding a salvaged phone keypad.">
   <meta property="og:title" content="Poetry Phone — Part 1: Cracking the Keypad Matrix - Mario The Maker">
-  <meta property="og:description" content="It started with a request from the amazing team at O, Miami — they wanted to create a custom phone shaped like a banana that would play poems about bananas,...">
+  <meta property="og:description" content="The Poetry Phone is a banana-shaped phone I built for O, Miami. Pick up, dial a number and hear a poem. Part 1 covers the Raspberry Pi Pico and decoding a salvaged phone keypad.">
   <meta property="og:image" content="https://mariothemaker.com/images/poetry-phone-teardown.jpeg">
   <meta property="og:url" content="https://mariothemaker.com/posts/poetry-phone-part-1.html">
   <meta property="og:type" content="article">
@@ -20,10 +20,10 @@
   "@context": "https://schema.org",
   "@type": "BlogPosting",
   "headline": "Poetry Phone \u2014 Part 1: Cracking the Keypad Matrix",
-  "description": "It started with a request from the amazing team at O, Miami \u2014 they wanted to create a custom phone shaped like a banana that would play poems about bananas,...",
+  "description": "The Poetry Phone is a banana-shaped phone I built for O, Miami. Pick up, dial a number and hear a poem. Part 1 covers the Raspberry Pi Pico and decoding a salvaged phone keypad.",
   "image": "https://mariothemaker.com/images/poetry-phone-teardown.jpeg",
   "datePublished": "2026-04-02T00:00:00-04:00",
-  "dateModified": "2026-04-02T00:00:00-04:00",
+  "dateModified": "2026-11-25T00:00:00-05:00",
   "url": "https://mariothemaker.com/posts/poetry-phone-part-1.html",
   "author": {
     "@type": "Person",
@@ -117,9 +117,11 @@
 
       <div class="post-content">
         <figure>
-          <img src="../images/poetry-phone-teardown.jpeg" alt="Phone teardown showing original internals and handset">
+          <img src="../images/poetry-phone-teardown.jpeg" alt="The Poetry Phone donor telephone taken apart, showing the original internals and handset">
           <figcaption>The donor phone, fully disassembled.</figcaption>
         </figure>
+
+        <p>This is the Poetry Phone, a real telephone that plays you a poem when you dial a number.</p>
 
         <p>It started with a request from the amazing team at <a href="https://www.omiami.org/" target="_blank">O, Miami</a> — they wanted to create a custom phone shaped like a banana that would play poems about bananas, along with other special poems selected based on the number you dialed. The phone would live at <strong>Peel</strong>, a banana-based soft serve shop in Miami Shores and the Design District that rescues "ugly" bananas that stores won't sell. A banana phone playing poetry in a banana soft serve shop. I was in.</p>
 
@@ -144,7 +146,7 @@ Row 3:    *       0       #</code></pre>
         <h2>Brute-Force Pin Discovery</h2>
 
         <figure>
-          <img src="../images/poetry-phone-pico-keypad.jpeg" alt="Raspberry Pi Pico wired to the phone keypad via ribbon cable">
+          <img src="../images/poetry-phone-pico-keypad.jpeg" alt="Raspberry Pi Pico wired to the Poetry Phone keypad via ribbon cable">
           <figcaption>Pico wired to the keypad ribbon cable.</figcaption>
         </figure>
 
